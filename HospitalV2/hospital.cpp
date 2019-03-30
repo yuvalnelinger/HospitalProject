@@ -1,6 +1,6 @@
 #include <iostream>
 using namespace std;
-
+//test as
 #include "hospital.h"
 
 Hospital::Hospital()
