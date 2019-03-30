@@ -1,11 +1,11 @@
 #ifndef __Research_Institute_H
 #define __Research_Institute_H
 
-#include <iostream>
-using namespace std;
-
 #include "Researcher.h"
 #include "Article.h"
+#include "Date.h"
+#include <iostream>
+using namespace std;
 
 class Research_Institute
 {
@@ -28,8 +28,8 @@ public:
 
 	//methods
 	void addResearcher(Researcher* researcher); //adds researcher ptr to the array
-	void addArticleToInstitute(Article* article);
-	void addArticleToResearcher(Article* article, int index);
+	void addArticle(Article* article);
+	void addArticle(Article* article, int index);
 	int searchResearcherByName(char* name) const;
 	void show() const;
 };

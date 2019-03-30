@@ -1,6 +1,5 @@
 #include "Research_Institute.h"
-#include "Researcher.h"
-#define NOT_FOUND -1
+
 
 Research_Institute::Research_Institute()
 {
@@ -15,15 +14,23 @@ Research_Institute::Research_Institute()
 //this is probably unuseful
 Research_Institute::Research_Institute(Researcher** researchers_arr, int size)
 {
-	cout << "In c'tor of Research Institute" << endl;
+	cout << "In Research Institute c'tor..." << endl;
 	researchers = researchers_arr;
 	num_of_researchers = size;
 }
 
 Research_Institute::~Research_Institute()
 {
-	cout << "In d'tor of Research Institute" << endl;
+	cout << "In Research Institute d'tor..." << endl;
+	int i;
+
+	for (i = 0; i < num_of_researchers; i++)
+		delete researchers[i];
 	delete[]researchers;
+
+	for (i = 0; i < num_of_articles; i++)
+		delete articles[i];
+	delete[]articles;
 }
 
 int Research_Institute::getNumOfResearchers() const { return num_of_researchers; }
@@ -36,14 +43,14 @@ void Research_Institute::addResearcher(Researcher* researcher)
 	//here should be code for array increment!
 }
 
-void Research_Institute::addArticleToInstitute(Article* article)
+void Research_Institute::addArticle(Article* article)
 {
 	articles[num_of_articles++] = article;
 	//here should be code for array increment!
 }
 
 //this method assign a pointer of article to a chosen researcher
-void Research_Institute::addArticleToResearcher(Article* article, int index)
+void Research_Institute::addArticle(Article* article, int index)
 {
 	researchers[index]->addArticle(article);
 }
@@ -56,7 +63,7 @@ int Research_Institute::searchResearcherByName(char* name) const
 			return i;
 	}
 
-	return NOT_FOUND;
+	return -1;
 }
 
 void Research_Institute::show() const

@@ -1,21 +1,20 @@
 #include "department.h"
-#include "doctor.h"
-#define NOT_FOUND -1
 
 Department::Department()
 {
-	cout << "In Department c'tor" << endl;
+	cout << "In Department c'tor..." << endl;
 	doctors = new Doctor*[10];
 	num_of_doctors = 0;
+	nurses = new Nurse*[10];
+	num_of_nurses = 0;
 	patients = new Patient*[10];
 	num_of_patients = 0;
-
-	name = 0;
 }
 
+//I don't think we will use it
 Department::Department(Doctor** doctors_arr, Patient** patients_arr, int size, int size_pat, char* newName)
 {
-	cout << "In Department c'tor" << endl;
+	cout << "In Department c'tor..." << endl;
 	doctors = doctors_arr;
 	patients = patients_arr;
 	num_of_doctors = size;
@@ -26,13 +25,23 @@ Department::Department(Doctor** doctors_arr, Patient** patients_arr, int size, i
 
 Department::~Department()
 {
-	cout << "In d'tor of Research Institute" << endl;
-	delete[] doctors;
+	cout << "In Department c'tor..." << endl;
+	delete[]doctors;
+	delete[]nurses;
+	delete[] patients;
 }
 
-//getters
+//getters and setters
 int Department::getNumOfDoctors() const { return num_of_doctors; }
+
 char* Department::getDepName() const { return name; }
+
+void Department::setName(char* name)
+{
+	delete[] this->name;
+	this->name = new char[strlen(name) + 1];
+	strcpy(this->name, name);
+}
 
 //methods
 void Department::addDoctor(Doctor* doctor)
@@ -40,25 +49,28 @@ void Department::addDoctor(Doctor* doctor)
 	doctors[num_of_doctors++] = doctor;
 }
 
+void Department::addNurse(Nurse* nurse)
+{
+	nurses[num_of_nurses++] = nurse;
+}
+
+
 void Department::addPatient(Patient* patient)
 {
 	patients[num_of_patients++] = patient;
 }
 
-void Department::setName(char* newName)
-{
-	name = newName;
-}
 void Department::showPatients() const
 {
 	cout << "List Of Patints: " << endl;
 	for (int i = 0; i < num_of_patients; i++)
 	{
-		cout << patients[i]->getPatientName() << endl;
+		cout << patients[i]->getName() << endl;
 	}
 }
 void Department::show() const {
-	cout << "This is department " << name << " with the following doctors: " << endl;
+	cout << "This is department " << name;
+	cout << " with the following doctors: " << endl;
 	for (int i = 0; i < num_of_doctors; i++)
 	{
 		cout << doctors[i]->getName() << endl;
@@ -66,7 +78,7 @@ void Department::show() const {
 	cout << "And Patients: " << endl;
 	for (int i = 0; i < num_of_patients; i++)
 	{
-		cout << patients[i]->getPatientName() << endl;
+		cout << patients[i]->getName() << endl;
 	}
 }
 

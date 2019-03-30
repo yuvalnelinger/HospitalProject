@@ -1,20 +1,17 @@
-#include <iostream>
-using namespace std;
-//test as
 #include "hospital.h"
 
 Hospital::Hospital()
 {
+	cout << "In Hospital c'tor..." << endl;
 	doctors = new Doctor*[50];
 	num_of_doctors = 0;
 	departments = new Department*[50];
 	num_of_departments = 0;
 	patients = new Patient*[50];
 	num_of_patients = 0;
-	visits = new Visit*[50];
-	num_of_visits = 0;
 }
-Hospital::Hospital(Doctor** docs, int numDocs, Department** deps, int numDeps, Patient** patientList, int numPatients, Visit** vis, int numVis)
+//I dont think we'll use  this
+Hospital::Hospital(Doctor** docs, int numDocs, Department** deps, int numDeps, Patient** patientList, int numPatients)
 {
 	doctors = docs;
 	num_of_doctors = numDocs;
@@ -22,52 +19,30 @@ Hospital::Hospital(Doctor** docs, int numDocs, Department** deps, int numDeps, P
 	num_of_departments = numDeps;
 	patients = patientList;
 	num_of_patients = numPatients;
-	visits = vis;
-	num_of_visits = numVis;
 }
 Hospital::~Hospital()
 {
+	cout << "In Hospital d'tor..." << endl;
+	int i;
+
+	for (i = 0; i < num_of_doctors; i++)
+		delete doctors[i];
 	delete[]doctors;
+
+	for (i = 0; i < num_of_nurses; i++)
+		delete nurses[i];
+	delete[]nurses;
+
+	for (i = 0; i < num_of_departments; i++)
+		delete departments[i];
 	delete[]departments;
+
+	for (i = 0; i < num_of_patients; i++)
+		delete patients[i];
 	delete[]patients;
-	delete[]visits;
 }
 
-//methods
-void Hospital::addDepartmentToHospital(Department* depToAdd)
-{
-	departments[num_of_departments++] = depToAdd;
-	cout << "Successfully added department to hospital" << endl;
-}
-
-void Hospital::addDoctorToHospital(Doctor* docToAdd)
-{
-	doctors[num_of_doctors++] = docToAdd;
-	cout << "Successfully added doctor to hospital" << endl;
-}
-
-void Hospital::addVisitToHospital(Visit* visToAdd)
-{
-	visits[num_of_visits++] = visToAdd;
-	cout << "Successfully added visit to hospital" << endl;
-}
-
-void Hospital::addPatientToHospital(Patient* patientToAdd)
-{
-	patients[num_of_patients++] = patientToAdd;
-	cout << "Successfully added patient to hospital" << endl;
-}
-
-
-
-void Hospital::showDepartments() const
-{
-	for (int i = 0; i < num_of_departments; i++)
-	{
-		cout << i << ". " << departments[i]->getDepName() << endl;
-	}
-}
-
+//getters and setters
 Department* Hospital::getDepartmentByIndex(int num) const
 {
 	return departments[num];
@@ -89,7 +64,7 @@ Doctor* Hospital::getDoctorByID(int id) const
 {
 	for (int i = 0; i < num_of_doctors; i++)
 	{
-		if (doctors[i]->getEmpId() == id)
+		if (doctors[i]->getId() == id)
 		{
 			return doctors[i];
 		}
@@ -97,23 +72,89 @@ Doctor* Hospital::getDoctorByID(int id) const
 	return 0;
 }
 
+//methods
+void Hospital::addDepartment(Department* depToAdd)
+{
+	departments[num_of_departments++] = depToAdd;
+	cout << "Successfully added department to hospital" << endl;
+	//include here code for array increment
+}
+
+void Hospital::addDoctor(Doctor* docToAdd)
+{
+	doctors[num_of_doctors++] = docToAdd;
+	cout << "Successfully added doctor to hospital" << endl;
+	//include here code for array increment
+}
+
+void Hospital::addPatient(Patient* patientToAdd)
+{
+	patients[num_of_patients++] = patientToAdd;
+	cout << "Successfully added patient to hospital" << endl;
+	//include here code for array increment
+}
+
+void Hospital::showDepartments() const
+{
+	for (int i = 0; i < num_of_departments; i++)
+	{
+		cout << "\t" << i << ". " << departments[i]->getDepName() << endl;
+	}
+}
+
 
 void Hospital::show() const
 {
+	int i;
+	cout << "List of departments: \n";
+	for (i = 0; i < num_of_departments; i++)
+		cout << "\t" << departments[i]->getDepName() << endl;
+
 	cout << "List of doctors: \n";
-	for (int i = 0; i < num_of_doctors; i++)
-	{
-		cout << doctors[i]->getName() << endl;
-	}
-	cout << "List of Departments: \n";
-	for (int i = 0; i < num_of_departments; i++)
-	{
-		cout << departments[i]->getDepName() << endl;
-	}
-	cout << "List of Patients: \n";
-	for (int i = 0; i < num_of_patients; i++)
-	{
-		cout << patients[i]->getPatientName() << endl;
-	}
+	for (i = 0; i < num_of_doctors; i++)
+		cout << "\t" << doctors[i]->getName() << endl;
+
+	cout << "List of nurses: \n";
+	for (i = 0; i < num_of_nurses; i++)
+		cout << "\t" << nurses[i]->getName() << endl;
+
+	cout << "List of patients: \n";
+	for (i = 0; i < num_of_patients; i++)
+		cout << "\t" << patients[i]->getName() << endl;
+}
+
+//menu methods
+
+void mainMenu()
+{
+	cout << "Welcome to Assuta hospital!" << endl;
+	cout << "What would you like to do? plesae choose an option from menu:" << endl;
+	cout << "1. Add a department\n"
+		<< "2. Add a staff member\n"
+		<< "3. To do some operations on patients\n"
+		<< "4. Enter the research institute\n"
+		<< "5. Show all staff members"
+		<< endl;
+
+	//add here swtich case
+}
+
+//Q2,Q3
+void addStaffMemberMenu()
+{
+
+}
+
+//Q4,Q7,Q10
+void patientsMenu()
+{
+
+
+}
+
+//Q5,Q6,Q9
+void researchInstituteMenu()
+{
+
 
 }

@@ -1,14 +1,17 @@
 #include "Article.h"
 
-Article::Article(Date p_date, char* t, char* nm)
+
+Article::Article(Date p_date, char* title, char* name_of_magazine)
 {
+	cout << "In Article c'tor..." << endl;
 	publish_date = p_date;
-	title = t;
-	name_of_magazine = nm;
+	setTitle(title);
+	setNameOfMagazine(name_of_magazine);
 }
 
 Article::~Article()
 {
+	cout << "In Article d'tor..." << endl;
 	delete[]title;
 	delete[]name_of_magazine;
 }
@@ -21,17 +24,21 @@ char* Article::getNameOfMagazine() const { return name_of_magazine; }
 
 void Article::setPublishDate(const Date& d)
 {
-	publish_date = d;
+	this->publish_date = d;
 }
 
-void Article::setTitle(char* t)
+void Article::setTitle(char* title)
 {
-	title = t;
+	delete[] this->title;
+	this->title = new char[strlen(title) + 1];
+	strcpy(this->title, title);
 }
 
-void Article::setNameOfMagazine(char* nm)
+void Article::setNameOfMagazine(char* name_of_magazine)
 {
-	name_of_magazine = nm;
+	delete[] this->name_of_magazine;
+	this->title = new char[strlen(name_of_magazine) + 1];
+	strcpy(this->name_of_magazine, name_of_magazine);
 }
 
 void Article::show()

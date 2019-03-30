@@ -1,10 +1,10 @@
 #ifndef __Article_H
 #define __Article_H
 
+#define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
-using namespace std;
-
 #include "Date.h"
+using namespace std;
 
 class Article
 {
@@ -15,7 +15,7 @@ private:
 
 public:
 	//c'tor and d'tor
-	Article(Date p_date, char* t, char* nm);
+	Article(Date p_date, char* title, char* name_of_magazine);
 	~Article();
 
 	//getters
@@ -25,8 +25,8 @@ public:
 
 	//setters
 	void setPublishDate(const Date& d);
-	void setTitle(char* t);
-	void setNameOfMagazine(char* nm);
+	void setTitle(char* title);
+	void setNameOfMagazine(char* magazine_name);
 
 	//methods
 	void show();

@@ -1,37 +1,51 @@
-#include <iostream>
-using namespace std;
-
 #include "doctor.h"
 
-Doctor::Doctor(int newId, char* newName, char* newSpecialty)
+int Doctor::counter = 1000;
+
+Doctor::Doctor(char* newName, char* newSpecialty)
 {
-	employeeId = newId;
+	cout << "In Doctor c'tor..." << endl;
+	id = counter++;
 	name = newName;
 	specialty = newSpecialty;
 }
 
 Doctor::~Doctor()
 {
+	cout << "In Docctor d'tor..." << endl;
+
 	delete[] name;
-	delete[] specialty;
 }
 
-int Doctor::getEmpId() { return employeeId; }
+//getters and setters
+int Doctor::getId() { return id; }
 char* Doctor::getName() const { return name; }
 char* Doctor::getSpecialty() const { return specialty; }
 
-//setters
-void Doctor::setEmpId(int newId) {
-	employeeId = newId;
+void Doctor::setName(char* name)
+{
+	delete[] this->name;
+	this->name = new char[strlen(name) + 1];
+	strcpy(this->name, name);
 }
-void Doctor::setNamee(char* newName) {
-	name = newName;
+void Doctor::setSpecialty(char* specialty)
+{
+	delete[] this->specialty;
+	this->specialty = new char[strlen(specialty) + 1];
+	strcpy(this->specialty, specialty);
 }
-void Doctor::setSpecialty(char* newSpecialty) {
-	specialty = newSpecialty;
+
+void Doctor::setDepartment(Department* dep)
+{
+	department = dep;
 }
+
 
 //methods
 void Doctor::show() {
-	cout << "Doctor ID: " << employeeId << " Name: " << name << "Specialty: " << specialty << endl;
+	cout << "Doctor ID: " << id
+		<< " Name: " << name
+		<< "Specialty: " << specialty
+		//	 <<	"Department: " << department->getDepName() //DOESNT WORK
+		<< endl;
 }

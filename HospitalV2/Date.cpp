@@ -1,7 +1,5 @@
 #include "Date.h"
 
-//no meaning to c'tor and d'tor
-
 //getters
 int Date::getDay() { return day; }
 int Date::getMonth() { return month; }

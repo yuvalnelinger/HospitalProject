@@ -1,21 +1,11 @@
-#include <iostream>
-using namespace std;
-
-#include <string.h>
-#include "Date.h"
-#include "Article.h"
-#include "Research_Institute.h"
-#include "Researcher.h"
 #include "hospital.h"
-#include "patient.h"
-#include "visit.h"
-#include "doctor.h"
-#include "department.h"
-
+#include <string.h>
 
 #define MAX_TITLE 150
 #define MAX_NAME 20
 #define NOT_FOUND -1
+#include <iostream>
+using namespace std;
 
 int main()
 {
@@ -28,33 +18,38 @@ int main()
 	char* search_name = new char[MAX_NAME];
 
 	Hospital hospital;
-	Department dep;
+
 	/*Q1*/
+	Department dep;
 	cout << "Adding a new department, choose name: " << endl;
 	cin.getline(name, MAX_NAME);
 	dep.setName(name);
 	cout << "Successfully defined department name, adding department to hostpial" << endl;
-	hospital.addDepartmentToHospital(&dep);
+	hospital.addDepartment(&dep);
 	hospital.show();
 	/*End Q1*/
+
+	/*Q2-same as Q3 for nurse*/
+
 	/*Q3*/
 	char* docName = new char[MAX_NAME];
-	int docId;
 	char* docSpecialty = new char[MAX_NAME];
 	int depIndex;
+	Department* assigned_dep;
+
 	cout << "Adding a new doctor, choose name: " << endl;
 	cin.getline(docName, MAX_NAME);
 	cout << "Adding a new doctor, choose specialty: " << endl;
 	cin.getline(docSpecialty, MAX_NAME);
-	cout << "Adding a new doctor, choose ID: " << endl;
-	cin >> docId;
-	Doctor doc(docId, docName, docSpecialty);
-	hospital.addDoctorToHospital(&doc);
+	Doctor doc(docName, docSpecialty);
+	hospital.addDoctor(&doc);
 	cout << "This is the list of departments in the hospital: " << endl;
 	hospital.showDepartments();
 	cout << "Insert the index of the department to add the doctor to " << endl;
-	cin >> depIndex;
-	hospital.getDepartmentByIndex(depIndex)->addDoctor(&doc);
+	cin >> depIndex;  //here check if number is ok
+	assigned_dep = hospital.getDepartmentByIndex(depIndex);
+	assigned_dep->addDoctor(&doc);
+	doc.setDepartment(assigned_dep);
 	hospital.getDepartmentByIndex(depIndex)->show();
 
 	/*End Q3*/
@@ -62,15 +57,15 @@ int main()
 	/*Q4*/
 	Patient* newPatient;
 	Date visitDate;
-	char* visPurpose=new char[MAX_NAME];
+	char* visPurpose = new char[MAX_NAME];
 	Doctor* treatDoc;
 	int patientID;
+	char* nameToAdd = new char[MAX_NAME];
 	cout << "Please enter Patient ID: " << endl;
 	cin >> patientID;
 	newPatient = hospital.getPatientByID(patientID);
-	char* nameToAdd = new char[MAX_NAME];
 	int newYear;
-	eGender newGen;
+	int newGen;
 	int genIndex;
 	if (newPatient != 0)
 	{
@@ -86,10 +81,17 @@ int main()
 		cin >> newYear;
 		cout << "Enter Gender (0 for MALE, 1 for FEMALE): " << endl;
 		cin >> genIndex;
-		newGen = (eGender)genIndex;
+		newGen = genIndex;
 		cout << "Received details, creating Patient" << endl;
-		newPatient = &Patient(nameToAdd, patientID, newYear, newGen);
+		newPatient = new Patient(nameToAdd, patientID, newYear, newGen);
 	}
+	cout << "What is the department the visit is to? insert the index of it " << endl;
+	int patDep;
+	hospital.showDepartments();
+	cin >> patDep;  //check if index is valid
+	Department* depToAdd = hospital.getDepartmentByIndex(patDep);
+	newPatient->setCurrDepartment(depToAdd);
+
 	cout << "Enter visit details. Visit date (day, month, year): " << endl;
 	int newday, newmonth, newyear;
 	cin >> newday >> newmonth >> newyear;
@@ -99,6 +101,7 @@ int main()
 	cout << "Enter the visit purpose: " << endl;
 	cin.ignore();
 	cin.getline(visPurpose, MAX_NAME);
+
 	cout << "Enter the Doctor ID: " << endl;
 	int idToCheck;
 	cin >> idToCheck;
@@ -113,14 +116,10 @@ int main()
 		//add here the function to add new doctor to hospital and assign to treatDoc
 	}
 	Visit newVisit(newPatient, &visitDate, visPurpose, treatDoc);
-	hospital.addVisitToHospital(&newVisit);
-	cout << "What is the department the visit is to? insert the index of it " << endl;
-	int patDep;
-	hospital.showDepartments();
-	cin >> patDep;
-	Department* depToAdd = hospital.getDepartmentByIndex(patDep);
-	depToAdd->addPatient(newPatient);
-	hospital.addPatientToHospital(newPatient);
+
+	newPatient->addVisit(&newVisit);
+	depToAdd->addPatient(newPatient);    //what if this patient is already in the patient array?? we should only add by flag for new patient
+	hospital.addPatient(newPatient); //^^^
 	cout << "Successfully added visit." << endl;
 	hospital.show();
 
@@ -131,6 +130,7 @@ int main()
 	cout << "Research Institute is now OPEN! let's add some researchers and articles!" << endl;
 	cout << "You chose to add a new researcher, let's do this. please enter his/her name (up to 20 characters):" << endl;
 
+	cin.ignore();
 	cin.getline(name, MAX_NAME);
 
 	//resize string to logic size - create func for this
@@ -221,8 +221,8 @@ int main()
 		Article a(date, title, name_of_magazine);
 		a.show();
 
-		resInstitute.addArticleToInstitute(&a);
-		resInstitute.addArticleToResearcher(&a, r_index);
+		resInstitute.addArticle(&a);
+		resInstitute.addArticle(&a, r_index);
 
 	}
 	return(0);

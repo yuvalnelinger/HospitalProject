@@ -1,18 +1,11 @@
 #include "Researcher.h"
 
-int Researcher::counter = 0;
-
-Researcher::Researcher(char* n, Article** articles_arr, int size)
-{
-	id = ++counter;
-	name = n;
-	articles = articles_arr;
-	num_of_articles = size;
-}
+int Researcher::counter = 3000;
 
 Researcher::Researcher(char* n)
 {
-	id = ++counter;
+	cout << "In Researcher c'tor..." << endl;
+	id = counter++;
 	name = n;
 	articles = new Article*[10];
 	num_of_articles = 0;
@@ -20,16 +13,19 @@ Researcher::Researcher(char* n)
 
 Researcher::~Researcher()
 {
+	cout << "In Researcher d'tor..." << endl;
 	delete[]name;
-
-	for (int i = 0; i < num_of_articles; i++)
-		delete articles[i];
 	delete[]articles;
 }
 
-void Researcher::setName(char* n) { name = n; }
-
 char* Researcher::getName() const { return name; }
+
+void Researcher::setName(char* name)
+{
+	delete[] this->name;
+	this->name = new char[strlen(name) + 1];
+	strcpy(this->name, name);
+}
 
 void Researcher::addArticle(Article* article)
 {

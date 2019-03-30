@@ -3,23 +3,21 @@
 
 #include <iostream>
 using namespace std;
-
-#include "date.h"
-#include "doctor.h"
-#include "patient.h"
+class Date;
+class Patient;
+class Doctor;
 
 class Visit
 {
 private:
-	Patient* patient;
 	Date* dateOfArrival;
+	Patient* patient;
 	char* visitPurpose;
-	Doctor* treatingDoc;
-	//add nurse
+	Doctor* treatDoc;
+
 public:
 	//c'tor
 	Visit(Patient* newPatient, Date* newDate, char* newPurpose, Doctor* newDoc);
-
 
 };
 
