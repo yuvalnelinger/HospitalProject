@@ -9,6 +9,8 @@ Hospital::Hospital()
 	num_of_departments = 0;
 	patients = new Patient*[50];
 	num_of_patients = 0;
+	nurses = new Nurse*[50];
+	num_of_nurses = 0;
 }
 //I dont think we'll use  this
 Hospital::Hospital(Doctor** docs, int numDocs, Department** deps, int numDeps, Patient** patientList, int numPatients)
@@ -87,6 +89,14 @@ void Hospital::addDoctor(Doctor* docToAdd)
 	//include here code for array increment
 }
 
+void Hospital::addNurse(Nurse* nurseToAdd)
+{
+	nurses[num_of_nurses++] = nurseToAdd;
+	cout << "Successfully added nurse to hospital" << endl;
+	//include here code for array increment
+}
+
+
 void Hospital::addPatient(Patient* patientToAdd)
 {
 	patients[num_of_patients++] = patientToAdd;
@@ -101,7 +111,6 @@ void Hospital::showDepartments() const
 		cout << "\t" << i << ". " << departments[i]->getDepName() << endl;
 	}
 }
-
 
 void Hospital::show() const
 {
@@ -136,7 +145,6 @@ void mainMenu()
 		<< "5. Show all staff members"
 		<< endl;
 
-	//add here swtich case
 }
 
 //Q2,Q3

@@ -36,6 +36,12 @@ void Nurse::setYearsOfExperience(int years)
 	this->years_of_experience = years;
 }
 
+void Nurse::setDepartment(Department* depart)
+{
+	this->department = depart;
+}
+
+
 void Nurse::show() const
 {
 	cout << "Nurse ID: " << "tofillin"

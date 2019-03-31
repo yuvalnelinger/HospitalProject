@@ -27,6 +27,7 @@ public:
 	int getYearsOfExperience() const;
 	void setName(char* name);
 	void setYearsOfExperience(int years);
+	void setDepartment(Department* depart);
 
 	//methods
 	void show() const;

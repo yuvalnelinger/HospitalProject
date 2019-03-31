@@ -1,10 +1,6 @@
 #include "hospital.h"
 #include <string.h>
 
-#define MAX_TITLE 150
-#define MAX_NAME 20
-#define NOT_FOUND -1
-#include <iostream>
 using namespace std;
 
 int main()
@@ -29,7 +25,29 @@ int main()
 	hospital.show();
 	/*End Q1*/
 
-	/*Q2-same as Q3 for nurse*/
+	/*Q2*/
+	char* nurseName = new char[MAX_NAME];
+	int nurseYears;
+	int depIndexNurse;
+	Department* assigned_dep_nurse;
+
+	cout << "Adding a new nurse, choose name: " << endl;
+	cin.getline(nurseName, MAX_NAME);
+	cout << "Adding a new nurse, type years of experience: " << endl;
+	cin >> nurseYears;
+	cout << "Insert the index of the department to add the nurse to " << endl;
+	cout << "This is the list of departments in the hospital: " << endl;
+	hospital.showDepartments();
+	cin >> depIndexNurse;  //here check if number is ok
+	assigned_dep_nurse = hospital.getDepartmentByIndex(depIndexNurse);
+	Nurse nurse(nurseName, nurseYears, assigned_dep_nurse);
+	assigned_dep_nurse->addNurse(&nurse);
+	hospital.addNurse(&nurse);
+	nurse.setDepartment(assigned_dep_nurse);
+	hospital.getDepartmentByIndex(depIndexNurse)->show();
+
+	/*End Q2*/
+
 
 	/*Q3*/
 	char* docName = new char[MAX_NAME];
@@ -38,6 +56,7 @@ int main()
 	Department* assigned_dep;
 
 	cout << "Adding a new doctor, choose name: " << endl;
+	cin.ignore();
 	cin.getline(docName, MAX_NAME);
 	cout << "Adding a new doctor, choose specialty: " << endl;
 	cin.getline(docSpecialty, MAX_NAME);
