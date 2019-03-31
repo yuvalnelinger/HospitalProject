@@ -38,7 +38,12 @@ int main()
 	cout << "Insert the index of the department to add the nurse to " << endl;
 	cout << "This is the list of departments in the hospital: " << endl;
 	hospital.showDepartments();
-	cin >> depIndexNurse;  //here check if number is ok
+	cin >> depIndexNurse;  
+	if (depIndexNurse > hospital.getNumOfDepartments())
+	{
+		cout << "Invalid input. Please enter a valid department ID" << endl;
+		cin >> depIndexNurse;
+	} //once there's a function, if it's invalid again, send back to the main menu
 	assigned_dep_nurse = hospital.getDepartmentByIndex(depIndexNurse);
 	Nurse nurse(nurseName, nurseYears, assigned_dep_nurse);
 	assigned_dep_nurse->addNurse(&nurse);
@@ -65,7 +70,12 @@ int main()
 	cout << "This is the list of departments in the hospital: " << endl;
 	hospital.showDepartments();
 	cout << "Insert the index of the department to add the doctor to " << endl;
-	cin >> depIndex;  //here check if number is ok
+	cin >> depIndex;  
+	if (depIndex > hospital.getNumOfDepartments())
+	{
+		cout << "Invalid input. Please enter a valid department ID" << endl;
+		cin >> depIndex;
+	} //once there's a function, if it's invalid again, send back to the main menu
 	assigned_dep = hospital.getDepartmentByIndex(depIndex);
 	assigned_dep->addDoctor(&doc);
 	doc.setDepartment(assigned_dep);
@@ -80,6 +90,7 @@ int main()
 	Doctor* treatDoc;
 	int patientID;
 	char* nameToAdd = new char[MAX_NAME];
+	bool isNewPatient;
 	cout << "Please enter Patient ID: " << endl;
 	cin >> patientID;
 	newPatient = hospital.getPatientByID(patientID);
@@ -89,6 +100,7 @@ int main()
 	if (newPatient != 0)
 	{
 		cout << "Patient found" << endl;
+		isNewPatient = false;
 	}
 	else
 	{
@@ -103,11 +115,17 @@ int main()
 		newGen = genIndex;
 		cout << "Received details, creating Patient" << endl;
 		newPatient = new Patient(nameToAdd, patientID, newYear, newGen);
+		isNewPatient = true;
 	}
 	cout << "What is the department the visit is to? insert the index of it " << endl;
 	int patDep;
 	hospital.showDepartments();
-	cin >> patDep;  //check if index is valid
+	cin >> patDep;  
+	if (patDep > hospital.getNumOfDepartments())
+	{
+		cout << "Invalid input. Please enter a valid department ID" << endl;
+		cin >> patDep;
+	} //once there's a function, if it's invalid again, send back to the main menu
 	Department* depToAdd = hospital.getDepartmentByIndex(patDep);
 	newPatient->setCurrDepartment(depToAdd);
 
@@ -137,8 +155,12 @@ int main()
 	Visit newVisit(newPatient, &visitDate, visPurpose, treatDoc);
 
 	newPatient->addVisit(&newVisit);
-	depToAdd->addPatient(newPatient);    //what if this patient is already in the patient array?? we should only add by flag for new patient
-	hospital.addPatient(newPatient); //^^^
+	if (isNewPatient = true)
+	{
+		depToAdd->addPatient(newPatient);  
+		hospital.addPatient(newPatient); 
+	}
+
 	cout << "Successfully added visit." << endl;
 	hospital.show();
 
@@ -245,4 +267,7 @@ int main()
 
 	}
 	return(0);
+
+	/*Q6*/
+
 }

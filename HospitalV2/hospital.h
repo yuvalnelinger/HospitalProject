@@ -37,6 +37,8 @@ public:
 	Department* getDepartmentByIndex(int num) const;
 	Patient* getPatientByID(int id) const;
 	Doctor* getDoctorByID(int id) const;
+	int getNumOfDepartments();
+
 
 	//methods
 	void addDepartment(Department* depToAdd);
@@ -44,6 +46,8 @@ public:
 	void addNurse(Nurse* nurseToAdd);
 	void addPatient(Patient* patientToAdd);
 	void showDepartments() const;
+	void showPatientById(int id) const;
+	void showStaff() const;
 	void show() const;
 
 	//menu methods

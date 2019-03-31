@@ -7,7 +7,7 @@ Patient::Patient(char* newName, int newId, int newYear, int newGen)
 	name = newName;
 	yearOfBirth = newYear;
 	gender = newGen;
-	curr_deparement = nullptr;
+	curr_department = nullptr;
 
 	arr_of_visitations = new Visit*[5];
 	num_of_visitations = 0;
@@ -31,6 +31,12 @@ int Patient::getYearOfBirth() const { return yearOfBirth; }
 
 int Patient::getGender() const { return gender; }
 
+Department* Patient::getCurrentDepartment() const
+{
+	return curr_department;
+}
+
+
 void Patient::setName(char* name)
 {
 	delete[] this->name;
@@ -50,7 +56,7 @@ void Patient::setGender(int gender)
 
 void Patient::setCurrDepartment(Department* dep)
 {
-	this->curr_deparement = dep;
+	this->curr_department = dep;
 }
 
 

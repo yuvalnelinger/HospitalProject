@@ -74,6 +74,11 @@ Doctor* Hospital::getDoctorByID(int id) const
 	return 0;
 }
 
+int Hospital::getNumOfDepartments()
+{
+	return num_of_departments;
+}
+
 //methods
 void Hospital::addDepartment(Department* depToAdd)
 {
@@ -110,6 +115,32 @@ void Hospital::showDepartments() const
 	{
 		cout << "\t" << i << ". " << departments[i]->getDepName() << endl;
 	}
+}
+
+void Hospital::showPatientById(int id) const
+{
+	Department* dep;
+	for (int i = 0; i < num_of_patients; i++)
+	{
+		if (patients[i]->getId() == id)
+		{
+			dep = patients[i]->getCurrentDepartment();
+			cout << "Patient Name: " << patients[i]->getName() << " Patient Department: " << dep->getDepName() << endl;
+		}
+	}
+}
+
+
+void Hospital::showStaff() const
+{
+	int i;
+	cout << "List of doctors: \n";
+	for (i = 0; i < num_of_doctors; i++)
+		cout << "\t" << doctors[i]->getName() << endl;
+
+	cout << "List of nurses: \n";
+	for (i = 0; i < num_of_nurses; i++)
+		cout << "\t" << nurses[i]->getName() << endl;
 }
 
 void Hospital::show() const

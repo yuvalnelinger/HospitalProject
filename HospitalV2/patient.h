@@ -22,6 +22,7 @@ public:
 	char* getName() const;
 	int getYearOfBirth() const;
 	int getGender() const;
+	Department* getCurrentDepartment() const;
 	void setName(char* name);
 	void setYearOfBirth(int year);
 	void setGender(int gender);
@@ -36,7 +37,7 @@ private:
 	char* name;
 	int yearOfBirth;
 	int gender;
-	Department* curr_deparement;
+	Department* curr_department;
 	Visit** arr_of_visitations;
 	int num_of_visitations;
 };
