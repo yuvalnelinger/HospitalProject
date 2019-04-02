@@ -164,10 +164,45 @@ void Hospital::show() const
 		cout << "\t" << patients[i]->getName() << endl;
 }
 
+void Hospital::createDoctor() 
+{
+	char* docName = new char[MAX_NAME];
+	char* docSpecialty = new char[MAX_NAME];
+	int depIndex;
+	Department* assigned_dep;
+
+	cout << "Adding a new doctor, choose name: " << endl;
+	cin.ignore();
+	cin.getline(docName, MAX_NAME);
+	cout << "Adding a new doctor, choose specialty: " << endl;
+	cin.getline(docSpecialty, MAX_NAME);
+	Doctor doc(docName, docSpecialty);
+	this->addDoctor(&doc);
+	cout << "This is the list of departments in the hospital: " << endl;
+	this->showDepartments();
+	cout << "Insert the index of the department to add the doctor to " << endl;
+	cin >> depIndex;
+	if (depIndex > this->getNumOfDepartments())
+	{
+		cout << "Invalid input. Please enter a valid department ID" << endl;
+		cin >> depIndex;
+		if (depIndex > this->getNumOfDepartments())
+		{
+			cout << "Invalid input. Doctor creation failed" << endl;
+			return;
+		}
+	} 
+	assigned_dep = this->getDepartmentByIndex(depIndex);
+	assigned_dep->addDoctor(&doc);
+	doc.setDepartment(assigned_dep);
+	this->getDepartmentByIndex(depIndex)->show();
+}
+
 //menu methods
 
 void Hospital::mainMenu()
 {
+	int selection;
 	cout << "Welcome to Assuta hospital!" << endl;
 	cout << "What would you like to do? plesae choose an option from the menu:" << endl;
 	cout << "1. Add a department\n"
@@ -176,6 +211,18 @@ void Hospital::mainMenu()
 		<<	"4. Enter the research institute\n"
 		<<	"5. Show all staff members"
 		<< endl;
+	cin >> selection;
+	switch (selection)
+	{
+	case 1: cout << "nothing yet" << endl;
+	case 2: this->addStaffMemberMenu();
+		break;
+	case 3: cout << "nothing yet" << endl;
+	case 4: cout << "nothing yet" << endl;
+	case 5: cout << "nothing yet" << endl;
+	default: cout << "Invalid value. Please try again" << endl;
+		mainMenu();
+	}
 
 	int choice;
 	cin >> choice;
@@ -216,7 +263,20 @@ void Hospital::mainMenu()
 //Q2,Q3
 void Hospital::addStaffMemberMenu()
 {
-
+	int selection;
+	cout << "Would you like to add a doctor or a nurse? Choose the option from the menu:" << endl;
+	cout << "1. Doctor\n"
+		<< "2. Nurse" << endl;
+	cin >> selection;
+	switch (selection)
+	{
+	case 1: this->createDoctor();
+		break;
+	case 2: //add for nurse
+		break;
+	default: cout << "Invalid selection. Please select again" << endl;
+	this->addStaffMemberMenu();
+	}
 }
 
 //Q4,Q7,Q10
