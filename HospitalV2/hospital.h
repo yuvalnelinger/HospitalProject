@@ -49,6 +49,7 @@ public:
 	void showPatientById(int id) const;
 	void showStaff() const;
 	void show() const;
+	void createDoctor();
 
 	//menu methods
 	void mainMenu();

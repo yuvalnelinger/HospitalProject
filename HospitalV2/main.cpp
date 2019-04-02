@@ -5,7 +5,6 @@ using namespace std;
 
 int main()
 {
-	//vkjnbvjkrnfvnknsrekjnvkjernvkjnekjrbnornkdf
 	bool res;
 	int day, month, year, len, r_index;
 	Date date;
@@ -16,6 +15,7 @@ int main()
 
 	Hospital hospital;
 
+
 	/*Q1*/
 	Department dep;
 	cout << "Adding a new department, choose name: " << endl;
@@ -25,7 +25,7 @@ int main()
 	hospital.addDepartment(&dep);
 	hospital.show();
 	/*End Q1*/
-
+	
 	/*Q2*/
 	char* nurseName = new char[MAX_NAME];
 	int nurseYears;
@@ -56,32 +56,7 @@ int main()
 
 
 	/*Q3*/
-	char* docName = new char[MAX_NAME];
-	char* docSpecialty = new char[MAX_NAME];
-	int depIndex;
-	Department* assigned_dep;
-
-	cout << "Adding a new doctor, choose name: " << endl;
-	cin.ignore();
-	cin.getline(docName, MAX_NAME);
-	cout << "Adding a new doctor, choose specialty: " << endl;
-	cin.getline(docSpecialty, MAX_NAME);
-	Doctor doc(docName, docSpecialty);
-	hospital.addDoctor(&doc);
-	cout << "This is the list of departments in the hospital: " << endl;
-	hospital.showDepartments();
-	cout << "Insert the index of the department to add the doctor to " << endl;
-	cin >> depIndex;  
-	if (depIndex > hospital.getNumOfDepartments())
-	{
-		cout << "Invalid input. Please enter a valid department ID" << endl;
-		cin >> depIndex;
-	} //once there's a function, if it's invalid again, send back to the main menu
-	assigned_dep = hospital.getDepartmentByIndex(depIndex);
-	assigned_dep->addDoctor(&doc);
-	doc.setDepartment(assigned_dep);
-	hospital.getDepartmentByIndex(depIndex)->show();
-
+	hospital.mainMenu();
 	/*End Q3*/
 
 	/*Q4*/
