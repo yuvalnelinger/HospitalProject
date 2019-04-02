@@ -6,7 +6,6 @@
 #define NOT_FOUND -1
 
 #include <iostream>
-#include <iostream>
 using namespace std;
 #include "department.h"
 #include "Nurse.h"   

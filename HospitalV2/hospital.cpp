@@ -3,6 +3,7 @@
 Hospital::Hospital()
 {
 	cout << "In Hospital c'tor..." << endl;
+	Research_Institute resInstitute;
 	doctors = new Doctor*[50];
 	num_of_doctors = 0;
 	departments = new Department*[50];
@@ -165,35 +166,193 @@ void Hospital::show() const
 
 //menu methods
 
-void mainMenu()
+void Hospital::mainMenu()
 {
 	cout << "Welcome to Assuta hospital!" << endl;
-	cout << "What would you like to do? plesae choose an option from menu:" << endl;
+	cout << "What would you like to do? plesae choose an option from the menu:" << endl;
 	cout << "1. Add a department\n"
-		<< "2. Add a staff member\n"
-		<< "3. To do some operations on patients\n"
-		<< "4. Enter the research institute\n"
-		<< "5. Show all staff members"
+		<<	"2. Add a staff member\n"
+		<<	"3. Patient operations\n"
+		<<	"4. Enter the research institute\n"
+		<<	"5. Show all staff members"
 		<< endl;
 
+	int choice;
+	cin >> choice;
+
+	switch (choice)
+	{
+	case 1:
+		{
+			char* name = new char[MAX_NAME];
+
+			Department dep;
+			cout << "Adding a new department, choose name: " << endl;
+			cin.getline(name, MAX_NAME);
+			dep.setName(name);
+			cout << "Successfully defined department name, adding department to hostpial" << endl;
+			this->addDepartment(&dep);
+			this->show();
+			break;
+		}
+	case 2:
+
+		break;
+	case 3:
+		break;
+	case 4:
+		this->researchInstituteMenu();
+		break;
+	case 5:
+		this->showStaff();
+		break;
+	default:
+		break;
+	}
+	
+	
 }
 
 //Q2,Q3
-void addStaffMemberMenu()
+void Hospital::addStaffMemberMenu()
 {
 
 }
 
 //Q4,Q7,Q10
-void patientsMenu()
+void Hospital::patientsMenu()
 {
 
 
 }
 
 //Q5,Q6,Q9
-void researchInstituteMenu()
+void Hospital::researchInstituteMenu()
 {
+	cout << "Welcome to the research institute!" << endl;
+	cout << "1. Add a researcher\n"
+		 << "2. Add an article to a researcher\n"
+		 << "3. Show all researchers"
+		 << endl;
 
+	int choice;
+	cin >> choice;
+	switch (choice)
+	{
+		case 1:
+		{
+			char* name = new char[MAX_NAME];
 
+			cin.ignore();
+			cin.getline(name, MAX_NAME);
+
+			//resize string to logic size - create func for this
+			int len = strlen(name);
+			char* newName = new char[len + 1];
+			for (int i = 0; i < len + 1; i++)
+				newName[i] = name[i];
+			newName[len] = '\0'; //lock string
+			delete[]name;
+			name = newName;
+
+			Researcher res(name);
+			this->RI.addResearcher(&res);
+			this->RI.show();
+
+			break;
+		}
+		case 2:
+		{
+			cout << "To whom you would like to add?" << endl;
+			char* title = new char[MAX_TITLE];
+			char* name_of_magazine = new char[MAX_NAME];
+			char* search_name = new char[MAX_NAME];
+
+			cin.getline(search_name, MAX_NAME);
+
+			//resize string to logic size - create func for this
+			int len = strlen(search_name);
+			char* new_search_name = new char[len + 1];
+			for (int i = 0; i < len + 1; i++)
+				new_search_name[i] = search_name[i];
+			new_search_name[len] = '\0'; //lock string
+			delete[]search_name;
+			search_name = new_search_name;
+
+			//look for this name - found/not found
+			int r_index = this->RI.searchResearcherByName(search_name);
+			if (r_index == NOT_FOUND)
+			{
+				cout << "There is no researcher in this name! try again..." << endl;
+				exit(1);
+			}
+			else
+			{
+				cout << "let's add a new article for " << search_name << "!" << endl;
+				cout << "What is the article's date?" << endl;
+				int day, month, year;
+				Date date;
+				bool res;
+
+				do {
+					cout << "please enter day:" << endl;
+					cin >> day;
+					res = date.setDay(day);
+
+				} while (res != true);
+
+				do {
+					cout << "please enter month:" << endl;
+					cin >> month;
+					res = date.setMonth(month);
+
+				} while (res != true);
+
+				do {
+					cout << "please enter year:" << endl;
+					cin >> year;
+					res = date.setYear(year);
+
+				} while (res != true);
+
+				cout << "enter the title: " << endl;
+				getchar();
+				cin.getline(title, MAX_TITLE);
+
+				//resize string to logic size
+				len = strlen(title);
+				char* newtitle = new char[len + 1];
+				for (int i = 0; i < len + 1; i++)
+					newtitle[i] = title[i];
+				newtitle[len] = '\0'; //lock string
+				delete[]title;
+				title = newtitle;
+
+				cout << "enter the magazine's name: " << endl;
+				cin.getline(name_of_magazine, MAX_NAME);
+
+				//resize string to logic size
+				len = strlen(name_of_magazine);
+				char* newnm = new char[len + 1];
+				for (int i = 0; i < len + 1; i++)
+					newnm[i] = name_of_magazine[i];
+				newnm[len] = '\0'; //lock string
+				delete[]name_of_magazine;
+				name_of_magazine = newnm;
+
+				Article a(date, title, name_of_magazine);
+				a.show();
+
+				this->RI.addArticle(&a);
+				this->RI.addArticle(&a, r_index);
+
+				break;
+		}
+
+		case 3:
+			this->RI.show();
+			break;
+		default:
+			break;
+	}
 }

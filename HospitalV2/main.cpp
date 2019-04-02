@@ -5,7 +5,6 @@ using namespace std;
 
 int main()
 {
-	//vkjnbvjkrnfvnknsrekjnvkjernvkjnekjrbnornkdf
 	bool res;
 	int day, month, year, len, r_index;
 	Date date;
