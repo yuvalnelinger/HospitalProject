@@ -211,23 +211,9 @@ void Hospital::mainMenu()
 		<<	"4. Enter the research institute\n"
 		<<	"5. Show all staff members"
 		<< endl;
+
 	cin >> selection;
 	switch (selection)
-	{
-	case 1: cout << "nothing yet" << endl;
-	case 2: this->addStaffMemberMenu();
-		break;
-	case 3: cout << "nothing yet" << endl;
-	case 4: cout << "nothing yet" << endl;
-	case 5: cout << "nothing yet" << endl;
-	default: cout << "Invalid value. Please try again" << endl;
-		mainMenu();
-	}
-
-	int choice;
-	cin >> choice;
-
-	switch (choice)
 	{
 	case 1:
 		{
@@ -242,22 +228,18 @@ void Hospital::mainMenu()
 			this->show();
 			break;
 		}
-	case 2:
-
+	case 2: this->addStaffMemberMenu();
 		break;
-	case 3:
+	case 3: this->patientsMenu();
 		break;
-	case 4:
-		this->researchInstituteMenu();
+	case 4: this->researchInstituteMenu();
 		break;
-	case 5:
-		this->showStaff();
+	case 5: this->showStaff();
 		break;
-	default:
+	default: cout << "Invalid value. Please try again" << endl;
+		this->mainMenu();
 		break;
-	}
-	
-	
+	}	
 }
 
 //Q2,Q3
@@ -266,7 +248,7 @@ void Hospital::addStaffMemberMenu()
 	int selection;
 	cout << "Would you like to add a doctor or a nurse? Choose the option from the menu:" << endl;
 	cout << "1. Doctor\n"
-		<< "2. Nurse" << endl;
+		 <<	"2. Nurse" << endl;
 	cin >> selection;
 	switch (selection)
 	{
@@ -276,6 +258,7 @@ void Hospital::addStaffMemberMenu()
 		break;
 	default: cout << "Invalid selection. Please select again" << endl;
 	this->addStaffMemberMenu();
+	break;
 	}
 }
 
