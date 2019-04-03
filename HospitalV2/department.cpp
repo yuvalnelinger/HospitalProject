@@ -1,8 +1,11 @@
 #include "department.h"
 
-Department::Department()
+Department::Department(char* name)
 {
 	cout << "In Department c'tor..." << endl;
+	this->name = new char[strlen(name) + 1];
+	strcpy(this->name, name);
+
 	doctors = new Doctor*[10];
 	num_of_doctors = 0;
 	nurses = new Nurse*[10];
@@ -11,21 +14,21 @@ Department::Department()
 	num_of_patients = 0;
 }
 
-//I don't think we will use it
-Department::Department(Doctor** doctors_arr, Patient** patients_arr, int size, int size_pat, char* newName)
-{
-	cout << "In Department c'tor..." << endl;
-	doctors = doctors_arr;
-	patients = patients_arr;
-	num_of_doctors = size;
-	num_of_patients = size_pat;
-
-	name = newName;
-}
+////I don't think we will use it
+//Department::Department(Doctor** doctors_arr, Patient** patients_arr, int size, int size_pat, char* newName)
+//{
+//	cout << "In Department c'tor..." << endl;
+//	doctors = doctors_arr;
+//	patients = patients_arr;
+//	num_of_doctors = size;
+//	num_of_patients = size_pat;
+//
+//	name = newName;
+//}
 
 Department::~Department()
 {
-	cout << "In Department c'tor..." << endl;
+	cout << "In Department d'tor..." << endl;
 	delete[]doctors;
 	delete[]nurses;
 	delete[] patients;
@@ -68,18 +71,23 @@ void Department::showPatients() const
 		cout << patients[i]->getName() << endl;
 	}
 }
-void Department::show() const {
+
+void Department::show() const 
+{
 	cout << "This is department " << name;
 	cout << " with the following doctors: " << endl;
 	for (int i = 0; i < num_of_doctors; i++)
 	{
-		cout << doctors[i]->getName() << endl;
+		cout << this->doctors[i]->getName() << endl;
+	}
+	cout << "And Nurses: " << endl;
+	for (int i = 0; i < num_of_nurses; i++)
+	{
+		cout << this->nurses[i]->getName() << endl;
 	}
 	cout << "And Patients: " << endl;
 	for (int i = 0; i < num_of_patients; i++)
 	{
-		cout << patients[i]->getName() << endl;
+		cout << this->patients[i]->getName() << endl;
 	}
 }
-
-

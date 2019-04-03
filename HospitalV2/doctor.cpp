@@ -2,12 +2,13 @@
 
 int Doctor::counter = 1000;
 
-Doctor::Doctor(char* newName, char* newSpecialty)
+Doctor::Doctor(char* name, char* specialty, Department* depart)
 {
 	cout << "In Doctor c'tor..." << endl;
 	id = counter++;
-	name = newName;
-	specialty = newSpecialty;
+	this->name = name;
+	this->specialty = specialty;
+	this->department = depart;
 }
 
 Doctor::~Doctor()

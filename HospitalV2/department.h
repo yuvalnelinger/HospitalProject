@@ -24,7 +24,7 @@ private:
 
 public:
 	//c'tor and d'tor
-	Department();
+	Department(char* name);
 	Department(Doctor** doctors_arr, Patient** patients_arr, int size, int size_pat, char* newName); //I don't think we will use it
 	~Department();
 

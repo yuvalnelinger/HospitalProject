@@ -16,7 +16,7 @@ private:
 	int num_of_articles;
 
 public:
-	Researcher(char* n);
+	Researcher(char* name);
 	~Researcher();
 
 	//getters and setters

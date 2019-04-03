@@ -14,7 +14,7 @@ public:
 	//enum class eSpecialty {SURGEON, ASSISTANT, ANESTHESIOLOGIST};
 
 	//c'tor and d'tor
-	Doctor(char* newName, char* newSpecialty);
+	Doctor(char* name, char* specialty, Department* depart);
 	~Doctor();
 
 	//getters and setters

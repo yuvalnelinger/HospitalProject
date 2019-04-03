@@ -2,11 +2,14 @@
 
 int Researcher::counter = 3000;
 
-Researcher::Researcher(char* n)
+Researcher::Researcher(char* name)
 {
 	cout << "In Researcher c'tor..." << endl;
 	id = counter++;
-	name = n;
+
+	this->name = new char[strlen(name) + 1];
+	strcpy(this->name, name);
+
 	articles = new Article*[10];
 	num_of_articles = 0;
 }

@@ -2,7 +2,7 @@
 #define __HOSPITAL_H
 
 #define MAX_TITLE 150
-#define MAX_NAME 20
+#define MAX_NAME 50
 #define NOT_FOUND -1
 
 #include <iostream>
@@ -40,7 +40,7 @@ public:
 
 
 	//methods
-	void addDepartment(Department* depToAdd);
+	void addDepartment();
 	void addDoctor(Doctor* docToAdd);
 	void addNurse(Nurse* nurseToAdd);
 	void addPatient(Patient* patientToAdd);
@@ -49,6 +49,7 @@ public:
 	void showStaff() const;
 	void show() const;
 	void createDoctor();
+	void createNurse();
 
 	//menu methods
 	void mainMenu();

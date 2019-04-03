@@ -37,7 +37,7 @@ void Article::setTitle(char* title)
 void Article::setNameOfMagazine(char* name_of_magazine)
 {
 	delete[] this->name_of_magazine;
-	this->title = new char[strlen(name_of_magazine) + 1];
+	this->name_of_magazine = new char[strlen(name_of_magazine) + 1];
 	strcpy(this->name_of_magazine, name_of_magazine);
 }
 
