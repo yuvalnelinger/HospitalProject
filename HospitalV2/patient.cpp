@@ -1,15 +1,16 @@
 #include "patient.h"
 
-Patient::Patient(char* newName, int newId, int newYear, int newGen)
+Patient::Patient(char* name, int id, int year, int gender)
 {
 	cout << "In Patient c'tor..." << endl;
-	id = newId;
-	name = newName;
-	yearOfBirth = newYear;
-	gender = newGen;
+	this->id = id;
+	this->name = new char[strlen(name) + 1];
+	strcpy(this->name, name);
+	this->yearOfBirth = year;
+	this->gender = gender;
 	curr_department = nullptr;
 
-	arr_of_visitations = new Visit*[5];
+	arr_of_visitations = new Visit*[size_of_visitations];
 	num_of_visitations = 0;
 }
 

@@ -2,12 +2,15 @@
 
 int Nurse::counter = 2000;
 
-Nurse::Nurse(char* newName, int y_exp, Department* depart)
+Nurse::Nurse(char* name, int y_exp, Department* depart)
 {
 	cout << "In Nurse c'tor..." << endl;
 
 	id = counter++;
-	name = newName;
+
+	this->name = new char[strlen(name) + 1];
+	strcpy(this->name, name);
+	
 	years_of_experience = y_exp;
 	department = depart;
 }
@@ -40,7 +43,6 @@ void Nurse::setDepartment(Department* depart)
 {
 	this->department = depart;
 }
-
 
 void Nurse::show() const
 {

@@ -4,19 +4,11 @@
 Research_Institute::Research_Institute()
 {
 	cout << "In Research Institute c'tor" << endl;
-	researchers = new Researcher*[10];
+	researchers = new Researcher*[size_of_researchers];
 	num_of_researchers = 0;
 
-	articles = new Article*[10];
+	articles = new Article*[size_of_articles];
 	num_of_articles = 0;
-}
-
-//this is probably unuseful
-Research_Institute::Research_Institute(Researcher** researchers_arr, int size)
-{
-	cout << "In Research Institute c'tor..." << endl;
-	researchers = researchers_arr;
-	num_of_researchers = size;
 }
 
 Research_Institute::~Research_Institute()
@@ -37,22 +29,41 @@ int Research_Institute::getNumOfResearchers() const { return num_of_researchers;
 
 int Research_Institute::getNumOfArticles() const { return num_of_articles; }
 
-void Research_Institute::addResearcher(Researcher* researcher)
+void Research_Institute::addResearcher(char* name)
 {
+	if (num_of_researchers == size_of_researchers) //array increment if needed
+	{
+		size_of_researchers *= 2;
+		Researcher** temp = new Researcher*[size_of_researchers];
+		for (int i = 0; i < num_of_researchers; i++) //copy from old array to new array
+			temp[i] = researchers[i];
+		delete[] researchers;
+		researchers = temp;
+	}
+
+	Researcher* researcher = new Researcher(name);
 	researchers[num_of_researchers++] = researcher;
-	//here should be code for array increment!
 }
 
-void Research_Institute::addArticle(Article* article)
+void Research_Institute::addArticle(Date date, char* title, char* name_of_magazine, int r_index)
 {
-	articles[num_of_articles++] = article;
-	//here should be code for array increment!
-}
+	if (num_of_articles == size_of_articles) //array increment if needed
+	{
+		size_of_articles *= 2;
+		Article** temp = new Article*[size_of_articles];
+		for (int i = 0; i < num_of_articles; i++) //copy from old array to new array
+			temp[i] = articles[i];
+		delete[] articles;
+		articles = temp;
+	}
 
-//this method assign a pointer of article to a chosen researcher
-void Research_Institute::addArticle(Article* article, int index)
-{
-	researchers[index]->addArticle(article);
+	Article* article = new Article(date, title, name_of_magazine);
+
+	articles[num_of_articles++] = article; //add article to the research institue
+	researchers[r_index]->addArticle(article); //add article to researcher
+
+	article->show();
+	cout << "Article successfully added" << endl;
 }
 
 int Research_Institute::searchResearcherByName(char* name) const
@@ -66,7 +77,7 @@ int Research_Institute::searchResearcherByName(char* name) const
 	return -1;
 }
 
-void Research_Institute::show() const
+void Research_Institute::showResearchers() const
 {
 	cout << "In the Research Institute there are " << num_of_researchers << " researchers: \n";
 	for (int i = 0; i < num_of_researchers; i++)

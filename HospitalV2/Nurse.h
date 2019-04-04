@@ -18,7 +18,7 @@ private:
 
 public:
 	//c'tor and d'tor
-	Nurse(char* newName, int y_exp, Department* depart);
+	Nurse(char* name, int y_exp, Department* depart);
 	~Nurse();
 
 	//getters and setters

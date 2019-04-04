@@ -11,7 +11,7 @@ class Department;
 class Doctor
 {
 public:
-	//enum class eSpecialty {SURGEON, ASSISTANT, ANESTHESIOLOGIST};
+	//enum class eSpecialty {SURGEON, ASSISTANT, ANESTHESIOLOGIST}; ???
 
 	//c'tor and d'tor
 	Doctor(char* name, char* specialty, Department* depart);

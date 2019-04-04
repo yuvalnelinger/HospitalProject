@@ -6,25 +6,13 @@ Department::Department(char* name)
 	this->name = new char[strlen(name) + 1];
 	strcpy(this->name, name);
 
-	doctors = new Doctor*[10];
+	doctors = new Doctor*[size_of_doctors];
 	num_of_doctors = 0;
-	nurses = new Nurse*[10];
+	nurses = new Nurse*[size_of_nurses];
 	num_of_nurses = 0;
-	patients = new Patient*[10];
+	patients = new Patient*[size_of_patients];
 	num_of_patients = 0;
 }
-
-////I don't think we will use it
-//Department::Department(Doctor** doctors_arr, Patient** patients_arr, int size, int size_pat, char* newName)
-//{
-//	cout << "In Department c'tor..." << endl;
-//	doctors = doctors_arr;
-//	patients = patients_arr;
-//	num_of_doctors = size;
-//	num_of_patients = size_pat;
-//
-//	name = newName;
-//}
 
 Department::~Department()
 {
@@ -49,17 +37,43 @@ void Department::setName(char* name)
 //methods
 void Department::addDoctor(Doctor* doctor)
 {
+	if (num_of_doctors == size_of_doctors) //array increment if needed
+	{
+		size_of_doctors *= 2;
+		Doctor** temp = new Doctor*[size_of_doctors];
+		for (int i = 0; i < num_of_doctors; i++) //copy from old array to new array
+			temp[i] = doctors[i];
+		delete[] doctors;
+		doctors = temp;
+	}
 	doctors[num_of_doctors++] = doctor;
 }
 
 void Department::addNurse(Nurse* nurse)
 {
+	if (num_of_nurses == size_of_nurses) //array increment if needed
+	{
+		size_of_nurses *= 2;
+		Nurse** temp = new Nurse*[size_of_nurses];
+		for (int i = 0; i < num_of_nurses; i++) //copy from old array to new array
+			temp[i] = nurses[i];
+		delete[] nurses;
+		nurses = temp;
+	}
 	nurses[num_of_nurses++] = nurse;
 }
 
-
 void Department::addPatient(Patient* patient)
 {
+	if (num_of_patients == size_of_patients) //array increment if needed
+	{
+		size_of_patients *= 2;
+		Patient** temp = new Patient*[size_of_patients];
+		for (int i = 0; i < num_of_patients; i++) //copy from old array to new array
+			temp[i] = patients[i];
+		delete[] patients;
+		patients = temp;
+	}
 	patients[num_of_patients++] = patient;
 }
 

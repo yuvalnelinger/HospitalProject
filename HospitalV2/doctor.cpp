@@ -6,8 +6,13 @@ Doctor::Doctor(char* name, char* specialty, Department* depart)
 {
 	cout << "In Doctor c'tor..." << endl;
 	id = counter++;
-	this->name = name;
-	this->specialty = specialty;
+
+	this->name = new char[strlen(name) + 1];
+	strcpy(this->name, name);
+
+	this->specialty = new char[strlen(specialty) + 1];
+	strcpy(this->specialty, specialty);
+
 	this->department = depart;
 }
 

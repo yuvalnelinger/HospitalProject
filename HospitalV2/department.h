@@ -5,27 +5,27 @@
 #include "doctor.h"
 #include "Nurse.h"
 #include "patient.h"
-
-//class Nurse;
-
 #include <iostream>
 using namespace std;
+#define INIT_SIZE 50
 
 class Department
 {
 private:
 	char* name;
 	Doctor** doctors;
+	int size_of_doctors = INIT_SIZE;
 	int num_of_doctors;
 	Nurse** nurses;
+	int size_of_nurses = INIT_SIZE;
 	int num_of_nurses;
 	Patient** patients;
+	int size_of_patients = INIT_SIZE;
 	int num_of_patients;
 
 public:
 	//c'tor and d'tor
 	Department(char* name);
-	Department(Doctor** doctors_arr, Patient** patients_arr, int size, int size_pat, char* newName); //I don't think we will use it
 	~Department();
 
 	//getters and setters
@@ -34,7 +34,7 @@ public:
 	void setName(char* name);
 
 	//methods
-	void addDoctor(Doctor* doctor); //adds doctor ptr to the array
+	void addDoctor(Doctor* doctor);
 	void addNurse(Nurse* nurse);
 	void addPatient(Patient* patient);
 	void showPatients() const;

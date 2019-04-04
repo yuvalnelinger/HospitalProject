@@ -2,7 +2,8 @@
 #define __HOSPITAL_H
 
 #define MAX_TITLE 150
-#define MAX_NAME 50
+#define MAX_NAME 30
+#define INIT_SIZE 50
 #define NOT_FOUND -1
 
 #include <iostream>
@@ -13,23 +14,27 @@ using namespace std;
 #include "Research_Institute.h"
 #include "patient.h"
 
+
 class Hospital
 {
 private:
 	Department** departments;
+	int size_of_departments = INIT_SIZE;
 	int num_of_departments;
 	Research_Institute RI;
 	Doctor** doctors;
+	int size_of_doctors = INIT_SIZE;
 	int num_of_doctors;
 	Nurse** nurses;
+	int size_of_nurses = INIT_SIZE;
 	int num_of_nurses;
 	Patient** patients;
+	int size_of_patients = INIT_SIZE;
 	int num_of_patients;
 
 public:
 	//c'tor and d'tor
 	Hospital();
-	Hospital(Doctor** docs, int numDocs, Department** deps, int numDeps, Patient** patientList, int numPatients); //I don't think we will use it
 	~Hospital();
 
 	//getters and setters
@@ -37,25 +42,17 @@ public:
 	Patient* getPatientByID(int id) const;
 	Doctor* getDoctorByID(int id) const;
 	int getNumOfDepartments();
-
+	Research_Institute& getResearchInstitute();
 
 	//methods
-	void addDepartment();
-	void addDoctor(Doctor* docToAdd);
-	void addNurse(Nurse* nurseToAdd);
+	void addDepartment(char* name);
+	void addDoctor(char* name, char* docSpecialty, Department* assigned_dep);
+	void addNurse(char* name, int yearsExperience, Department* assigned_dep);
 	void addPatient(Patient* patientToAdd);
 	void showDepartments() const;
 	void showPatientById(int id) const;
 	void showStaff() const;
 	void show() const;
-	void createDoctor();
-	void createNurse();
-
-	//menu methods
-	void mainMenu();
-	void addStaffMemberMenu();     //Q2,Q3
-	void patientsMenu();		   //Q4,Q7,Q10
-	void researchInstituteMenu();  //Q5,Q6,Q9
 };
 
 #endif

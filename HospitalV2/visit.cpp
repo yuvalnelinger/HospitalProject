@@ -1,11 +1,13 @@
 #include "visit.h"
 
-
-Visit::Visit(Patient* newPatient, Date* newDate, char* newPurpose, Doctor* newDoc)
+Visit::Visit(Patient* patient, Date* date, char* purpose, Doctor* doc)
 {
 	cout << "In Visit c'tor..." << endl;
-	patient = newPatient;
-	dateOfArrival = newDate;
-	visitPurpose = newPurpose;
-	treatDoc = newDoc;
+	this->patient = patient;
+	this->dateOfArrival = date;
+	
+	this->visitPurpose = new char[strlen(purpose) + 1];
+	strcpy(this->visitPurpose, purpose);
+
+	this->treatDoc = doc;
 }

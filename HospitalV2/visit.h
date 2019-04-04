@@ -1,6 +1,7 @@
 #ifndef __VISIT_H
 #define __VISIT_H
 
+#define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 using namespace std;
 class Date;
@@ -17,8 +18,7 @@ private:
 
 public:
 	//c'tor
-	Visit(Patient* newPatient, Date* newDate, char* newPurpose, Doctor* newDoc);
-
+	Visit(Patient* patient, Date* date, char* purpose, Doctor* doc);
 };
 
 #endif

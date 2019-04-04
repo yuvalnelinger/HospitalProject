@@ -6,20 +6,22 @@
 #include "Date.h"
 #include <iostream>
 using namespace std;
+#define INIT_SIZE 50
 
 class Research_Institute
 {
 private:
 	Researcher** researchers;
+	int size_of_researchers = INIT_SIZE;
 	int num_of_researchers;
 
 	Article** articles;
+	int size_of_articles = INIT_SIZE;
 	int num_of_articles;
 
 public:
 	//c'tor and d'tor
 	Research_Institute();
-	Research_Institute(Researcher** researchers_arr, int size);
 	~Research_Institute();
 
 	//getters
@@ -27,11 +29,10 @@ public:
 	int getNumOfArticles() const;
 
 	//methods
-	void addResearcher(Researcher* researcher); //adds researcher ptr to the array
-	void addArticle(Article* article);
-	void addArticle(Article* article, int index);
+	void addResearcher(char* name); //adds researcher ptr to the array
+	void addArticle(Date date, char* title, char* name_of_magazine, int r_index);
 	int searchResearcherByName(char* name) const;
-	void show() const;
+	void showResearchers() const;
 };
 
 #endif

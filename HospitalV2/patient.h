@@ -5,6 +5,7 @@
 #include <iostream>
 using namespace std;
 #include "visit.h"
+#define INIT_SIZE 10
 
 class Department;
 
@@ -14,7 +15,7 @@ public:
 	//enum eGender { MALE, FEMALE };
 
 	//c'tor and d'tor
-	Patient(char* newName, int newId, int newYear, int newGen);
+	Patient(char* name, int id, int year, int gender);
 	~Patient();
 
 	//getters and setters
@@ -39,6 +40,7 @@ private:
 	int gender;
 	Department* curr_department;
 	Visit** arr_of_visitations;
+	int size_of_visitations = INIT_SIZE;
 	int num_of_visitations;
 };
 
