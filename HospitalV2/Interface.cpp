@@ -61,7 +61,7 @@ void Interface::getDoctorInfo(char** name, char** specialty, Department** depart
 		cin >> depIndex;
 	}
 
-	*depart = hospital.getDepartmentByIndex(depIndex);
+	*depart = hospital.getDepartmentByIndex(depIndex-1);
 }
 
 void Interface::getNurseInfo(char** name, int* yearsExperience, Department** depart, Hospital& hospital)
@@ -82,7 +82,7 @@ void Interface::getNurseInfo(char** name, int* yearsExperience, Department** dep
 		cin >> depIndex;
 	}
 
-	*depart = hospital.getDepartmentByIndex(depIndex);
+	*depart = hospital.getDepartmentByIndex(depIndex-1);
 }
 
 void Interface::getResearcherInfo(char** name)
@@ -152,8 +152,15 @@ void Interface::getVisitInfo(Patient** newPatient, Date* visitDate, char** visPu
 	int newGen = 0;
 	int genIndex = 0;
 
-	cout << "Adding a new visit, Please enter Patient ID: " << endl;
+	cout << "Adding a new visit, Please enter Patient ID (9 digits): " << endl;
 	cin >> patientID;
+	int numOfDigits = (int)log10((double)patientID) + 1;
+	while (numOfDigits != 9)
+	{
+		cout << "Patint ID must be 9 digits. Please enter ID" << endl;
+		cin >> patientID;
+		numOfDigits = (int)log10((double)patientID) + 1;
+	}
 	*newPatient = hospital.getPatientByID(patientID);
 
 	if (!*newPatient)
@@ -180,9 +187,37 @@ void Interface::getVisitInfo(Patient** newPatient, Date* visitDate, char** visPu
 		cout << "Invalid input. Please enter a valid department ID" << endl;
 		cin >> patDep;
 	}
-	*depToAdd = hospital.getDepartmentByIndex(patDep);
+	*depToAdd = hospital.getDepartmentByIndex(patDep-1);
 	(*newPatient)->setCurrDepartment(*depToAdd);
+	if ((*depToAdd)->getNumOfDoctors() + (*depToAdd)->getNumOfNurses() == 0)
+	{
+		cout << "No staff in this department yet. Please add staff" << endl;
+		int selection;
+		printAddStaffMemberMenu();
+		cin >> selection;
+		while (!isValid(selection, 1, 2))
+		{
+			cout << "Invalid input, select between Nurse to Doctor" << endl;
+			cin >> selection;
+		}
+		char* name = new char[MAX_NAME];
+		if (selection == 1)
+		{
+			char* docSpecialty = new char[MAX_NAME];
+			Interface::getDoctorInfo(&name, &docSpecialty, depToAdd, hospital);
+			hospital.addDoctor(name, docSpecialty, *depToAdd);
+			delete[] name;
+			delete[] docSpecialty;
+		}
+		else
+		{
+			int yearsExperience;
+			Interface::getNurseInfo(&name, &yearsExperience, depToAdd, hospital);
+			hospital.addNurse(name, yearsExperience, *depToAdd);
+			delete[] name;
+		}
 
+	}
 	cout << "Enter visit details. Visit date (day, month, year): " << endl;
 	int day, month, year;
 	bool res;
@@ -225,16 +260,14 @@ void Interface::getVisitInfo(Patient** newPatient, Date* visitDate, char** visPu
 		cout << "Enter the Doctor ID: " << endl;
 		cin >> idToCheck;
 		*treatDoc = hospital.getDoctorByID(idToCheck);
-		if (*treatDoc != 0)
-		{
-			cout << "Doctor set as treating staff." << endl;
-		}
-		else
-		{
-			cout << "Couldn't find Doctor." << endl;
-			//go back to main menu
-		}
 
+	while (*treatDoc == 0)
+		{
+			cout << "Couldn't find Doctor, insert ID of doctor from the list above." << endl;
+			cin >> idToCheck;
+			*treatDoc = hospital.getDoctorByID(idToCheck);
+		}
+		cout << "Doctor set as treating staff." << endl;
 
 		break;
 	}
@@ -244,15 +277,14 @@ void Interface::getVisitInfo(Patient** newPatient, Date* visitDate, char** visPu
 		cout << "Enter the Nurse ID: " << endl;
 		cin >> idToCheck;
 		*treatNurse = hospital.getNurseByID(idToCheck);
-		if (*treatNurse != 0)
+		while (*treatNurse == 0)
 		{
-			cout << "Nurse set as treating staff." << endl;
+			cout << "Couldn't find Nurse, insert ID of nurse from the list above." << endl;
+			cin >> idToCheck;
+			*treatNurse = hospital.getNurseByID(idToCheck);
 		}
-		else
-		{
-			cout << "Couldn't find Nurse." << endl;
-			//go back to main menu
-		}
+		cout << "Nurse set as treating staff." << endl;
+
 		break;
 	}
 

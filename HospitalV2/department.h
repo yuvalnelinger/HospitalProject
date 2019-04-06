@@ -30,6 +30,8 @@ public:
 
 	//getters and setters
 	int getNumOfDoctors() const;
+	int getNumOfNurses() const;
+
 	char* getDepName() const;
 	void setName(const char* name);
 

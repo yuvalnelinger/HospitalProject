@@ -171,9 +171,9 @@ void Hospital::addPatient(Patient* patientToAdd)
 
 void Hospital::showDepartments() const
 {
-	for (int i = 0; i < num_of_departments; i++)
+	for (int i = 1; i < num_of_departments+1; i++)
 	{
-		cout << "\t" << i << ". " << departments[i]->getDepName() << endl;
+		cout << "\t" << i << ". " << departments[i-1]->getDepName() << endl;
 	}
 }
 
@@ -217,19 +217,48 @@ void Hospital::showStaff() const
 void Hospital::show() const
 {
 	int i;
-	cout << "List of departments: \n";
-	for (i = 0; i < num_of_departments; i++)
-		cout << "\t" << i <<"." << departments[i]->getDepName() << endl;
+	if (num_of_departments == 0)
+	{
+		cout << "No departments yet" << endl;
+	}
+	else 
+	{
+		cout << "List of departments: \n";
+		for (i = 0; i < num_of_departments; i++)
+			cout << "\t" << i << "." << departments[i]->getDepName() << endl;
+	}
+	if (num_of_doctors == 0)
+	{
+		cout << "No doctors yet" << endl;
+	}
+	else
+	{
+		cout << "List of doctors: \n";
+		for (i = 0; i < num_of_doctors; i++)
+			cout << "\t" << i << "." << doctors[i]->getName() << endl;
+	}
+	if (num_of_nurses == 0)
+	{
+		cout << "No nurses yet" << endl;
+	}
+	else
+	{
+		cout << "List of nurses: \n";
+		for (i = 0; i < num_of_nurses; i++)
+			cout << "\t" << i << "." << nurses[i]->getName() << endl;
+	}
+	if (num_of_patients == 0)
+	{
+		cout << "No patients yet" << endl;
+	}
+	else
+	{
+		cout << "List of patients: \n";
+		for (i = 0; i < num_of_patients; i++)
+			cout << i << "." << "\t" << patients[i]->getName() << endl;
+	}
 
-	cout << "List of doctors: \n";
-	for (i = 0; i < num_of_doctors; i++)
-		cout << "\t" << i << "." << doctors[i]->getName() << endl;
 
-	cout << "List of nurses: \n";
-	for (i = 0; i < num_of_nurses; i++)
-		cout << "\t" << i << "."<< nurses[i]->getName() << endl;
 
-	cout << "List of patients: \n";
-	for (i = 0; i < num_of_patients; i++)
-		cout << i << "." << "\t" << patients[i]->getName() << endl;
+	
 }

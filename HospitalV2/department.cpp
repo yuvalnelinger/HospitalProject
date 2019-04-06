@@ -23,6 +23,8 @@ Department::~Department()
 
 //getters and setters
 int Department::getNumOfDoctors() const { return num_of_doctors; }
+int Department::getNumOfNurses() const { return num_of_nurses; }
+
 
 char* Department::getDepName() const { return name; }
 

@@ -80,6 +80,14 @@ int main()
 		case 3: //patient operations
 		{
 			int choice;
+			if (hospital.getNumOfDepartments() == 0)
+			{
+				cout << "You have to create a department before making any patient operations." << endl;
+				char* name = new char[MAX_NAME];
+				Interface::getDepartmentInfo(&name);
+				hospital.addDepartment(name);
+				delete[] name;
+			}
 			Interface::printPatientsMenu();
 			cin >> choice;
 			bool invalid = true;
@@ -117,13 +125,13 @@ int main()
 					cout << "Please select a department: " << endl;
 					hospital.showDepartments();
 					cin >> select;
-					while (!Interface::isValid(select, 1, hospital.getNumOfDepartments()))
+					while (!Interface::isValid(select-1, 0, hospital.getNumOfDepartments()))
 					{
 						cout << "Invalid input. Please enter a valid department ID" << endl;
 						cin >> select;
 					}
 
-					depToShow = hospital.getDepartmentByIndex(select);
+					depToShow = hospital.getDepartmentByIndex(select-1);
 					cout << "These are the patients of department " << depToShow->getDepName() << endl;
 					depToShow->showPatients();
 					break;
@@ -180,6 +188,15 @@ int main()
 				break;
 				case 2: //add an article
 				{
+					if (hospital.getResearchInstitute().getNumOfResearchers() == 0)
+					{
+						cout << "There are no researchers in the research institute. Please add a researcher first" << endl;
+						char* name = new char[MAX_NAME];
+						Interface::getResearcherInfo(&name);
+						hospital.getResearchInstitute().addResearcher(name);
+						hospital.getResearchInstitute().showResearchers();
+						delete[] name;
+					}
 					int r_index;
 					Date date;
 					char* title = new char[MAX_TITLE];
@@ -220,7 +237,7 @@ int main()
 			<< "Press 1 for YES or 0 for NO" << endl;
 		cin >> proceed;
 
-	} while (proceed);
+	} while (proceed==1);
 
 	cout << "Goodbye!" << endl;
 }
