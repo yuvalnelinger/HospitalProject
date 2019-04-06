@@ -50,7 +50,7 @@ Patient* Hospital::getPatientByID(int id) const
 			return patients[i];
 		}
 	}
-	return 0;
+	return nullptr;
 }
 
 Doctor* Hospital::getDoctorByID(int id) const

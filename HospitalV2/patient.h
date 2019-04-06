@@ -31,7 +31,7 @@ public:
 
 	//methods
 	void show() const;
-	void addVisit(Visit* newVisit);
+	void addVisit(Patient* patient, Date visitDate, char*visPurpose, Doctor* treatDoc, Nurse* treatNurse);
 
 private:
 	int id;

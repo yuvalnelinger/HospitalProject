@@ -24,7 +24,7 @@
     <ClInclude Include="department.h" />
     <ClInclude Include="doctor.h" />
     <ClInclude Include="hospital.h" />
-    <ClInclude Include="main.h" />
+    <ClInclude Include="Interface.h" />
     <ClInclude Include="Nurse.h" />
     <ClInclude Include="patient.h" />
     <ClInclude Include="Researcher.h" />
@@ -37,6 +37,7 @@
     <ClCompile Include="department.cpp" />
     <ClCompile Include="doctor.cpp" />
     <ClCompile Include="hospital.cpp" />
+    <ClCompile Include="Interface.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Nurse.cpp" />
     <ClCompile Include="patient.cpp" />

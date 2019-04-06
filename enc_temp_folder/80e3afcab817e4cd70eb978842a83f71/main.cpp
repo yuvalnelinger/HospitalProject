@@ -156,7 +156,7 @@ int main()
 				}
 			}
 			break;
-		}//end patient operations
+		}//end patiend operations
 
 		case 4:  //enter the research institute
 		{
