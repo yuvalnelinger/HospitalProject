@@ -1,22 +1,21 @@
 #ifndef __Research_Institute_H
 #define __Research_Institute_H
 
+#define INIT_SIZE 50
 #include "Researcher.h"
 #include "Article.h"
 #include "Date.h"
 #include <iostream>
 using namespace std;
-#define INIT_SIZE 50
 
 class Research_Institute
 {
 private:
 	Researcher** researchers;
-	int size_of_researchers = INIT_SIZE;
+	int size_of_researchers;
 	int num_of_researchers;
-
 	Article** articles;
-	int size_of_articles = INIT_SIZE;
+	int size_of_articles;
 	int num_of_articles;
 
 public:
@@ -33,6 +32,9 @@ public:
 	void addArticle(Date date, char* title, char* name_of_magazine, int r_index);
 	int searchResearcherByName(char* name) const;
 	void showResearchers() const;
+
+private:
+	Research_Institute(const Research_Institute&); //prevent from user to make a copy of the RI
 };
 
 #endif

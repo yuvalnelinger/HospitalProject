@@ -18,6 +18,9 @@ public:
 	Article(Date p_date, char* title, char* name_of_magazine);
 	~Article();
 
+	//copy c'tor
+	Article(const Article& other);
+
 	//getters
 	Date& getPublishDate();
 	char* getTitle() const;

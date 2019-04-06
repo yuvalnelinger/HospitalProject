@@ -1,16 +1,17 @@
 #include "hospital.h"
+#include "main.h"
 #include <string.h>
 
 using namespace std;
 
 int main()
 {
-	Hospital hospital;
+	Hospital hospital("Assuta");
 	
 	bool proceed = true;
 	int selection;
 	do {
-		cout << "Welcome to Assuta hospital!" << endl;
+		cout << "Welcome to " << hospital.getName() << " hospital!" << endl;
 		cout << "What would you like to do? please choose an option from the menu:" << endl;
 		cout << "1. Add a department\n"
 			<< "2. Add a staff member\n"
@@ -133,6 +134,7 @@ int main()
 		}
 			break;
 		case 3: //patient operations
+					//implement code here
 			break;
 		case 4:  //enter the research institute
 		{

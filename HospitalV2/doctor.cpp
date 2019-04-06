@@ -2,25 +2,20 @@
 
 int Doctor::counter = 1000;
 
-Doctor::Doctor(char* name, char* specialty, Department* depart)
+Doctor::Doctor(char* name, char* specialty, Department* depart) : name(nullptr), specialty (nullptr)
 {
 	cout << "In Doctor c'tor..." << endl;
 	id = counter++;
-
-	this->name = new char[strlen(name) + 1];
-	strcpy(this->name, name);
-
-	this->specialty = new char[strlen(specialty) + 1];
-	strcpy(this->specialty, specialty);
-
+	setName(name);
+	setSpecialty(specialty);
 	this->department = depart;
 }
 
 Doctor::~Doctor()
 {
 	cout << "In Docctor d'tor..." << endl;
-
 	delete[] name;
+	delete[] specialty;
 }
 
 //getters and setters

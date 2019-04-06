@@ -1,7 +1,7 @@
 #include "Article.h"
 
-
-Article::Article(Date p_date, char* title, char* name_of_magazine)
+//c'tor and d'tor
+Article::Article(Date p_date, char* title, char* name_of_magazine) : title (nullptr), name_of_magazine (nullptr)
 {
 	cout << "In Article c'tor..." << endl;
 	publish_date = p_date;
@@ -14,6 +14,18 @@ Article::~Article()
 	cout << "In Article d'tor..." << endl;
 	delete[]title;
 	delete[]name_of_magazine;
+}
+
+//copy c'tor
+Article::Article(const Article& other)
+{
+	title = new char[strlen(other.title) + 1];
+	strcpy(title, other.title);
+
+	name_of_magazine = new char[strlen(other.name_of_magazine) + 1];
+	strcpy(name_of_magazine, other.name_of_magazine);
+
+	publish_date = other.publish_date;
 }
 
 Date& Article::getPublishDate() { return publish_date; }

@@ -14,10 +14,11 @@ private:
 	char* name;
 	int id;
 	Article** articles;
-	int size_of_articles = INIT_SIZE;
+	int size_of_articles;
 	int num_of_articles;
 
 public:
+	//c'tor and d'tor
 	Researcher(char* name);
 	~Researcher();
 
@@ -27,6 +28,9 @@ public:
 
 	//methods
 	void addArticle(Article* article);
+
+private:
+	Researcher(const Researcher&); //prevent from user to make a copy of researcher
 };
 #endif
 

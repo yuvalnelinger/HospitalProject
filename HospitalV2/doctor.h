@@ -5,14 +5,18 @@
 #include <iostream>
 using namespace std;
 
-//#include "department.h"
 class Department;
 
 class Doctor
 {
-public:
-	//enum class eSpecialty {SURGEON, ASSISTANT, ANESTHESIOLOGIST}; ???
+private:
+	static int counter; //unique id 
+	int id;
+	char* name;
+	char* specialty;
+	Department* department;
 
+public:
 	//c'tor and d'tor
 	Doctor(char* name, char* specialty, Department* depart);
 	~Doctor();
@@ -29,11 +33,7 @@ public:
 	void show();
 
 private:
-	static int counter; //unique id 
-	int id;
-	char* name;
-	char* specialty;
-	Department* department;
+	Doctor(const Doctor&); //prevent from user to make a copy of doctor
 };
 
 #endif

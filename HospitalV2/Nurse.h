@@ -32,6 +32,8 @@ public:
 	//methods
 	void show() const;
 
+private:
+	Nurse(const Nurse&); //prevent from user to make a copy of nurse
 };
 
 #endif

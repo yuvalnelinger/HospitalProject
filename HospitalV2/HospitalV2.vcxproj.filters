@@ -45,6 +45,9 @@
     <ClInclude Include="Nurse.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="main.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Researcher.cpp">

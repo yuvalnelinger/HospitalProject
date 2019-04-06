@@ -1,15 +1,12 @@
 #include "patient.h"
 
-Patient::Patient(char* name, int id, int year, int gender)
+Patient::Patient(char* name, int id, int year, int gender) : name(nullptr), curr_department(nullptr), size_of_visitations(INIT_SIZE)
 {
 	cout << "In Patient c'tor..." << endl;
 	this->id = id;
-	this->name = new char[strlen(name) + 1];
-	strcpy(this->name, name);
+	setName(name);
 	this->yearOfBirth = year;
 	this->gender = gender;
-	curr_department = nullptr;
-
 	arr_of_visitations = new Visit*[size_of_visitations];
 	num_of_visitations = 0;
 }
@@ -69,6 +66,16 @@ void Patient::show() const
 
 void Patient::addVisit(Visit* newVisit)
 {
+	if (num_of_visitations == size_of_visitations) //array increment if needed
+	{
+		size_of_visitations *= 2;
+		Visit** temp = new Visit*[size_of_visitations];
+		for (int i = 0; i < num_of_visitations; i++) //copy from old array to new array
+			temp[i] = arr_of_visitations[i];
+		delete[] arr_of_visitations;
+		arr_of_visitations = temp;
+	}
+
 	arr_of_visitations[num_of_visitations++] = newVisit;
 }
 

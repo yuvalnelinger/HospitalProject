@@ -1,11 +1,9 @@
 #include "department.h"
 
-Department::Department(char* name)
+Department::Department(char* name) : name(nullptr), size_of_doctors(INIT_SIZE), size_of_nurses(INIT_SIZE), size_of_patients(INIT_SIZE)
 {
 	cout << "In Department c'tor..." << endl;
-	this->name = new char[strlen(name) + 1];
-	strcpy(this->name, name);
-
+	setName(name);
 	doctors = new Doctor*[size_of_doctors];
 	num_of_doctors = 0;
 	nurses = new Nurse*[size_of_nurses];
@@ -17,6 +15,7 @@ Department::Department(char* name)
 Department::~Department()
 {
 	cout << "In Department d'tor..." << endl;
+	delete[] name;
 	delete[]doctors;
 	delete[]nurses;
 	delete[] patients;
@@ -27,7 +26,7 @@ int Department::getNumOfDoctors() const { return num_of_doctors; }
 
 char* Department::getDepName() const { return name; }
 
-void Department::setName(char* name)
+void Department::setName(const char* name)
 {
 	delete[] this->name;
 	this->name = new char[strlen(name) + 1];

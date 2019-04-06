@@ -5,6 +5,7 @@
 #define MAX_NAME 30
 #define INIT_SIZE 50
 #define NOT_FOUND -1
+#define _CRT_SECURE_NO_WARNINGS
 
 #include <iostream>
 using namespace std;
@@ -14,35 +15,37 @@ using namespace std;
 #include "Research_Institute.h"
 #include "patient.h"
 
-
 class Hospital
 {
 private:
+	char* name;
 	Department** departments;
-	int size_of_departments = INIT_SIZE;
+	int size_of_departments;
 	int num_of_departments;
 	Research_Institute RI;
 	Doctor** doctors;
-	int size_of_doctors = INIT_SIZE;
+	int size_of_doctors;
 	int num_of_doctors;
 	Nurse** nurses;
-	int size_of_nurses = INIT_SIZE;
+	int size_of_nurses;
 	int num_of_nurses;
 	Patient** patients;
-	int size_of_patients = INIT_SIZE;
+	int size_of_patients;
 	int num_of_patients;
 
 public:
 	//c'tor and d'tor
-	Hospital();
+	Hospital(const char* name);
 	~Hospital();
 
 	//getters and setters
+	char* getName() const;
 	Department* getDepartmentByIndex(int num) const;
 	Patient* getPatientByID(int id) const;
 	Doctor* getDoctorByID(int id) const;
 	int getNumOfDepartments();
 	Research_Institute& getResearchInstitute();
+	void setName(const char* name);
 
 	//methods
 	void addDepartment(char* name);
@@ -53,6 +56,9 @@ public:
 	void showPatientById(int id) const;
 	void showStaff() const;
 	void show() const;
+
+private:
+	Hospital(const Hospital&); //prevent from user to make a copy of the hospital
 };
 
 #endif

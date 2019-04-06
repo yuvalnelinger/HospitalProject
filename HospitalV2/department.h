@@ -2,25 +2,25 @@
 #define __DEPARTMENT_H
 
 #define _CRT_SECURE_NO_WARNINGS
+#define INIT_SIZE 50;
 #include "doctor.h"
 #include "Nurse.h"
 #include "patient.h"
 #include <iostream>
 using namespace std;
-#define INIT_SIZE 50
 
 class Department
 {
 private:
 	char* name;
 	Doctor** doctors;
-	int size_of_doctors = INIT_SIZE;
+	int size_of_doctors;
 	int num_of_doctors;
 	Nurse** nurses;
-	int size_of_nurses = INIT_SIZE;
+	int size_of_nurses;
 	int num_of_nurses;
 	Patient** patients;
-	int size_of_patients = INIT_SIZE;
+	int size_of_patients;
 	int num_of_patients;
 
 public:
@@ -31,7 +31,7 @@ public:
 	//getters and setters
 	int getNumOfDoctors() const;
 	char* getDepName() const;
-	void setName(char* name);
+	void setName(const char* name);
 
 	//methods
 	void addDoctor(Doctor* doctor);
@@ -39,6 +39,9 @@ public:
 	void addPatient(Patient* patient);
 	void showPatients() const;
 	void show() const;
+
+private:
+	Department(const Department&); //prevent from user to make a copy of department
 };
 
 #endif

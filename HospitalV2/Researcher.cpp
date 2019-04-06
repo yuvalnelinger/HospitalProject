@@ -2,14 +2,12 @@
 
 int Researcher::counter = 3000;
 
-Researcher::Researcher(char* name)
+//c'tor and d'tor
+Researcher::Researcher(char* name) : name(nullptr), size_of_articles(INIT_SIZE)
 {
 	cout << "In Researcher c'tor..." << endl;
 	id = counter++;
-
-	this->name = new char[strlen(name) + 1];
-	strcpy(this->name, name);
-
+	setName(name);
 	articles = new Article*[size_of_articles];
 	num_of_articles = 0;
 }

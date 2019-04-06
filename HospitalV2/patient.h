@@ -2,17 +2,17 @@
 #define __PATIENT_H
 
 #define _CRT_SECURE_NO_WARNINGS
+#define INIT_SIZE 10
 #include <iostream>
 using namespace std;
 #include "visit.h"
-#define INIT_SIZE 10
 
 class Department;
 
 class Patient
 {
 public:
-	//enum eGender { MALE, FEMALE };
+	enum eGender { MALE, FEMALE };
 
 	//c'tor and d'tor
 	Patient(char* name, int id, int year, int gender);
@@ -40,8 +40,11 @@ private:
 	int gender;
 	Department* curr_department;
 	Visit** arr_of_visitations;
-	int size_of_visitations = INIT_SIZE;
+	int size_of_visitations;
 	int num_of_visitations;
+
+private:
+	Patient(const Patient&); //prevent from user to make a copy of patient
 };
 
 #endif

@@ -1,16 +1,17 @@
 #include "hospital.h"
 
-Hospital::Hospital()
+Hospital::Hospital(const char* name) : name(nullptr), size_of_departments(INIT_SIZE), size_of_doctors(INIT_SIZE), size_of_nurses(INIT_SIZE), size_of_patients(INIT_SIZE)
 {
 	cout << "In Hospital c'tor..." << endl;
-	doctors = new Doctor*[size_of_doctors];
-	num_of_doctors = 0;
+	setName(name);
 	departments = new Department*[size_of_departments];
 	num_of_departments = 0;
-	patients = new Patient*[size_of_patients];
-	num_of_patients = 0;
+	doctors = new Doctor*[size_of_doctors];
+	num_of_doctors = 0;
 	nurses = new Nurse*[size_of_nurses];
 	num_of_nurses = 0;
+	patients = new Patient*[size_of_patients];
+	num_of_patients = 0;
 }
 
 Hospital::~Hospital()
@@ -36,10 +37,9 @@ Hospital::~Hospital()
 }
 
 //getters and setters
-Department* Hospital::getDepartmentByIndex(int num) const
-{
-	return departments[num];
-}
+char* Hospital::getName() const { return name; }
+
+Department* Hospital::getDepartmentByIndex(int num) const { return departments[num]; }
 
 Patient* Hospital::getPatientByID(int id) const
 {
@@ -74,6 +74,14 @@ Research_Institute& Hospital::getResearchInstitute()
 {
 	return RI;
 }
+
+void Hospital::setName(const char* name)
+{
+	delete[] this->name;
+	this->name = new char[strlen(name) + 1];
+	strcpy(this->name, name);
+}
+
 
 
 //methods
