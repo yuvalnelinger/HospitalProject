@@ -5,7 +5,7 @@
 #include <iostream>
 using namespace std;
 class Article;
-#define INIT_SIZE 10
+#define INIT_SIZE 50
 
 class Researcher
 {

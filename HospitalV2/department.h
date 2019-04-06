@@ -2,7 +2,7 @@
 #define __DEPARTMENT_H
 
 #define _CRT_SECURE_NO_WARNINGS
-#define INIT_SIZE 50;
+#define INIT_SIZE 50
 #include "doctor.h"
 #include "Nurse.h"
 #include "patient.h"

@@ -134,8 +134,184 @@ int main()
 		}
 			break;
 		case 3: //patient operations
-					//implement code here
+		{
+			int choice;
+			cout << "What operation would you like to perform?" << endl;
+			cout << "1. Add a new visit\n2. Present all patients of a specific department\n3. Search patient by ID and get his details" << endl;
+			cin >> choice;
+			bool invalid = true;
+			while (invalid)
+			{
+				switch (choice)
+				{
+				case 1:
+				{
+					invalid = false;
+					Patient* newPatient = 0;
+					Date visitDate;
+					char* visPurpose = new char[MAX_NAME];
+					Doctor* treatDoc = 0;
+					Nurse* treatNurse = 0;
+					int patientID = 0;
+					char* nameToAdd = new char[MAX_NAME];
+					bool isNewPatient = 0;
+					int newYear = 0;
+					int newGen = 0;
+					int genIndex = 0;
+					cout << "Please enter Patient ID: " << endl;
+					cin >> patientID;
+					newPatient = hospital.getPatientByID(patientID);
+					if (newPatient == 0)
+					{
+						cout << "Patient not found, enter details: " << endl;
+						cout << "Enter Name: " << endl;
+						cin.ignore();
+						cin.getline(nameToAdd, MAX_NAME);
+						cout << "Enter Year Of Birth: " << endl;
+						cin >> newYear;
+						cout << "Enter Gender (0 for MALE, 1 for FEMALE): " << endl;
+						cin >> genIndex;
+						newGen = genIndex;
+						cout << "Received details, creating Patient" << endl;
+						newPatient = new Patient(nameToAdd, patientID, newYear, newGen);
+						isNewPatient = true;
+					}
+					delete[] nameToAdd;
+					cout << "What is the department the visit is to? insert the index of it " << endl;
+					int patDep;
+					hospital.showDepartments();
+					cin >> patDep;
+					if (patDep > hospital.getNumOfDepartments())
+					{
+						cout << "Invalid input. Please enter a valid department ID" << endl;
+						cin >> patDep;
+					} //if dep invalid, send back to main menu 
+					Department* depToAdd = hospital.getDepartmentByIndex(patDep);
+					newPatient->setCurrDepartment(depToAdd);
+
+					cout << "Enter visit details. Visit date (day, month, year): " << endl;
+					int newday, newmonth, newyear;
+					cin >> newday >> newmonth >> newyear;
+					visitDate.setDay(newday);
+					visitDate.setMonth(newmonth);
+					visitDate.setYear(newyear);
+					cout << "Enter the visit purpose: " << endl;
+					cin.ignore();
+					cin.getline(visPurpose, MAX_NAME);
+
+					int idToCheck;
+					int pick;
+					cout << "List of department doctors and nurses: " << endl;
+					depToAdd->show();
+					cout << "Is the lead treating staff doctor or nurse?" << endl;
+					cout << "1. Doctor\n2. Nurse" << endl;
+					cin >> pick;
+					switch (pick)
+					{
+					case 1:
+					{
+						cout << "Enter the Doctor ID: " << endl;
+						cin >> idToCheck;
+						treatDoc = hospital.getDoctorByID(idToCheck);
+						if (treatDoc != 0)
+						{
+							cout << "Doctor set as treating staff." << endl;
+						}
+						else
+						{
+							cout << "Couldn't find Doctor." << endl;
+							//go back to main menu
+						}
+						break;
+					}
+
+					case 2:
+					{
+						cout << "Enter the Nurse ID: " << endl;
+						cin >> idToCheck;
+						treatNurse = hospital.getNurseByID(idToCheck);
+						if (treatNurse != 0)
+						{
+							cout << "Nurse set as treating staff." << endl;
+						}
+						else
+						{
+							cout << "Couldn't find Nurse." << endl;
+							//go back to main menu
+						}
+						break;
+					}
+
+					default:
+					{
+						cout << "Invalid input" << endl;
+						//go back to main menu
+						break;
+					}
+
+
+					}
+
+					Visit newVisit(newPatient, visitDate, visPurpose, treatDoc, treatNurse);
+					delete[]visPurpose;
+					newPatient->addVisit(&newVisit);
+					if (isNewPatient = true)
+					{
+						depToAdd->addPatient(newPatient);
+						hospital.addPatient(newPatient);
+					}
+
+					cout << "Successfully added visit." << endl;
+					break;
+				}
+				case 2:
+				{
+					invalid = false;
+					int selec;
+					Department* depToShow;
+					cout << "Please select the department to see data of: " << endl;
+					hospital.showDepartments();
+					cin >> selec;
+					if (selec > hospital.getNumOfDepartments())
+					{
+						cout << "Invalid input. Please enter a valid department ID" << endl;
+						cin >> selec;
+					} //if dep invalid, send back to main menu 
+					depToShow = hospital.getDepartmentByIndex(selec);
+					cout << "Those are the patients of department " << depToShow->getDepName() << endl;
+					depToShow->showPatients();
+					break;
+				}
+
+				case 3:
+				{
+					invalid = false;
+					int patID;
+					Patient* patientToShow;
+					cout << "Enter the ID of the patient to search:" << endl;
+					cin >> patID;
+					patientToShow = hospital.getPatientByID(patID);
+					if (patientToShow == 0)
+					{
+						cout << "Patient not found." << endl;
+					}
+					else 
+					{
+						cout << "Patient with ID " << patID << "is " << patientToShow->getName() << "and his current department is " << patientToShow->getCurrentDepartment()->getDepName() << endl;
+					}
+					break;
+				}
+				default:
+				{
+					cout << "Invalid selection. Please try again" << endl;
+					break;
+				}
+
+				}
+			}
 			break;
+		}
+			
 		case 4:  //enter the research institute
 		{
 			cout << "Welcome to the research institute! What would you like to do?" << endl;
@@ -256,10 +432,16 @@ int main()
 			break;
 		}
 		case 5: //show all staff members
+		{
 			hospital.showStaff();
 			break;
-		default: cout << "Invalid value. Please try again" << endl;
+		}
+		default: 
+		{
+			cout << "Invalid value. Please try again" << endl;
 			break;
+		}
+			
 		}
 
 		cout << "Would you like to perform another action?\n"
@@ -272,84 +454,7 @@ int main()
 }
 
 	///*Q4*/
-	//Patient* newPatient;
-	//Date visitDate;
-	//char* visPurpose = new char[MAX_NAME];
-	//Doctor* treatDoc;
-	//int patientID;
-	//char* nameToAdd = new char[MAX_NAME];
-	//bool isNewPatient;
-	//cout << "Please enter Patient ID: " << endl;
-	//cin >> patientID;
-	//newPatient = hospital.getPatientByID(patientID);
-	//int newYear;
-	//int newGen;
-	//int genIndex;
-	//if (newPatient != 0)
-	//{
-	//	cout << "Patient found" << endl;
-	//	isNewPatient = false;
-	//}
-	//else
-	//{
-	//	cout << "Patient not found, enter details: " << endl;
-	//	cout << "Enter Name: " << endl;
-	//	cin.ignore();
-	//	cin.getline(nameToAdd, MAX_NAME);
-	//	cout << "Enter Year Of Birth: " << endl;
-	//	cin >> newYear;
-	//	cout << "Enter Gender (0 for MALE, 1 for FEMALE): " << endl;
-	//	cin >> genIndex;
-	//	newGen = genIndex;
-	//	cout << "Received details, creating Patient" << endl;
-	//	newPatient = new Patient(nameToAdd, patientID, newYear, newGen);
-	//	isNewPatient = true;
-	//}
-	//cout << "What is the department the visit is to? insert the index of it " << endl;
-	//int patDep;
-	//hospital.showDepartments();
-	//cin >> patDep;  
-	//if (patDep > hospital.getNumOfDepartments())
-	//{
-	//	cout << "Invalid input. Please enter a valid department ID" << endl;
-	//	cin >> patDep;
-	//} //once there's a function, if it's invalid again, send back to the main menu
-	//Department* depToAdd = hospital.getDepartmentByIndex(patDep);
-	//newPatient->setCurrDepartment(depToAdd);
-
-	//cout << "Enter visit details. Visit date (day, month, year): " << endl;
-	//int newday, newmonth, newyear;
-	//cin >> newday >> newmonth >> newyear;
-	//visitDate.setDay(newday);
-	//visitDate.setMonth(newmonth);
-	//visitDate.setYear(newyear);
-	//cout << "Enter the visit purpose: " << endl;
-	//cin.ignore();
-	//cin.getline(visPurpose, MAX_NAME);
-
-	//cout << "Enter the Doctor ID: " << endl;
-	//int idToCheck;
-	//cin >> idToCheck;
-	//treatDoc = hospital.getDoctorByID(idToCheck);
-	//if (treatDoc != 0)
-	//{
-	//	cout << "Doctor set." << endl;
-	//}
-	//else
-	//{
-	//	cout << "Doctor not found, please create a new doctor" << endl;
-	//	//add here the function to add new doctor to hospital and assign to treatDoc
-	//}
-	//Visit newVisit(newPatient, &visitDate, visPurpose, treatDoc);
-
-	//newPatient->addVisit(&newVisit);
-	//if (isNewPatient = true)
-	//{
-	//	depToAdd->addPatient(newPatient);  
-	//	hospital.addPatient(newPatient); 
-	//}
-
-	//cout << "Successfully added visit." << endl;
+	
 	//hospital.show();
 
 	///*End Q4*/

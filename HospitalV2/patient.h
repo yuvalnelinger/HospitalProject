@@ -2,7 +2,7 @@
 #define __PATIENT_H
 
 #define _CRT_SECURE_NO_WARNINGS
-#define INIT_SIZE 10
+#define INIT_SIZE 50
 #include <iostream>
 using namespace std;
 #include "visit.h"

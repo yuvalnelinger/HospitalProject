@@ -91,16 +91,16 @@ void Department::show() const
 	cout << " with the following doctors: " << endl;
 	for (int i = 0; i < num_of_doctors; i++)
 	{
-		cout << this->doctors[i]->getName() << endl;
+		cout << this->doctors[i]->getName() << " , ID " << this->doctors[i]->getId() << endl;
 	}
 	cout << "And Nurses: " << endl;
 	for (int i = 0; i < num_of_nurses; i++)
 	{
-		cout << this->nurses[i]->getName() << endl;
+		cout << this->nurses[i]->getName() << " , ID " << this->nurses[i]->getId() << endl;
 	}
 	cout << "And Patients: " << endl;
 	for (int i = 0; i < num_of_patients; i++)
 	{
-		cout << this->patients[i]->getName() << endl;
+		cout << this->patients[i]->getName() << " , ID " << this->patients[i]->getId() << endl;
 	}
 }

@@ -43,6 +43,7 @@ public:
 	Department* getDepartmentByIndex(int num) const;
 	Patient* getPatientByID(int id) const;
 	Doctor* getDoctorByID(int id) const;
+	Nurse* getNurseByID(int id) const;
 	int getNumOfDepartments();
 	Research_Institute& getResearchInstitute();
 	void setName(const char* name);

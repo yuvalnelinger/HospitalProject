@@ -65,6 +65,18 @@ Doctor* Hospital::getDoctorByID(int id) const
 	return 0;
 }
 
+Nurse* Hospital::getNurseByID(int id) const
+{
+	for (int i = 0; i < num_of_nurses; i++)
+	{
+		if (nurses[i]->getId() == id)
+		{
+			return nurses[i];
+		}
+	}
+	return 0;
+}
+
 int Hospital::getNumOfDepartments()
 {
 	return num_of_departments;
@@ -188,7 +200,7 @@ void Hospital::showStaff() const
 	{
 		cout << "List of doctors: \n";
 		for (i = 0; i < num_of_doctors; i++)
-			cout << "\t" << i+1 << "." << doctors[i]->getName() << endl;
+			cout << "\t" << i+1 << "." << doctors[i]->getName() << ", ID " <<doctors[i]->getId() << endl;
 	}
 
 	if (num_of_nurses == 0)
@@ -198,7 +210,7 @@ void Hospital::showStaff() const
 	{
 		cout << "List of nurses: \n";
 		for (i = 0; i < num_of_nurses; i++)
-			cout << "\t" << i+1 << "."<< nurses[i]->getName() << endl;
+			cout << "\t" << i+1 << "."<< nurses[i]->getName() << ", ID " << nurses[i]->getId() << endl;
 	}
 }
 
