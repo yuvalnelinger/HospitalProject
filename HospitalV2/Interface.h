@@ -19,7 +19,7 @@ static void printRIMenu();
 
 	//cases
 static void getDepartmentInfo(char** name);
-static void getDoctorInfo(char** name, char** specialty, Department** depart, Hospital& hospital);
+static void getDoctorInfo(char** name, char** specialty, Department** depart, Hospital& hospital,bool* isSurgeon, bool* isResearcher);
 static void getNurseInfo(char** name, int* yearsExperience, Department** depart, Hospital& hospital);
 static void getResearcherInfo(char** name);
 static void getArticleInfo(char** title, char** name_of_magazine, Date* p_date, int* r_index, Hospital& hospital);

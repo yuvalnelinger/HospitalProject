@@ -115,7 +115,7 @@ void Hospital::addDepartment(char* name)
 	
 }
 
-void Hospital::addDoctor(char* name, char* docSpecialty, Department* assigned_dep)
+void Hospital::addDoctor(char* name, char* docSpecialty, Department* assigned_dep,bool isSurgeon,bool isResearcher)
 {
 	if (num_of_doctors == size_of_doctors) //array increment if needed
 	{
@@ -126,7 +126,18 @@ void Hospital::addDoctor(char* name, char* docSpecialty, Department* assigned_de
 		delete[] doctors;
 		doctors = temp;
 	}
-
+	if (isSurgeon==1 && isResearcher==0)
+	{
+		Surgeon* surgeon = new Surgeon(name, docSpecialty, assigned_dep); //create a surgeon
+	}
+	else if (isSurgeon && isResearcher)
+	{
+		SurgeonResearcher* surgeresearch = new SurgeonResearcher(Surgeon(name, docSpecialty, assigned_dep), Researcher(name));
+	}
+	else if (!isSurgeon && isResearcher)
+	{
+		DoctorResearcher* docresearch = new DoctorResearcher(Doctor(name, docSpecialty, assigned_dep), Researcher(name));
+	}
 	Doctor* doc = new Doctor(name, docSpecialty,assigned_dep);
 	this->doctors[num_of_doctors++] = doc;	//add doctor to hospital
 	assigned_dep->addDoctor(doc);   //add doctor to deparement

@@ -48,6 +48,18 @@
     <ClInclude Include="Interface.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="StaffMember.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Surgeon.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DoctorResearcher.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SurgeonResearcher.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Researcher.cpp">
@@ -84,6 +96,18 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Interface.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="StaffMember.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Surgeon.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DoctorResearcher.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SurgeonResearcher.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

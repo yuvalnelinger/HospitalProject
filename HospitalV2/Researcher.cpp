@@ -1,13 +1,10 @@
 #include "Researcher.h"
 
-int Researcher::counter = 3000;
 
 //c'tor and d'tor
-Researcher::Researcher(char* name) : name(nullptr), size_of_articles(INIT_SIZE)
+Researcher::Researcher(char* name) : StaffMember(name), size_of_articles(INIT_SIZE)
 {
 	cout << "In Researcher c'tor..." << endl;
-	id = counter++;
-	setName(name);
 	articles = new Article*[size_of_articles];
 	num_of_articles = 0;
 }
@@ -15,7 +12,6 @@ Researcher::Researcher(char* name) : name(nullptr), size_of_articles(INIT_SIZE)
 Researcher::~Researcher()
 {
 	cout << "In Researcher d'tor..." << endl;
-	delete[]name;
 	delete[]articles;
 }
 
@@ -24,7 +20,7 @@ char* Researcher::getName() const { return name; }
 void Researcher::setName(char* name)
 {
 	delete[] this->name;
-	this->name = new char[strlen(name) + 1];
+	this->name = new char[strlen(name)+1];
 	strcpy(this->name, name);
 }
 

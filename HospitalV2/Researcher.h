@@ -3,16 +3,14 @@
 
 #define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
+#include "StaffMember.h"
 using namespace std;
 class Article;
 #define INIT_SIZE 50
 
-class Researcher
+class Researcher : virtual public StaffMember
 {
 private:
-	static int counter; //unique id, starts from: 3000
-	char* name;
-	int id;
 	Article** articles;
 	int size_of_articles;
 	int num_of_articles;
@@ -30,7 +28,7 @@ public:
 	void addArticle(Article* article);
 
 private:
-	Researcher(const Researcher&); //prevent from user to make a copy of researcher
+	//Researcher(const Researcher&); //prevent from user to make a copy of researcher
 };
 #endif
 

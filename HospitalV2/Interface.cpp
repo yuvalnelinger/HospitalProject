@@ -43,7 +43,7 @@ void Interface::getDepartmentInfo(char** name)
 	*name = getInput();
 }
 
-void Interface::getDoctorInfo(char** name, char** specialty, Department** depart, Hospital& hospital)
+void Interface::getDoctorInfo(char** name, char** specialty, Department** depart, Hospital& hospital,bool* isSurgeon,bool* isResearcher)
 {
 	int depIndex;
 
@@ -62,6 +62,12 @@ void Interface::getDoctorInfo(char** name, char** specialty, Department** depart
 	}
 
 	*depart = hospital.getDepartmentByIndex(depIndex-1);
+	cout << "Is this doctor a surgeon? press 1 for YES, 0 for NO" << endl;
+	cin >> *isSurgeon;
+	cout << *isSurgeon << endl;
+	cout << "Is this doctor a researcher? press 1 for YES, 0 for NO" << endl;
+	cin >> *isResearcher;
+	cout << *isResearcher << endl;
 }
 
 void Interface::getNurseInfo(char** name, int* yearsExperience, Department** depart, Hospital& hospital)
@@ -201,11 +207,13 @@ void Interface::getVisitInfo(Patient** newPatient, Date* visitDate, char** visPu
 			cin >> selection;
 		}
 		char* name = new char[MAX_NAME];
+		bool isSurgeon;
+		bool isResearcher;
 		if (selection == 1)
 		{
 			char* docSpecialty = new char[MAX_NAME];
-			Interface::getDoctorInfo(&name, &docSpecialty, depToAdd, hospital);
-			hospital.addDoctor(name, docSpecialty, *depToAdd);
+			Interface::getDoctorInfo(&name, &docSpecialty, depToAdd, hospital,&isSurgeon,&isResearcher);
+			hospital.addDoctor(name, docSpecialty, *depToAdd,isSurgeon,isResearcher);
 			delete[] name;
 			delete[] docSpecialty;
 		}
@@ -304,8 +312,7 @@ char* Interface::getInput()
 	char* input = new char[MAX_SIZE];
 	cin.ignore();
 	cin.getline(input, MAX_SIZE);
-
-	char* resized_input = new char[strlen(input) + 1];	
+	char* resized_input = new char[strlen(input)+1];
 	strcpy(resized_input, input);
 	delete[]input;
 	input = resized_input;

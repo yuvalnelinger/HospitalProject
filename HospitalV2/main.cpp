@@ -40,6 +40,8 @@ int main()
 
 			int selection;
 			char* name = new char[MAX_NAME];
+			bool isSurgeon;
+			bool isResearcher;
 			Department* assigned_dep = nullptr;
 			Interface::printAddStaffMemberMenu();
 
@@ -53,8 +55,8 @@ int main()
 				case 1: //add doctor
 				{
 					char* docSpecialty = new char[MAX_NAME];
-					Interface::getDoctorInfo(&name, &docSpecialty, &assigned_dep, hospital);
-					hospital.addDoctor(name, docSpecialty, assigned_dep);
+					Interface::getDoctorInfo(&name, &docSpecialty, &assigned_dep, hospital,&isSurgeon,&isResearcher);
+					hospital.addDoctor(name, docSpecialty, assigned_dep,isSurgeon,isResearcher);
 					delete[] name;
 					delete[] docSpecialty;
 				}

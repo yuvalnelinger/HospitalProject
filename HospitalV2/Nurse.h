@@ -3,16 +3,14 @@
 
 #define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
+#include "StaffMember.h"
 using namespace std;
 
 class Department;
 
-class Nurse
+class Nurse : public StaffMember
 {
 private:
-	static int counter; //unique id, starts from: 2000
-	int id;
-	char* name;
 	int years_of_experience;
 	Department* department;
 
