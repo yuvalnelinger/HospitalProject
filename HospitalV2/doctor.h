@@ -28,7 +28,7 @@ public:
 	void setDepartment(Department* dep);
 
 	//methods
-	void show();
+	virtual void show();
 
 };
 

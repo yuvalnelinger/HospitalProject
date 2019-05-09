@@ -13,12 +13,9 @@ class Department
 {
 private:
 	char* name;
-	Doctor** doctors;
-	int size_of_doctors;
-	int num_of_doctors;
-	Nurse** nurses;
-	int size_of_nurses;
-	int num_of_nurses;
+	StaffMember** staff_members;
+	int size_of_stf_mem;
+	int num_of_stf_mem;
 	Patient** patients;
 	int size_of_patients;
 	int num_of_patients;
@@ -29,14 +26,12 @@ public:
 	~Department();
 
 	//getters and setters
-	int getNumOfDoctors() const;
-	int getNumOfNurses() const;
-	char* getDepName() const;
+	int getNumOfStaffMembers() const;
+	char* getName() const;
 	void setName(const char* name);
 
 	//methods
-	void addDoctor(Doctor* doctor);
-	void addNurse(Nurse* nurse);
+	void addStaffMember(StaffMember* mem);
 	void addPatient(Patient* patient);
 	void showPatients() const;
 	void showStaff() const;

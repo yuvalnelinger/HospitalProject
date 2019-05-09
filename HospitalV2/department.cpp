@@ -1,13 +1,11 @@
 #include "department.h"
 
 //c'tor and d'tor
-Department::Department(char* name) : name(nullptr), size_of_doctors(INIT_SIZE), size_of_nurses(INIT_SIZE), size_of_patients(INIT_SIZE)
+Department::Department(char* name) : name(nullptr), size_of_stf_mem(INIT_SIZE), size_of_patients(INIT_SIZE)
 {
 	setName(name);
-	doctors = new Doctor*[size_of_doctors];
-	num_of_doctors = 0;
-	nurses = new Nurse*[size_of_nurses];
-	num_of_nurses = 0;
+	staff_members = new StaffMember*[size_of_stf_mem];
+	num_of_stf_mem = 0;
 	patients = new Patient*[size_of_patients];
 	num_of_patients = 0;
 }
@@ -15,17 +13,14 @@ Department::Department(char* name) : name(nullptr), size_of_doctors(INIT_SIZE), 
 Department::~Department()
 {
 	delete[] name;
-	delete[]doctors;
-	delete[]nurses;
+	delete[]staff_members;
 	delete[] patients;
 }
 
 //getters and setters
-int Department::getNumOfDoctors() const { return num_of_doctors; }
+int Department::getNumOfStaffMembers() const { return num_of_stf_mem; }
 
-int Department::getNumOfNurses() const { return num_of_nurses; }
-
-char* Department::getDepName() const { return name; }
+char* Department::getName() const { return name; }
 
 void Department::setName(const char* name)
 {
@@ -35,32 +30,18 @@ void Department::setName(const char* name)
 }
 
 //methods
-void Department::addDoctor(Doctor* doctor)
+void Department::addStaffMember(StaffMember* mem)
 {
-	if (num_of_doctors == size_of_doctors) //array increment if needed
+	if (num_of_stf_mem == size_of_stf_mem) //array increment if needed
 	{
-		size_of_doctors *= 2;
-		Doctor** temp = new Doctor*[size_of_doctors];
-		for (int i = 0; i < num_of_doctors; i++) //copy from old array to new array
-			temp[i] = doctors[i];
-		delete[] doctors;
-		doctors = temp;
+		size_of_stf_mem *= 2;
+		StaffMember** temp = new StaffMember*[size_of_stf_mem];
+		for (int i = 0; i < num_of_stf_mem; i++) //copy from old array to new array
+			temp[i] = staff_members[i];
+		delete[] staff_members;
+		staff_members = temp;
 	}
-	doctors[num_of_doctors++] = doctor;
-}
-
-void Department::addNurse(Nurse* nurse)
-{
-	if (num_of_nurses == size_of_nurses) //array increment if needed
-	{
-		size_of_nurses *= 2;
-		Nurse** temp = new Nurse*[size_of_nurses];
-		for (int i = 0; i < num_of_nurses; i++) //copy from old array to new array
-			temp[i] = nurses[i];
-		delete[] nurses;
-		nurses = temp;
-	}
-	nurses[num_of_nurses++] = nurse;
+	staff_members[num_of_stf_mem++] = mem;
 }
 
 void Department::addPatient(Patient* patient)

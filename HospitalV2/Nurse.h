@@ -25,10 +25,10 @@ public:
 	int getYearsOfExperience() const;
 	void setName(char* name);
 	void setYearsOfExperience(int years);
-	void setDepartment(Department* depart);
+	virtual void setDepartment(Department* depart);
 
 	//methods
-	void show() const;
+	virtual void show() const;
 
 private:
 	Nurse(const Nurse&); //prevent from user to make a copy of nurse

@@ -1,18 +1,19 @@
 #include "doctor.h"
 
-Doctor::Doctor(char* name, char* specialty, Department* depart) : StaffMember(name)
+Doctor::Doctor(char* name, char* specialty, Department* depart) : StaffMember(name, depart)
 {
 	cout << "In Doctor c'tor..." << endl;
 	setSpecialty(specialty);
-	this->department = depart;
 }
 
-Doctor::Doctor() : StaffMember(name)
+//why we need default???
+Doctor::Doctor() : StaffMember(name, nullptr)
 {
 	cout << "In Doctor default c'tor..." << endl;
 	setSpecialty(0);
 	this->department = 0;
 }
+
 Doctor::~Doctor()
 {
 	cout << "In Docctor d'tor..." << endl;
@@ -45,10 +46,9 @@ void Doctor::setDepartment(Department* dep)
 
 //methods
 void Doctor::show() {
-	cout << "Doctor ID: " << id
-		<< " Name: " << name
-		<< "Specialty: " << specialty
-		//	 <<	"Department: " << department->getDepName() //DOESNT WORK
+
+	StaffMember::show();
+	cout << ", " << "Specialty: " << specialty
 		<< endl;
 }
 /*

@@ -7,19 +7,21 @@ using namespace std;
 
 class Department;
 
+//abstract class
 class StaffMember
 {
 protected:
 	int id;
 	char* name;
+	Department* department;
 	static int counter;
 
 
 public:
 	//c'tor and d'tor
-	StaffMember(char* name);
+	StaffMember(char* name, Department* department);
 	StaffMember(const StaffMember& other);
-	~StaffMember();
+	virtual ~StaffMember();
 
 	//getters and setters
 	int getId();
@@ -27,7 +29,8 @@ public:
 	void setName(char* name);
 
 	//methods
-	//void show();
+	virtual void setDepartment(Department* depart) = 0;
+	virtual void show() const = 0;
 
 };
 

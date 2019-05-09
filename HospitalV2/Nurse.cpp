@@ -1,10 +1,9 @@
 #include "Nurse.h"
 
-Nurse::Nurse(char* name, int y_exp, Department* depart) : StaffMember(name)
+Nurse::Nurse(char* name, int y_exp, Department* depart) : StaffMember(name, department)
 {
 	cout << "In Nurse c'tor..." << endl;
 	years_of_experience = y_exp;
-	department = depart;
 }
 
 Nurse::~Nurse()
@@ -37,10 +36,8 @@ void Nurse::setDepartment(Department* depart)
 
 void Nurse::show() const
 {
-	cout << "Nurse ID: " << "tofillin"
-		<< " Name: " << name
-		<< "Years of experience: " << years_of_experience
-		//<< "Department: " << department->getDepName()
+	StaffMember::show();
+	cout << ", " << "Years of experience: " << years_of_experience
 		<< endl;
 }
 

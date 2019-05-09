@@ -23,7 +23,7 @@ public:
 
 	//getters
 	int getNumOfDoctors() const;
-	char* getDepName() const;
+	char* getName() const;
 
 	//methods
 	void addDoctor(Doctor* doctor); //adds doctor ptr to the array

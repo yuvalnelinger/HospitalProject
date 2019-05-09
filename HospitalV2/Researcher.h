@@ -26,9 +26,10 @@ public:
 
 	//methods
 	void addArticle(Article* article);
+	virtual void show() const;
 
 private:
-	//Researcher(const Researcher&); //prevent from user to make a copy of researcher
+	Researcher(const Researcher&); //prevent from user to make a copy of researcher
 };
 #endif
 

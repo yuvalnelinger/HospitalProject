@@ -42,4 +42,10 @@ void Researcher::addArticle(Article* article)
 	articles[num_of_articles++] = article;
 }
 
+void Researcher::show() const
+{
+	StaffMember::show();
+}
+
+
 

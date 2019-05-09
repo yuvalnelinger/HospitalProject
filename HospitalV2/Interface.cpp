@@ -5,7 +5,7 @@ void Interface::printMainMenu()
 {
 	cout << "What would you like to do? please choose an option from the menu:" << endl;
 	cout << "1. Add a department\n"
-		<< "2. Add a staff member\n"
+	 	<< "2. Add a staff member\n"
 		<< "3. Patient operations\n"
 		<< "4. Enter the research institute\n"
 		<< "5. Show all staff members"
@@ -14,9 +14,10 @@ void Interface::printMainMenu()
 
 void Interface::printAddStaffMemberMenu()
 {
-	cout << "Would you like to add a doctor or a nurse? Choose the option from the menu:" << endl;
+	cout << "What would you like to add? Choose the option from the menu:" << endl;
 	cout << "1. Doctor\n"
-		<< "2. Nurse" << endl;
+		<< "2. Nurse"
+		<< endl;
 }
 
 void Interface::printPatientsMenu()

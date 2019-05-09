@@ -1,14 +1,12 @@
 #include "hospital.h"
 
-Hospital::Hospital(const char* name) : name(nullptr), size_of_departments(INIT_SIZE), size_of_doctors(INIT_SIZE), size_of_nurses(INIT_SIZE), size_of_patients(INIT_SIZE)
+Hospital::Hospital(const char* name) : name(nullptr), size_of_departments(INIT_SIZE), size_of_stf_mem(INIT_SIZE), size_of_patients(INIT_SIZE)
 {
 	setName(name);
 	departments = new Department*[size_of_departments];
 	num_of_departments = 0;
-	doctors = new Doctor*[size_of_doctors];
-	num_of_doctors = 0;
-	nurses = new Nurse*[size_of_nurses];
-	num_of_nurses = 0;
+	staff_members = new StaffMember*[size_of_stf_mem];
+	num_of_stf_mem = 0;
 	patients = new Patient*[size_of_patients];
 	num_of_patients = 0;
 }
@@ -19,17 +17,13 @@ Hospital::~Hospital()
 
 	delete[] name;
 
-	for (i = 0; i < num_of_doctors; i++)
-		delete doctors[i];
-	delete[]doctors;
-
-	for (i = 0; i < num_of_nurses; i++)
-		delete nurses[i];
-	delete[]nurses;
-
 	for (i = 0; i < num_of_departments; i++)
 		delete departments[i];
 	delete[]departments;
+
+	for (i = 0; i < num_of_stf_mem; i++)
+		delete staff_members[i];
+	delete[]staff_members;
 
 	for (i = 0; i < num_of_patients; i++)
 		delete patients[i];
@@ -164,18 +158,18 @@ void Hospital::addDoctor(char* name, char* docSpecialty, Department* assigned_de
 
 void Hospital::addNurse(char* name, int yearsExperience, Department* assigned_dep)
 {
-	if (num_of_nurses == size_of_nurses) //array increment if needed
+	if (num_of_stf_mem == size_of_stf_mem) //array increment if needed
 	{
-		size_of_nurses *= 2;
-		Nurse** temp = new Nurse*[size_of_nurses];
-		for (int i = 0; i < num_of_nurses; i++) //copy from old array to new array
-			temp[i] = nurses[i];
-		delete[] nurses;
-		nurses = temp;
+		size_of_stf_mem *= 2;
+		StaffMember** temp = new StaffMember*[size_of_stf_mem];
+		for (int i = 0; i < num_of_stf_mem; i++) //copy from old array to new array
+			temp[i] = staff_members[i];
+		delete[] staff_members;
+		staff_members = temp;
 	}
 
-	Nurse* nurse = new Nurse(name, yearsExperience, assigned_dep);
-	this->nurses[num_of_nurses++] = nurse;	//add nurse to hospital
+	StaffMember* nurse = new Nurse(name, yearsExperience, assigned_dep);
+	this->staff_members[num_of_stf_mem++] = nurse;	//add nurse to hospital
 	assigned_dep->addNurse(nurse);   //add nurse to deparement
 	nurse->setDepartment(assigned_dep);  //add department to the nurse
 	cout << "Successfully added nurse to hospital" << endl;
@@ -201,7 +195,7 @@ void Hospital::showDepartments() const
 {
 	for (int i = 1; i < num_of_departments+1; i++)
 	{
-		cout << "\t" << i << ". " << departments[i-1]->getDepName() << endl;
+		cout << "\t" << i << ". " << departments[i-1]->getName() << endl;
 	}
 }
 
@@ -213,7 +207,7 @@ void Hospital::showPatientById(int id) const
 		if (patients[i]->getId() == id)
 		{
 			dep = patients[i]->getCurrentDepartment();
-			cout << "Patient Name: " << patients[i]->getName() << " Patient Department: " << dep->getDepName() << endl;
+			cout << "Patient Name: " << patients[i]->getName() << " Patient Department: " << dep->getName() << endl;
 		}
 	}
 }
@@ -222,23 +216,18 @@ void Hospital::showStaff() const
 {
 	int i;
 
-	if (num_of_doctors == 0)
-		cout << "No doctors yet" << endl;
+	if (num_of_stf_mem == 0)
+		cout << "No staff members yet" << endl;
 	else
 	{
-		cout << "List of doctors: \n";
-		for (i = 0; i < num_of_doctors; i++)
-			cout << "\t" << i+1 << "." << doctors[i]->getName() << ", ID " <<doctors[i]->getId() << endl;
-	}
+		cout << "List of staff members: \n";
+		for (i = 0; i < num_of_stf_mem; i++)
+		{
+			//Researcher* temp = dynamic_cast<Researcher*>(staff_members[i]); //do not print researchers
 
-	if (num_of_nurses == 0)
-		cout << "No nurses yet" << endl;
-
-	else
-	{
-		cout << "List of nurses: \n";
-		for (i = 0; i < num_of_nurses; i++)
-			cout << "\t" << i+1 << "."<< nurses[i]->getName() << ", ID " << nurses[i]->getId() << endl;
+			//if (temp)
+				cout << "\t" << i + 1 << "." << staff_members[i]->show() << endl;
+		}
 	}
 }
 
@@ -253,7 +242,7 @@ void Hospital::show() const
 	{
 		cout << "List of departments: \n";
 		for (i = 0; i < num_of_departments; i++)
-			cout << "\t" << i << "." << departments[i]->getDepName() << endl;
+			cout << "\t" << i << "." << departments[i]->getName() << endl;
 	}
 	if (num_of_doctors == 0)
 	{

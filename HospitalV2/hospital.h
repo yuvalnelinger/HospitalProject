@@ -27,12 +27,9 @@ private:
 	int size_of_departments;
 	int num_of_departments;
 	Research_Institute RI;
-	Doctor** doctors;
-	int size_of_doctors;
-	int num_of_doctors;
-	Nurse** nurses;
-	int size_of_nurses;
-	int num_of_nurses;
+	StaffMember** staff_members;
+	int size_of_stf_mem;
+	int num_of_stf_mem;
 	Patient** patients;
 	int size_of_patients;
 	int num_of_patients;
@@ -48,8 +45,8 @@ public:
 	Patient* getPatientByID(int id) const;
 	Doctor* getDoctorByID(int id) const;
 	Nurse* getNurseByID(int id) const;
-	int getNumOfDepartments();
-	Research_Institute& getResearchInstitute();
+	int getNumOfDepartments(); const
+	Research_Institute& getResearchInstitute(); const
 	void setName(const char* name);
 
 	//methods

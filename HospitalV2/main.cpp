@@ -134,7 +134,7 @@ int main()
 					}
 
 					depToShow = hospital.getDepartmentByIndex(select-1);
-					cout << "These are the patients of department " << depToShow->getDepName() << endl;
+					cout << "These are the patients of department " << depToShow->getName() << endl;
 					depToShow->showPatients();
 					break;
 				}
@@ -153,7 +153,7 @@ int main()
 					}
 					else
 					{
-						cout << "Patient with ID " << patID << "is " << patientToShow->getName() << "and his current department is " << patientToShow->getCurrentDepartment()->getDepName() << endl;
+						cout << "Patient with ID " << patID << "is " << patientToShow->getName() << "and his current department is " << patientToShow->getCurrentDepartment()->getName() << endl;
 					}
 					break;
 				}
