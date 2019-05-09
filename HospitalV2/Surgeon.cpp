@@ -16,4 +16,9 @@ int Surgeon::getNumOfSurgeries() const
 	return this->num_of_surgeries;
 }
 
+void show()
+{
+	Doctor::show();
+}
+
 

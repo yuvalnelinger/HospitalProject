@@ -47,18 +47,18 @@ Patient* Hospital::getPatientByID(int id) const
 	return nullptr;
 }
 
-Doctor* Hospital::getDoctorByID(int id) const
+StaffMember* Hospital::getStaffMemberByID(int id) const
 {
-	for (int i = 0; i < num_of_doctors; i++)
+	for (int i = 0; i < num_of_stf_mem; i++)
 	{
-		if (doctors[i]->getId() == id)
+		if (staff_members[i]->getId() == id)
 		{
-			return doctors[i];
+			return staff_members[i];
 		}
 	}
 	return 0;
 }
-
+/* OLD
 Nurse* Hospital::getNurseByID(int id) const
 {
 	for (int i = 0; i < num_of_nurses; i++)
@@ -70,7 +70,7 @@ Nurse* Hospital::getNurseByID(int id) const
 	}
 	return 0;
 }
-
+*/
 int Hospital::getNumOfDepartments()
 {
 	return num_of_departments;
@@ -109,46 +109,49 @@ void Hospital::addDepartment(char* name)
 	
 }
 
+//int size_of_stf_mem;
+//int num_of_stf_mem;
+
 void Hospital::addDoctor(char* name, char* docSpecialty, Department* assigned_dep,bool isSurgeon,bool isResearcher)
 {
-	if (num_of_doctors == size_of_doctors) //array increment if needed
+	if (num_of_stf_mem == size_of_stf_mem) //array increment if needed
 	{
-		size_of_doctors *= 2;
-		Doctor** temp = new Doctor*[size_of_doctors];
-		for (int i = 0; i < num_of_doctors; i++) //copy from old array to new array
-			temp[i] = doctors[i];
-		delete[] doctors;
-		doctors = temp;
+		size_of_stf_mem *= 2;
+		StaffMember** temp = new StaffMember*[size_of_stf_mem];
+		for (int i = 0; i < num_of_stf_mem; i++) //copy from old array to new array
+			temp[i] = staff_members[i];
+		delete[] staff_members;
+		staff_members = temp;
 	}
 	if (isSurgeon==1 && isResearcher==0)
 	{
 		Surgeon* doc = new Surgeon(name, docSpecialty, assigned_dep); //create a surgeon
-		this->doctors[num_of_doctors++] = doc;	//add doctor to hospital
-		assigned_dep->addDoctor(doc);   //add doctor to deparement
+		this->staff_members[num_of_stf_mem++] = doc;	//add doctor to hospital
+		assigned_dep->addStaffMember(doc);   //add doctor to deparement
 		doc->setDepartment(assigned_dep);  //add department to the doctor
 
 	}
 	else if (isSurgeon && isResearcher)
 	{
 		SurgeonResearcher* doc = new SurgeonResearcher(Surgeon(name, docSpecialty, assigned_dep), Researcher(name)); //create suegron research
-		this->doctors[num_of_doctors++] = doc;	//add doctor to hospital
-		assigned_dep->addDoctor(doc);   //add doctor to deparement
+		this->staff_members[num_of_stf_mem++] = doc;	//add doctor to hospital
+		assigned_dep->addStaffMember(doc);   //add doctor to deparement
 		doc->setDepartment(assigned_dep);  //add department to the doctor
 
 	}
 	else if (!isSurgeon && isResearcher)
 	{
 		DoctorResearcher* doc = new DoctorResearcher(Doctor(name, docSpecialty, assigned_dep), Researcher(name)); //create doctor research
-		this->doctors[num_of_doctors++] = doc;	//add doctor to hospital
-		assigned_dep->addDoctor(doc);   //add doctor to deparement
+		this->staff_members[num_of_stf_mem++] = doc;	//add doctor to hospital
+		assigned_dep->addStaffMember(doc);   //add doctor to deparement
 		doc->setDepartment(assigned_dep);  //add department to the doctor
 
 	}
 	else 
 	{
 		Doctor* doc = new Doctor(name, docSpecialty, assigned_dep);
-		this->doctors[num_of_doctors++] = doc;	//add doctor to hospital
-		assigned_dep->addDoctor(doc);   //add doctor to deparement
+		this->staff_members[num_of_stf_mem++] = doc;	//add doctor to hospital
+		assigned_dep->addStaffMember(doc);   //add doctor to deparement
 		doc->setDepartment(assigned_dep);  //add department to the doctor
 
 	}
