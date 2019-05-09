@@ -11,17 +11,17 @@ class Department;
 
 class DoctorResearcher : public Doctor, public Researcher
 {
-private:
 
 public:
 	//c'tor and d'tor
-	DoctorResearcher(const Doctor& doc,const Researcher& researcher);
+	DoctorResearcher(const Doctor& doc, const Researcher& researcher);
+	DoctorResearcher(const DoctorResearcher& other);
 
 	//getters and setters
 
 
 	//methods
-
+	void show();
 };
 
 #endif

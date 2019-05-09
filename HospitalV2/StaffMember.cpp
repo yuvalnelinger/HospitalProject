@@ -25,6 +25,7 @@ StaffMember::~StaffMember()
 
 //getters and setters
 int StaffMember::getId() { return id; }
+
 char* StaffMember::getName() const { return name; }
 
 void StaffMember::setName(char* name)

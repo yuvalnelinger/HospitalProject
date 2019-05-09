@@ -1,9 +1,17 @@
 #include "Surgeon.h"
+#include "StaffMember.h"
+#include "doctor.h"
 
-Surgeon::Surgeon(char* name, char* specialty, Department* depart) : StaffMember(name),Doctor(name,specialty,depart) //check if this is right
+Surgeon::Surgeon(const Doctor& base, int num_of_surgeries) : Doctor(base)
 {
 	cout << "In Surgeon c'tor..." << endl;
-	this->num_of_surgeries=0;
+	this->num_of_surgeries = num_of_surgeries;
+}
+
+Surgeon::Surgeon(const Surgeon& other) : Doctor(other)
+{
+	cout << "In Surgeon copy..." << endl;
+	*this = other;
 }
 
 void Surgeon::addSurgery()
@@ -16,9 +24,12 @@ int Surgeon::getNumOfSurgeries() const
 	return this->num_of_surgeries;
 }
 
-void show()
+void Surgeon::show()
 {
+	StaffMember::show();
 	Doctor::show();
+	cout << ", number of surgeries: " << num_of_surgeries
+		<< endl;
 }
 
 

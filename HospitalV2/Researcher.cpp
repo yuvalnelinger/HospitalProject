@@ -7,6 +7,12 @@ Researcher::Researcher(char* name) : StaffMember(name, nullptr), size_of_article
 	num_of_articles = 0;
 }
 
+Researcher::Researcher(const Researcher& other) : StaffMember(other)
+{
+	cout << "In Researcher::Researcher(copy)\n";
+	*this = other;
+}
+
 Researcher::~Researcher()
 {
 	delete[]name;
@@ -14,14 +20,14 @@ Researcher::~Researcher()
 }
 
 //getters and setters
-char* Researcher::getName() const { return name; }
+//char* Researcher::getName() const { return name; }
 
-void Researcher::setName(char* name)
-{
-	delete[] this->name;
-	this->name = new char[strlen(name) + 1];
-	strcpy(this->name, name);
-}
+//void Researcher::setName(char* name)
+//{
+//	delete[] this->name;
+//	this->name = new char[strlen(name) + 1];
+//	strcpy(this->name, name);
+//}
 
 //methods
 void Researcher::addArticle(Article* article)
@@ -38,10 +44,9 @@ void Researcher::addArticle(Article* article)
 	articles[num_of_articles++] = article;
 }
 
-void setDepartment(Department* depart)
+void Researcher::setDepartment(Department* depart)
 {
-	depart
-
+	this->department == nullptr;
 }
 
 

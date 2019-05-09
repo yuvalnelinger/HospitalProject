@@ -16,15 +16,16 @@ public:
 	//c'tor and d'tor
 	Doctor(char* name, char* specialty, Department* depart);
 	Doctor();
-	//Doctor(const Doctor& other);
+	Doctor(const Doctor& other);
 	~Doctor();
 
 	//getters and setters
-	int getId();
-	char* getName() const;
+	//int getId();
+	//char* getName() const;
 	char* getSpecialty() const;
-	void setName(char* name);
+	//void setName(char* name);
 	void setSpecialty(char* specialty);
+	Department* getDepartment() const;
 	void setDepartment(Department* dep);
 
 	//methods

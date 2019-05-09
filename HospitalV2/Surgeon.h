@@ -8,21 +8,22 @@
 using namespace std;
 class Department;
 
-class Surgeon : virtual public Doctor
+class Surgeon : public Doctor
 {
 protected:
 	int num_of_surgeries;
 
 public:
 	//c'tor and d'tor
-	Surgeon(char* name, char* specialty, Department* depart);
+	Surgeon(const Doctor& base, int num_of_surgeries);
+	Surgeon(const Surgeon& other);
 
 	//getters and setters
 	int getNumOfSurgeries() const;
 	void addSurgery();
 
 	//methods
-	void show();
+	virtual void show();
 };
 
 #endif

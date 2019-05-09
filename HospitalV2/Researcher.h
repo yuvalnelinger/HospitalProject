@@ -18,11 +18,12 @@ protected:
 public:
 	//c'tor and d'tor
 	Researcher(char* name);
+	Researcher(const Researcher& other);
 	~Researcher();
 
 	//getters and setters
-	char* getName() const;
-	void setName(char* name);
+	//char* getName() const;
+	//void setName(char* name);
 
 	//methods
 	void addArticle(Article* article);
