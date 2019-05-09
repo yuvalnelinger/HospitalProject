@@ -119,7 +119,7 @@ int main()
 					cout << "Successfully added visit." << endl;
 				}
 				break;
-				case 2:
+				case 2: //show all patients that belong to a department
 				{
 					invalid = false;
 					int select;
@@ -139,7 +139,7 @@ int main()
 					break;
 				}
 
-				case 3:
+				case 3: //search a patient by ID
 				{
 					invalid = false;
 					int patID;
@@ -183,8 +183,7 @@ int main()
 				{
 					char* name = new char[MAX_NAME];
 					Interface::getResearcherInfo(&name);
-					hospital.getResearchInstitute().addResearcher(name);
-					hospital.getResearchInstitute().showResearchers();
+					hospital.getResearchInstitute().addResearcher(name);  //qq-why does is return const?!
 					delete[] name;
 				}
 				break;

@@ -46,7 +46,7 @@ public:
 	Doctor* getDoctorByID(int id) const;
 	Nurse* getNurseByID(int id) const;
 	int getNumOfDepartments(); const
-	Research_Institute& getResearchInstitute(); const
+	Research_Institute& getResearchInstitute();
 	void setName(const char* name);
 
 	//methods

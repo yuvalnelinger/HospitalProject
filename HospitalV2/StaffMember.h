@@ -29,7 +29,7 @@ public:
 	void setName(char* name);
 
 	//methods
-	virtual void setDepartment(Department* depart) = 0;
+	virtual void setDepartment(Department* depart) =0;
 	virtual void show() const = 0;
 
 };

@@ -11,7 +11,7 @@ using namespace std;
 class Research_Institute
 {
 private:
-	Researcher** researchers;
+	StaffMember** researchers;
 	int size_of_researchers;
 	int num_of_researchers;
 	Article** articles;

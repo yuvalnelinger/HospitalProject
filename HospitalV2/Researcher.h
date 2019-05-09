@@ -26,7 +26,9 @@ public:
 
 	//methods
 	void addArticle(Article* article);
-	virtual void show() const;
+	virtual void setDepartment(Department* depart) override;
+	virtual void show() const override;
+
 
 private:
 	Researcher(const Researcher&); //prevent from user to make a copy of researcher

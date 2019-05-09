@@ -30,16 +30,18 @@ void Research_Institute::addResearcher(char* name)
 	if (num_of_researchers == size_of_researchers) //array increment if needed
 	{
 		size_of_researchers *= 2;
-		Researcher** temp = new Researcher*[size_of_researchers];
+		StaffMember** temp = new StaffMember*[size_of_researchers];
 		for (int i = 0; i < num_of_researchers; i++) //copy from old array to new array
 			temp[i] = researchers[i];
 		delete[] researchers;
 		researchers = temp;
 	}
 
-	Researcher* researcher = new Researcher(name);
-	researchers[num_of_researchers++] = researcher;
+	StaffMember* researcher = new Researcher(name);
+	researchers[num_of_researchers++] = researcher; //add researcher to RI
+	cout << "Successfully added researcher to the research institute" << endl;
 }
+
 
 void Research_Institute::addArticle(Date date, char* title, char* name_of_magazine, int r_index)
 {

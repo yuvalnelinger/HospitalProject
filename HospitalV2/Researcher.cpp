@@ -1,12 +1,8 @@
 #include "Researcher.h"
 
-int Researcher::counter = 3000;
-
 //c'tor and d'tor
-Researcher::Researcher(char* name) : name(nullptr), size_of_articles(INIT_SIZE)
+Researcher::Researcher(char* name) : StaffMember(name, nullptr), size_of_articles(INIT_SIZE)
 {
-	id = counter++;
-	setName(name);
 	articles = new Article*[size_of_articles];
 	num_of_articles = 0;
 }
@@ -41,6 +37,13 @@ void Researcher::addArticle(Article* article)
 	}
 	articles[num_of_articles++] = article;
 }
+
+void setDepartment(Department* depart)
+{
+	depart
+
+}
+
 
 void Researcher::show() const
 {
