@@ -23,7 +23,6 @@ public:
 
 	//methods
 	void show();
-
 };
 
 #endif

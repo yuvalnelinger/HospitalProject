@@ -43,9 +43,9 @@ public:
 	char* getName() const;
 	Department* getDepartmentByIndex(int num) const;
 	Patient* getPatientByID(int id) const;
-	Doctor* getDoctorByID(int id) const;
-	Nurse* getNurseByID(int id) const;
-	int getNumOfDepartments(); const
+	StaffMember* getStaffMemberByID(int id) const;
+	//Nurse* getNurseByID(int id) const; OLD
+	int getNumOfDepartments();
 	Research_Institute& getResearchInstitute();
 	void setName(const char* name);
 
