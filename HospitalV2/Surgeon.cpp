@@ -1,6 +1,6 @@
 #include "Surgeon.h"
 
-Surgeon::Surgeon(char* name, char* specialty, Department* depart) : Doctor(name,specialty,depart),StaffMember(name) //check if this is right
+Surgeon::Surgeon(char* name, char* specialty, Department* depart) : StaffMember(name),Doctor(name,specialty,depart) //check if this is right
 {
 	cout << "In Surgeon c'tor..." << endl;
 	this->num_of_surgeries=0;

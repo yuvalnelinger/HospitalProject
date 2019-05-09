@@ -10,7 +10,7 @@ class Article;
 
 class Researcher : virtual public StaffMember
 {
-private:
+protected:
 	Article** articles;
 	int size_of_articles;
 	int num_of_articles;

@@ -128,20 +128,37 @@ void Hospital::addDoctor(char* name, char* docSpecialty, Department* assigned_de
 	}
 	if (isSurgeon==1 && isResearcher==0)
 	{
-		Surgeon* surgeon = new Surgeon(name, docSpecialty, assigned_dep); //create a surgeon
+		Surgeon* doc = new Surgeon(name, docSpecialty, assigned_dep); //create a surgeon
+		this->doctors[num_of_doctors++] = doc;	//add doctor to hospital
+		assigned_dep->addDoctor(doc);   //add doctor to deparement
+		doc->setDepartment(assigned_dep);  //add department to the doctor
+
 	}
 	else if (isSurgeon && isResearcher)
 	{
-		SurgeonResearcher* surgeresearch = new SurgeonResearcher(Surgeon(name, docSpecialty, assigned_dep), Researcher(name));
+		SurgeonResearcher* doc = new SurgeonResearcher(Surgeon(name, docSpecialty, assigned_dep), Researcher(name)); //create suegron research
+		this->doctors[num_of_doctors++] = doc;	//add doctor to hospital
+		assigned_dep->addDoctor(doc);   //add doctor to deparement
+		doc->setDepartment(assigned_dep);  //add department to the doctor
+
 	}
 	else if (!isSurgeon && isResearcher)
 	{
-		DoctorResearcher* docresearch = new DoctorResearcher(Doctor(name, docSpecialty, assigned_dep), Researcher(name));
+		DoctorResearcher* doc = new DoctorResearcher(Doctor(name, docSpecialty, assigned_dep), Researcher(name)); //create doctor research
+		this->doctors[num_of_doctors++] = doc;	//add doctor to hospital
+		assigned_dep->addDoctor(doc);   //add doctor to deparement
+		doc->setDepartment(assigned_dep);  //add department to the doctor
+
 	}
-	Doctor* doc = new Doctor(name, docSpecialty,assigned_dep);
-	this->doctors[num_of_doctors++] = doc;	//add doctor to hospital
-	assigned_dep->addDoctor(doc);   //add doctor to deparement
-	doc->setDepartment(assigned_dep);  //add department to the doctor
+	else 
+	{
+		Doctor* doc = new Doctor(name, docSpecialty, assigned_dep);
+		this->doctors[num_of_doctors++] = doc;	//add doctor to hospital
+		assigned_dep->addDoctor(doc);   //add doctor to deparement
+		doc->setDepartment(assigned_dep);  //add department to the doctor
+
+	}
+
 	cout << "Successfully added doctor to hospital" << endl;
 }
 

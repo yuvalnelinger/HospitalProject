@@ -15,6 +15,7 @@ protected:
 public:
 	//c'tor and d'tor
 	Doctor(char* name, char* specialty, Department* depart);
+	Doctor();
 	//Doctor(const Doctor& other);
 	~Doctor();
 

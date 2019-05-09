@@ -3,12 +3,16 @@
 Doctor::Doctor(char* name, char* specialty, Department* depart) : StaffMember(name)
 {
 	cout << "In Doctor c'tor..." << endl;
-	setName(name);
 	setSpecialty(specialty);
 	this->department = depart;
 }
 
-
+Doctor::Doctor() : StaffMember(name)
+{
+	cout << "In Doctor default c'tor..." << endl;
+	setSpecialty(0);
+	this->department = 0;
+}
 Doctor::~Doctor()
 {
 	cout << "In Docctor d'tor..." << endl;

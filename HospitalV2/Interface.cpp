@@ -64,10 +64,8 @@ void Interface::getDoctorInfo(char** name, char** specialty, Department** depart
 	*depart = hospital.getDepartmentByIndex(depIndex-1);
 	cout << "Is this doctor a surgeon? press 1 for YES, 0 for NO" << endl;
 	cin >> *isSurgeon;
-	cout << *isSurgeon << endl;
 	cout << "Is this doctor a researcher? press 1 for YES, 0 for NO" << endl;
 	cin >> *isResearcher;
-	cout << *isResearcher << endl;
 }
 
 void Interface::getNurseInfo(char** name, int* yearsExperience, Department** depart, Hospital& hospital)

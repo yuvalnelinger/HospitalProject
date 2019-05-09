@@ -11,6 +11,7 @@ Visit::Visit(Patient* patient, Date date, char* purpose, Doctor* doc, Nurse* nur
 	this->treatNurse = nurse;
 }
 
+
 //copy c'tor
 Visit::Visit(const Visit& other)
 {

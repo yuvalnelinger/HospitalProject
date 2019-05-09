@@ -60,6 +60,12 @@
     <ClInclude Include="SurgeonResearcher.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="SurgeryVisit.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TestsVisit.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Researcher.cpp">
@@ -108,6 +114,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SurgeonResearcher.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SurgeryVisit.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TestsVisit.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
