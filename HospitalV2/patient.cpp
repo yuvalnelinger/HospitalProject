@@ -2,7 +2,6 @@
 
 Patient::Patient(char* name, int id, int year, int gender) : name(nullptr), curr_department(nullptr), size_of_visitations(INIT_SIZE)
 {
-	cout << "In Patient c'tor..." << endl;
 	this->id = id;
 	setName(name);
 	this->yearOfBirth = year;
@@ -13,7 +12,6 @@ Patient::Patient(char* name, int id, int year, int gender) : name(nullptr), curr
 
 Patient::~Patient()
 {
-	cout << "In Patient d'tor..." << endl;
 	delete[]name;
 
 	for (int i = 0; i < num_of_visitations; i++)

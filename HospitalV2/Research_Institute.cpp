@@ -2,7 +2,6 @@
 
 Research_Institute::Research_Institute() : size_of_researchers(INIT_SIZE), size_of_articles(INIT_SIZE)
 {
-	cout << "In Research Institute c'tor" << endl;
 	researchers = new Researcher*[size_of_researchers];
 	num_of_researchers = 0;
 	articles = new Article*[size_of_articles];
@@ -11,7 +10,6 @@ Research_Institute::Research_Institute() : size_of_researchers(INIT_SIZE), size_
 
 Research_Institute::~Research_Institute()
 {
-	cout << "In Research Institute d'tor..." << endl;
 	int i;
 
 	for (i = 0; i < num_of_researchers; i++)

@@ -1,8 +1,8 @@
 #include "department.h"
 
+//c'tor and d'tor
 Department::Department(char* name) : name(nullptr), size_of_doctors(INIT_SIZE), size_of_nurses(INIT_SIZE), size_of_patients(INIT_SIZE)
 {
-	cout << "In Department c'tor..." << endl;
 	setName(name);
 	doctors = new Doctor*[size_of_doctors];
 	num_of_doctors = 0;
@@ -14,7 +14,6 @@ Department::Department(char* name) : name(nullptr), size_of_doctors(INIT_SIZE), 
 
 Department::~Department()
 {
-	cout << "In Department d'tor..." << endl;
 	delete[] name;
 	delete[]doctors;
 	delete[]nurses;
@@ -23,8 +22,8 @@ Department::~Department()
 
 //getters and setters
 int Department::getNumOfDoctors() const { return num_of_doctors; }
-int Department::getNumOfNurses() const { return num_of_nurses; }
 
+int Department::getNumOfNurses() const { return num_of_nurses; }
 
 char* Department::getDepName() const { return name; }
 
@@ -81,28 +80,39 @@ void Department::addPatient(Patient* patient)
 void Department::showPatients() const
 {
 	cout << "List Of Patints: " << endl;
-	for (int i = 0; i < num_of_patients; i++)
+	if (num_of_patients == 0)
 	{
-		cout << patients[i]->getName() << endl;
+		cout << "No patients yet." << endl;
+	}
+	else
+	{
+		for (int i = 0; i < num_of_patients; i++)
+			cout << this->patients[i]->getName() << " , ID " << this->patients[i]->getId() << endl;
 	}
 }
 
-void Department::show() const 
+void Department::showStaff() const 
 {
 	cout << "This is department " << name;
 	cout << " with the following doctors: " << endl;
-	for (int i = 0; i < num_of_doctors; i++)
+	if (num_of_doctors == 0)
 	{
-		cout << this->doctors[i]->getName() << " , ID " << this->doctors[i]->getId() << endl;
+		cout << "No doctors yet." << endl;
 	}
+	else
+	{
+		for (int i = 0; i < num_of_doctors; i++)
+			cout << this->doctors[i]->getName() << " , ID " << this->doctors[i]->getId() << endl;
+	}
+
 	cout << "And Nurses: " << endl;
-	for (int i = 0; i < num_of_nurses; i++)
+	if (num_of_nurses == 0)
 	{
-		cout << this->nurses[i]->getName() << " , ID " << this->nurses[i]->getId() << endl;
+		cout << "No nurses yet." << endl;
 	}
-	cout << "And Patients: " << endl;
-	for (int i = 0; i < num_of_patients; i++)
+	else
 	{
-		cout << this->patients[i]->getName() << " , ID " << this->patients[i]->getId() << endl;
+		for (int i = 0; i < num_of_nurses; i++)
+			cout << this->nurses[i]->getName() << " , ID " << this->nurses[i]->getId() << endl;
 	}
 }

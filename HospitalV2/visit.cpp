@@ -3,7 +3,6 @@
 //c'tor
 Visit::Visit(Patient* patient, Date date, char* purpose, Doctor* doc, Nurse* nurse) : visitPurpose(nullptr), treatDoc(nullptr), treatNurse(nullptr)
 {
-	cout << "In Visit c'tor..." << endl;
 	this->patient = patient;
 	this->dateOfArrival = date;
 	setVisitPurpose(purpose);

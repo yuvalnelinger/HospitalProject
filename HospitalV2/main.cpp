@@ -125,7 +125,7 @@ int main()
 					cout << "Please select a department: " << endl;
 					hospital.showDepartments();
 					cin >> select;
-					while (!Interface::isValid(select-1, 0, hospital.getNumOfDepartments()))
+					while (!Interface::isValid(select-1, 0, hospital.getNumOfDepartments()-1))
 					{
 						cout << "Invalid input. Please enter a valid department ID" << endl;
 						cin >> select;
@@ -234,10 +234,10 @@ int main()
 		}
 
 		cout << "Would you like to perform another action?\n"
-			<< "Press 1 for YES or 0 for NO" << endl;
+			<< "Press any key for YES or 0 for NO" << endl;
 		cin >> proceed;
 
-	} while (proceed==1);
+	} while (proceed);
 
-	cout << "Goodbye!" << endl;
+	cout << "Get well soon, Goodbye!" << endl;
 }

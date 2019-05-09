@@ -21,12 +21,10 @@ public:
 	//copy c'tor
 	Article(const Article& other);
 
-	//getters
+	//getters and setters
 	Date& getPublishDate();
 	char* getTitle() const;
 	char* getNameOfMagazine() const;
-
-	//setters
 	void setPublishDate(const Date& d);
 	void setTitle(char* title);
 	void setNameOfMagazine(char* magazine_name);

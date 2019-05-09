@@ -44,6 +44,7 @@ private:
 	int num_of_visitations;
 
 private:
+	//copy c'tor
 	Patient(const Patient&); //prevent from user to make a copy of patient
 };
 

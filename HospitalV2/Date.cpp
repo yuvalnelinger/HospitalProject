@@ -51,5 +51,5 @@ bool Date::setYear(int y)
 //methods
 void Date::show()
 {
-	cout << day << "/" << month << "/" << year;   //qq make a better print
+	cout << day << "/" << month << "/" << year;
 }

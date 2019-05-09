@@ -5,7 +5,6 @@ int Researcher::counter = 3000;
 //c'tor and d'tor
 Researcher::Researcher(char* name) : name(nullptr), size_of_articles(INIT_SIZE)
 {
-	cout << "In Researcher c'tor..." << endl;
 	id = counter++;
 	setName(name);
 	articles = new Article*[size_of_articles];
@@ -14,11 +13,11 @@ Researcher::Researcher(char* name) : name(nullptr), size_of_articles(INIT_SIZE)
 
 Researcher::~Researcher()
 {
-	cout << "In Researcher d'tor..." << endl;
 	delete[]name;
 	delete[]articles;
 }
 
+//getters and setters
 char* Researcher::getName() const { return name; }
 
 void Researcher::setName(char* name)
@@ -28,6 +27,7 @@ void Researcher::setName(char* name)
 	strcpy(this->name, name);
 }
 
+//methods
 void Researcher::addArticle(Article* article)
 {
 	if (num_of_articles == size_of_articles) //array increment if needed

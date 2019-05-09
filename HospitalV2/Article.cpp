@@ -3,7 +3,6 @@
 //c'tor and d'tor
 Article::Article(Date p_date, char* title, char* name_of_magazine) : title (nullptr), name_of_magazine (nullptr)
 {
-	cout << "In Article c'tor..." << endl;
 	publish_date = p_date;
 	setTitle(title);
 	setNameOfMagazine(name_of_magazine);
@@ -11,7 +10,6 @@ Article::Article(Date p_date, char* title, char* name_of_magazine) : title (null
 
 Article::~Article()
 {
-	cout << "In Article d'tor..." << endl;
 	delete[]title;
 	delete[]name_of_magazine;
 }
@@ -28,6 +26,7 @@ Article::Article(const Article& other)
 	publish_date = other.publish_date;
 }
 
+//getters and setters
 Date& Article::getPublishDate() { return publish_date; }
 
 char* Article::getTitle() const { return title; }
@@ -57,5 +56,4 @@ void Article::show()
 {
 	cout << "Title: " << title << ", publish date: "; publish_date.show();
 	cout << " published in magazine: " << name_of_magazine << endl;
-
 }

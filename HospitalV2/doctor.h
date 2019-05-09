@@ -33,6 +33,7 @@ public:
 	void show();
 
 private:
+	//copy c'tor
 	Doctor(const Doctor&); //prevent from user to make a copy of doctor
 };
 

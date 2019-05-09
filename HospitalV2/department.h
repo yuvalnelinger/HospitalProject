@@ -31,7 +31,6 @@ public:
 	//getters and setters
 	int getNumOfDoctors() const;
 	int getNumOfNurses() const;
-
 	char* getDepName() const;
 	void setName(const char* name);
 
@@ -40,9 +39,10 @@ public:
 	void addNurse(Nurse* nurse);
 	void addPatient(Patient* patient);
 	void showPatients() const;
-	void show() const;
+	void showStaff() const;
 
 private:
+	//copy c'tor
 	Department(const Department&); //prevent from user to make a copy of department
 };
 

@@ -55,7 +55,7 @@ void Interface::getDoctorInfo(char** name, char** specialty, Department** depart
 	hospital.showDepartments();
 	cin >> depIndex;
 
-	while (!isValid(depIndex, 1, hospital.getNumOfDepartments()))
+	while (!isValid(depIndex-1, 0, hospital.getNumOfDepartments()-1))
 	{
 		cout << "Invalid input. Please enter a valid department ID" << endl;
 		cin >> depIndex;
@@ -72,11 +72,11 @@ void Interface::getNurseInfo(char** name, int* yearsExperience, Department** dep
 	*name = getInput();
 	cout << "Adding a new nurse, type years of experience: " << endl;
 	cin >> *yearsExperience;
-	cout << "In which department is the doctor going to work? Insert the index" << endl;
+	cout << "In which department is the nurse going to work? Insert the index" << endl;
 	hospital.showDepartments();
 	cin >> depIndex;
 
-	while (!isValid(depIndex, 1, hospital.getNumOfDepartments()))
+	while (!isValid(depIndex-1, 0, hospital.getNumOfDepartments()-1))
 	{
 		cout << "Invalid input. Please enter a valid department ID" << endl;
 		cin >> depIndex;
@@ -176,13 +176,14 @@ void Interface::getVisitInfo(Patient** newPatient, Date* visitDate, char** visPu
 		cout << "Received details, creating Patient" << endl;
 		*newPatient = new Patient(nameToAdd, patientID, newYear, newGen);
 		isNewPatient = true;
+		delete[] nameToAdd;
 	}
 
 	cout << "What is the department the visit is to? insert the index of it " << endl;
 	int patDep;
 	hospital.showDepartments();
 	cin >> patDep;
-	while (!isValid(patDep, 1, hospital.getNumOfDepartments()))
+	while (!isValid(patDep-1, 0, hospital.getNumOfDepartments()-1))
 	{
 		cout << "Invalid input. Please enter a valid department ID" << endl;
 		cin >> patDep;
@@ -248,7 +249,7 @@ void Interface::getVisitInfo(Patient** newPatient, Date* visitDate, char** visPu
 	int idToCheck;
 	int pick;
 	cout << "This is the list of doctors and nurses you can choose from:" << endl;
-	(*depToAdd)->show();
+	(*depToAdd)->showStaff();
 	cout << "Is the lead treating staff member is a doctor or a nurse?" << endl;
 	cout << "1. Doctor\n"
 		 << "2. Nurse" << endl;

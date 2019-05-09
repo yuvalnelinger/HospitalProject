@@ -2,7 +2,6 @@
 
 Hospital::Hospital(const char* name) : name(nullptr), size_of_departments(INIT_SIZE), size_of_doctors(INIT_SIZE), size_of_nurses(INIT_SIZE), size_of_patients(INIT_SIZE)
 {
-	cout << "In Hospital c'tor..." << endl;
 	setName(name);
 	departments = new Department*[size_of_departments];
 	num_of_departments = 0;
@@ -16,8 +15,9 @@ Hospital::Hospital(const char* name) : name(nullptr), size_of_departments(INIT_S
 
 Hospital::~Hospital()
 {
-	cout << "In Hospital d'tor..." << endl;
 	int i;
+
+	delete[] name;
 
 	for (i = 0; i < num_of_doctors; i++)
 		delete doctors[i];

@@ -2,9 +2,9 @@
 
 int Nurse::counter = 2000;
 
+//c'tor and d'tor
 Nurse::Nurse(char* name, int y_exp, Department* depart) : name(nullptr)
 {
-	cout << "In Nurse c'tor..." << endl;
 	id = counter++;
 	setName(name);
 	years_of_experience = y_exp;
@@ -13,7 +13,6 @@ Nurse::Nurse(char* name, int y_exp, Department* depart) : name(nullptr)
 
 Nurse::~Nurse()
 {
-	cout << "In Nurse d'tor..." << endl;
 	delete[] name;
 }
 
@@ -40,12 +39,12 @@ void Nurse::setDepartment(Department* depart)
 	this->department = depart;
 }
 
+//methods
 void Nurse::show() const
 {
 	cout << "Nurse ID: " << "tofillin"
 		<< " Name: " << name
 		<< "Years of experience: " << years_of_experience
-		//<< "Department: " << department->getDepName()
 		<< endl;
 }
 
