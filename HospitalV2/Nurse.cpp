@@ -1,19 +1,15 @@
 #include "Nurse.h"
 
-int Nurse::counter = 2000;
-
-//c'tor and d'tor
-Nurse::Nurse(char* name, int y_exp, Department* depart) : name(nullptr)
+Nurse::Nurse(char* name, int y_exp, Department* depart) : StaffMember(name)
 {
-	id = counter++;
-	setName(name);
+	cout << "In Nurse c'tor..." << endl;
 	years_of_experience = y_exp;
 	department = depart;
 }
 
 Nurse::~Nurse()
 {
-	delete[] name;
+	cout << "In Nurse d'tor..." << endl;
 }
 
 //getters and setters
@@ -39,12 +35,12 @@ void Nurse::setDepartment(Department* depart)
 	this->department = depart;
 }
 
-//methods
 void Nurse::show() const
 {
 	cout << "Nurse ID: " << "tofillin"
 		<< " Name: " << name
 		<< "Years of experience: " << years_of_experience
+		//<< "Department: " << department->getDepName()
 		<< endl;
 }
 

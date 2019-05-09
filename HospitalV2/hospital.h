@@ -14,6 +14,10 @@ using namespace std;
 #include "doctor.h"
 #include "Research_Institute.h"
 #include "patient.h"
+#include "Surgeon.h"
+#include "SurgeonResearcher.h"
+#include "DoctorResearcher.h"
+
 
 class Hospital
 {
@@ -50,7 +54,7 @@ public:
 
 	//methods
 	void addDepartment(char* name);
-	void addDoctor(char* name, char* docSpecialty, Department* assigned_dep);
+	void addDoctor(char* name, char* docSpecialty, Department* assigned_dep,bool isSurgeon,bool isResearcher);
 	void addNurse(char* name, int yearsExperience, Department* assigned_dep);
 	void addPatient(Patient* patientToAdd);
 	void showDepartments() const;

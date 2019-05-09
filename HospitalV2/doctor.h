@@ -3,22 +3,20 @@
 
 #define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
+#include "StaffMember.h"
 using namespace std;
 
-class Department;
-
-class Doctor
+class Doctor : virtual public StaffMember
 {
-private:
-	static int counter; //unique id 
-	int id;
-	char* name;
+protected:
 	char* specialty;
 	Department* department;
 
 public:
 	//c'tor and d'tor
 	Doctor(char* name, char* specialty, Department* depart);
+	Doctor();
+	//Doctor(const Doctor& other);
 	~Doctor();
 
 	//getters and setters
@@ -32,9 +30,6 @@ public:
 	//methods
 	void show();
 
-private:
-	//copy c'tor
-	Doctor(const Doctor&); //prevent from user to make a copy of doctor
 };
 
 #endif

@@ -67,7 +67,9 @@ int Research_Institute::searchResearcherByName(char* name) const
 	for (int i = 0; i < num_of_researchers; i++)
 	{
 		if (strcmp(researchers[i]->getName(), name) == 0)
+		{
 			return i;
+		}
 	}
 
 	return -1;

@@ -23,12 +23,18 @@
     <ClInclude Include="Date.h" />
     <ClInclude Include="department.h" />
     <ClInclude Include="doctor.h" />
+    <ClInclude Include="DoctorResearcher.h" />
     <ClInclude Include="hospital.h" />
     <ClInclude Include="Interface.h" />
     <ClInclude Include="Nurse.h" />
     <ClInclude Include="patient.h" />
     <ClInclude Include="Researcher.h" />
     <ClInclude Include="Research_Institute.h" />
+    <ClInclude Include="StaffMember.h" />
+    <ClInclude Include="Surgeon.h" />
+    <ClInclude Include="SurgeonResearcher.h" />
+    <ClInclude Include="SurgeryVisit.h" />
+    <ClInclude Include="TestsVisit.h" />
     <ClInclude Include="visit.h" />
   </ItemGroup>
   <ItemGroup>
@@ -36,6 +42,7 @@
     <ClCompile Include="Date.cpp" />
     <ClCompile Include="department.cpp" />
     <ClCompile Include="doctor.cpp" />
+    <ClCompile Include="DoctorResearcher.cpp" />
     <ClCompile Include="hospital.cpp" />
     <ClCompile Include="Interface.cpp" />
     <ClCompile Include="main.cpp" />
@@ -43,6 +50,11 @@
     <ClCompile Include="patient.cpp" />
     <ClCompile Include="Researcher.cpp" />
     <ClCompile Include="Research_Institute.cpp" />
+    <ClCompile Include="StaffMember.cpp" />
+    <ClCompile Include="Surgeon.cpp" />
+    <ClCompile Include="SurgeonResearcher.cpp" />
+    <ClCompile Include="SurgeryVisit.cpp" />
+    <ClCompile Include="TestsVisit.cpp" />
     <ClCompile Include="visit.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

@@ -115,7 +115,7 @@ void Hospital::addDepartment(char* name)
 	
 }
 
-void Hospital::addDoctor(char* name, char* docSpecialty, Department* assigned_dep)
+void Hospital::addDoctor(char* name, char* docSpecialty, Department* assigned_dep,bool isSurgeon,bool isResearcher)
 {
 	if (num_of_doctors == size_of_doctors) //array increment if needed
 	{
@@ -126,11 +126,39 @@ void Hospital::addDoctor(char* name, char* docSpecialty, Department* assigned_de
 		delete[] doctors;
 		doctors = temp;
 	}
+	if (isSurgeon==1 && isResearcher==0)
+	{
+		Surgeon* doc = new Surgeon(name, docSpecialty, assigned_dep); //create a surgeon
+		this->doctors[num_of_doctors++] = doc;	//add doctor to hospital
+		assigned_dep->addDoctor(doc);   //add doctor to deparement
+		doc->setDepartment(assigned_dep);  //add department to the doctor
 
-	Doctor* doc = new Doctor(name, docSpecialty,assigned_dep);
-	this->doctors[num_of_doctors++] = doc;	//add doctor to hospital
-	assigned_dep->addDoctor(doc);   //add doctor to deparement
-	doc->setDepartment(assigned_dep);  //add department to the doctor
+	}
+	else if (isSurgeon && isResearcher)
+	{
+		SurgeonResearcher* doc = new SurgeonResearcher(Surgeon(name, docSpecialty, assigned_dep), Researcher(name)); //create suegron research
+		this->doctors[num_of_doctors++] = doc;	//add doctor to hospital
+		assigned_dep->addDoctor(doc);   //add doctor to deparement
+		doc->setDepartment(assigned_dep);  //add department to the doctor
+
+	}
+	else if (!isSurgeon && isResearcher)
+	{
+		DoctorResearcher* doc = new DoctorResearcher(Doctor(name, docSpecialty, assigned_dep), Researcher(name)); //create doctor research
+		this->doctors[num_of_doctors++] = doc;	//add doctor to hospital
+		assigned_dep->addDoctor(doc);   //add doctor to deparement
+		doc->setDepartment(assigned_dep);  //add department to the doctor
+
+	}
+	else 
+	{
+		Doctor* doc = new Doctor(name, docSpecialty, assigned_dep);
+		this->doctors[num_of_doctors++] = doc;	//add doctor to hospital
+		assigned_dep->addDoctor(doc);   //add doctor to deparement
+		doc->setDepartment(assigned_dep);  //add department to the doctor
+
+	}
+
 	cout << "Successfully added doctor to hospital" << endl;
 }
 
