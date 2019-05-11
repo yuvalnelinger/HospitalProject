@@ -6,6 +6,9 @@
 #include <iostream>
 using namespace std;
 #include "visit.h"
+#include "StaffMember.h"
+#include "doctor.h"
+#include "Nurse.h"
 
 class Department;
 
@@ -31,7 +34,7 @@ public:
 
 	//methods
 	void show() const;
-	void addVisit(Patient* patient, Date visitDate, char*visPurpose, Doctor* treatDoc, Nurse* treatNurse);
+	void addVisit(Patient* patient, Date visitDate, char*visPurpose, StaffMember* treatDoc);
 
 private:
 	int id;

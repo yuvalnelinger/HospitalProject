@@ -18,7 +18,7 @@ private:
 
 public:
 	//c'tor
-	SurgeryVisit(Patient* patient, Date date, char* purpose, Doctor* doc, Nurse* nurse,int roomNum,bool isFast);
+	SurgeryVisit(Patient* patient, Date date, char* purpose, StaffMember* doc,int roomNum,bool isFast);
 
 	//copy c'tor
 	SurgeryVisit(const SurgeryVisit& other);

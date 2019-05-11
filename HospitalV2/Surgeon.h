@@ -23,7 +23,7 @@ public:
 	void addSurgery();
 
 	//methods
-	virtual void show();
+	void show() const;
 };
 
 #endif

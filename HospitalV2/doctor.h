@@ -10,7 +10,6 @@ class Doctor : virtual public StaffMember
 {
 protected:
 	char* specialty;
-	Department* department;
 
 public:
 	//c'tor and d'tor
@@ -26,13 +25,10 @@ public:
 	//void setName(char* name);
 	void setSpecialty(char* specialty);
 	Department* getDepartment() const;
-	virtual void setDepartment(Department* dep);
-
-	//operatoes
-	const Doctor& operator=(const Doctor& other);
+	//void setDepartment(Department* dep);
 
 	//methods
-	virtual void show();
+	virtual void show() const;
 
 };
 

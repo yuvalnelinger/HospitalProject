@@ -1,7 +1,7 @@
 #include "SurgeryVisit.h"
 
 //c'tor
-SurgeryVisit::SurgeryVisit(Patient* patient, Date date, char* purpose, Doctor* doc, Nurse* nurse, int roomNum, bool isFast) : Visit(patient, date, purpose, doc, nurse), roomNum(roomNum), isFast(isFast)
+SurgeryVisit::SurgeryVisit(Patient* patient, Date date, char* purpose, StaffMember* doc, int roomNum, bool isFast) : Visit(patient, date, purpose, doc), roomNum(roomNum), isFast(isFast)
 {
 	cout << "In Surgery Visit c'tor..." << endl;
 	this->roomNum = roomNum;

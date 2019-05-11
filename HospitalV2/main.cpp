@@ -42,6 +42,7 @@ int main()
 			char* name = new char[MAX_NAME];
 			bool isSurgeon;
 			bool isResearcher;
+			int num_of_surgeries;
 			Department* assigned_dep = nullptr;
 			Interface::printAddStaffMemberMenu();
 
@@ -55,8 +56,8 @@ int main()
 				case 1: //add doctor
 				{
 					char* docSpecialty = new char[MAX_NAME];
-					Interface::getDoctorInfo(&name, &docSpecialty, &assigned_dep, hospital,&isSurgeon,&isResearcher);
-					hospital.addDoctor(name, docSpecialty, assigned_dep,isSurgeon,isResearcher);
+					Interface::getDoctorInfo(&name, &docSpecialty, &assigned_dep, hospital,&isSurgeon,&isResearcher,&num_of_surgeries);
+					hospital.addDoctor(name, docSpecialty, assigned_dep,isSurgeon,isResearcher,num_of_surgeries);
 					delete[] name;
 					delete[] docSpecialty;
 				}
@@ -105,11 +106,10 @@ int main()
 					Date visitDate;
 					char* visPurpose = new char[MAX_NAME];
 					Department* depToAdd;
-					Doctor* treatDoc = nullptr;
-					Nurse* treatNurse = nullptr;
+					StaffMember* treatDoc = nullptr;
 
-					Interface::getVisitInfo(&newPatient, &visitDate, &visPurpose, &depToAdd, &treatDoc, &treatNurse, isNewPatient, hospital);
-					newPatient->addVisit(newPatient, visitDate, visPurpose, treatDoc, treatNurse);  //add new visit to patient
+					Interface::getVisitInfo(&newPatient, &visitDate, &visPurpose, &depToAdd, &treatDoc, isNewPatient, hospital);
+					newPatient->addVisit(newPatient, visitDate, visPurpose, treatDoc);  //add new visit to patient
 					depToAdd->addPatient(newPatient); //add patient to current department (of visit)
 
 					if (isNewPatient = true) //add patient to hospital only if he is new patient

@@ -75,25 +75,15 @@ void Department::showPatients() const
 void Department::showStaff() const 
 {
 	cout << "This is department " << name;
-	cout << " with the following doctors: " << endl;
-	if (num_of_doctors == 0)
+	cout << " with the following staff members: " << endl;
+	if (num_of_stf_mem == 0)
 	{
-		cout << "No doctors yet." << endl;
+		cout << "No staff members yet." << endl;
 	}
 	else
 	{
-		for (int i = 0; i < num_of_doctors; i++)
-			cout << this->doctors[i]->getName() << " , ID " << this->doctors[i]->getId() << endl;
+		for (int i = 0; i < num_of_stf_mem; i++)
+			cout << this->staff_members[i]->getName() << " , ID " << this->staff_members[i]->getId() << endl;
 	}
 
-	cout << "And Nurses: " << endl;
-	if (num_of_nurses == 0)
-	{
-		cout << "No nurses yet." << endl;
-	}
-	else
-	{
-		for (int i = 0; i < num_of_nurses; i++)
-			cout << this->nurses[i]->getName() << " , ID " << this->nurses[i]->getId() << endl;
-	}
 }
