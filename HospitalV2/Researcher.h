@@ -25,6 +25,10 @@ public:
 	//char* getName() const;
 	//void setName(char* name);
 
+	//operators
+	const Researcher& operator=(const Researcher& other);
+	bool operator>(const Researcher& other) const;
+
 	//methods
 	void addArticle(Article* article);
 	virtual void setDepartment(Department* depart) override;

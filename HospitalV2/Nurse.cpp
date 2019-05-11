@@ -34,6 +34,18 @@ void Nurse::setDepartment(Department* depart)
 	this->department = depart;
 }
 
+//operators
+const Nurse& Nurse::operator=(const Nurse& other)
+{
+	cout << "In Doctor::operator=" << endl;
+	StaffMember::operator=(other);
+
+	years_of_experience = other.years_of_experience;
+
+	return *this;
+}
+
+//methods
 void Nurse::show() const
 {
 	StaffMember::show();

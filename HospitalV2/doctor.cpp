@@ -57,6 +57,20 @@ Department* Doctor::getDepartment() const
 	return this->department;
 }
 
+//operators
+const Doctor& Doctor::operator=(const Doctor& other)
+{
+	cout << "In Doctor::operator=" << endl;
+	StaffMember::operator=(other);
+
+	delete[]specialty;
+	specialty = new char[strlen(other.specialty) + 1];
+	strcpy(specialty, other.specialty);
+
+	return *this;
+}
+
+
 //methods
 void Doctor::show() {
 

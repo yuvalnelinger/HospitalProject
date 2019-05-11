@@ -28,6 +28,9 @@ public:
 	char* getName() const;
 	void setName(char* name);
 
+	//operators
+	const StaffMember& operator=(const StaffMember& other);
+
 	//methods
 	virtual void setDepartment(Department* depart) { department = depart; }
 	virtual void show() const = 0;

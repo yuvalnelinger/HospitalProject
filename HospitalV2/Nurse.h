@@ -27,6 +27,9 @@ public:
 	void setYearsOfExperience(int years);
 	virtual void setDepartment(Department* depart);
 
+	//operatoes
+	const Nurse& operator=(const Nurse& other);
+
 	//methods
 	virtual void show() const;
 

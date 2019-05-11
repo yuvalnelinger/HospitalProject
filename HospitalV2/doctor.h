@@ -26,7 +26,10 @@ public:
 	//void setName(char* name);
 	void setSpecialty(char* specialty);
 	Department* getDepartment() const;
-	void setDepartment(Department* dep);
+	virtual void setDepartment(Department* dep);
+
+	//operatoes
+	const Doctor& operator=(const Doctor& other);
 
 	//methods
 	virtual void show();

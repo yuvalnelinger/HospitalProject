@@ -35,6 +35,24 @@ void StaffMember::setName(char* name)
 	strcpy(this->name, name);
 }
 
+//operators
+const StaffMember& StaffMember::operator=(const StaffMember& other)
+{
+	cout << "StaffMember::In operator=" << endl;
+	if (this != &other)
+	{
+		id = other.id;
+
+		delete[]name;
+		name = new char[strlen(other.name) + 1];
+		strcpy(name, other.name);
+
+		department = other.department;
+	}
+	return *this;
+}
+
+
 //methods
 void StaffMember::show() const
 {

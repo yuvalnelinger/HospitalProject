@@ -1,4 +1,5 @@
 #include "Researcher.h"
+#include "Article.h"
 
 //c'tor and d'tor
 Researcher::Researcher(char* name) : StaffMember(name, nullptr), size_of_articles(INIT_SIZE)
@@ -28,6 +29,33 @@ Researcher::~Researcher()
 //	this->name = new char[strlen(name) + 1];
 //	strcpy(this->name, name);
 //}
+
+//operators
+const Researcher& Researcher::operator=(const Researcher& other)
+{
+	cout << "In Doctor::operator=" << endl;
+	StaffMember::operator=(other);
+
+	for (int i = 0; i < num_of_articles; i++)
+		delete articles[i];
+	
+	delete[]articles;
+
+	size_of_articles = other.size_of_articles;
+	num_of_articles = other.num_of_articles;
+
+	articles = new Article*[size_of_articles];
+	for (int i = 0; i < num_of_articles; i++)
+		articles[i] = other.articles[i];
+
+	return *this;
+}
+
+bool Researcher::operator>(const Researcher& other) const
+{
+	return (this->num_of_articles > other.num_of_articles);
+}
+
 
 //methods
 void Researcher::addArticle(Article* article)
