@@ -1,12 +1,10 @@
 #include "TestsVisit.h"
 
 //c'tor
-TestsVisit::TestsVisit(Patient* patient, Date date, char* purpose, Doctor* doc, Nurse* nurse) : Visit(patient, date, purpose, doc, nurse)
+TestsVisit::TestsVisit(Patient* patient, Date date, char* purpose, StaffMember* doc) : Visit(patient, date, purpose, doc)
 {
 }
 //copy c'tor
-TestsVisit::TestsVisit(const TestsVisit& other)
-{
-}
+
 
 //setters and getters

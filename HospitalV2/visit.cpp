@@ -1,14 +1,20 @@
 #include "visit.h"
 
 //c'tor
-Visit::Visit(Patient* patient, Date date, char* purpose, Doctor* doc, Nurse* nurse) : visitPurpose(nullptr), treatDoc(nullptr), treatNurse(nullptr)
+Visit::Visit(Patient* patient, Date date, char* purpose, StaffMember* doc) : visitPurpose(nullptr), treatDoc(nullptr)
 {
 	this->patient = patient;
 	this->dateOfArrival = date;
 	setVisitPurpose(purpose);
 	this->treatDoc = doc;
-	this->treatNurse = nurse;
 }
+
+Visit::Visit() : visitPurpose(nullptr), treatDoc(nullptr)
+{
+	this->patient = 0;
+	this->dateOfArrival = Date();
+}
+
 
 
 //copy c'tor
@@ -19,7 +25,6 @@ Visit::Visit(const Visit& other)
 	visitPurpose = new char[strlen(other.visitPurpose) + 1];
 	strcpy(visitPurpose, other.visitPurpose);
 	treatDoc = other.treatDoc;
-	treatNurse = other.treatNurse;
 }
 
 //setters and getters

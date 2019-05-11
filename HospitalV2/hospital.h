@@ -51,7 +51,7 @@ public:
 
 	//methods
 	void addDepartment(char* name);
-	void addDoctor(char* name, char* docSpecialty, Department* assigned_dep,bool isSurgeon,bool isResearcher);
+	void addDoctor(char* name, char* docSpecialty, Department* assigned_dep,bool isSurgeon,bool isResearcher,int num_of_surgeries);
 	void addNurse(char* name, int yearsExperience, Department* assigned_dep);
 	void addPatient(Patient* patientToAdd);
 	void showDepartments() const;

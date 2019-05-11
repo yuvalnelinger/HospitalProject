@@ -5,6 +5,8 @@
 #include <iostream>
 using namespace std;
 #include "Date.h"
+#include "StaffMember.h"
+
 class Patient;
 class Doctor;
 class Nurse;
@@ -15,12 +17,12 @@ private:
 	Date dateOfArrival;
 	Patient* patient;
 	char* visitPurpose;
-	Doctor* treatDoc;
-	Nurse* treatNurse;
+	StaffMember* treatDoc;
 
 public:
 	//c'tor
-	Visit(Patient* patient, Date date, char* purpose, Doctor* doc, Nurse* nurse);
+	Visit(Patient* patient, Date date, char* purpose, StaffMember* doc);
+	Visit();
 
 	//copy c'tor
 	Visit(const Visit& other);

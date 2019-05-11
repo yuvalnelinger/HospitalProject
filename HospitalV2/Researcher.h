@@ -31,8 +31,7 @@ public:
 	virtual void show() const override;
 
 
-private:
-	Researcher(const Researcher&); //prevent from user to make a copy of researcher
+
 };
 #endif
 

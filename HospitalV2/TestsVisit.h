@@ -17,7 +17,7 @@ private:
 
 public:
 	//c'tor
-	TestsVisit(Patient* patient, Date date, char* purpose, Doctor* doc, Nurse* nurse);
+	TestsVisit(Patient* patient, Date date, char* purpose, StaffMember* doc);
 
 	//copy c'tor
 	TestsVisit(const TestsVisit& other);

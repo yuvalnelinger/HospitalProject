@@ -44,7 +44,7 @@ void Interface::getDepartmentInfo(char** name)
 	*name = getInput();
 }
 
-void Interface::getDoctorInfo(char** name, char** specialty, Department** depart, Hospital& hospital,bool* isSurgeon,bool* isResearcher)
+void Interface::getDoctorInfo(char** name, char** specialty, Department** depart, Hospital& hospital,bool* isSurgeon,bool* isResearcher, int* num_of_surgeries)
 {
 	int depIndex;
 
@@ -65,6 +65,12 @@ void Interface::getDoctorInfo(char** name, char** specialty, Department** depart
 	*depart = hospital.getDepartmentByIndex(depIndex-1);
 	cout << "Is this doctor a surgeon? press 1 for YES, 0 for NO" << endl;
 	cin >> *isSurgeon;
+	if (*isSurgeon==1)
+	{
+		cout << "How many surgeries did the surgeon perform?" << endl;
+		cin >> *num_of_surgeries;
+
+	}
 	cout << "Is this doctor a researcher? press 1 for YES, 0 for NO" << endl;
 	cin >> *isResearcher;
 }
@@ -149,7 +155,7 @@ void Interface::getArticleInfo(char** title, char** name_of_magazine, Date* p_da
 	delete[] search_name;
 }
 
-void Interface::getVisitInfo(Patient** newPatient, Date* visitDate, char** visPurpose, Department** depToAdd, Doctor** treatDoc, Nurse** treatNurse, bool isNewPatient, Hospital& hospital)
+void Interface::getVisitInfo(Patient** newPatient, Date* visitDate, char** visPurpose, Department** depToAdd, StaffMember** treatDoc, bool isNewPatient, Hospital& hospital)
 {
 	int patientID;
 	char* nameToAdd = new char[MAX_NAME];
@@ -195,7 +201,7 @@ void Interface::getVisitInfo(Patient** newPatient, Date* visitDate, char** visPu
 	}
 	*depToAdd = hospital.getDepartmentByIndex(patDep-1);
 	(*newPatient)->setCurrDepartment(*depToAdd);
-	if ((*depToAdd)->getNumOfDoctors() + (*depToAdd)->getNumOfNurses() == 0)
+	if ((*depToAdd)->getNumOfStaffMembers() == 0)
 	{
 		cout << "No staff in this department yet. Please add staff" << endl;
 		int selection;
@@ -209,11 +215,12 @@ void Interface::getVisitInfo(Patient** newPatient, Date* visitDate, char** visPu
 		char* name = new char[MAX_NAME];
 		bool isSurgeon;
 		bool isResearcher;
+		int num_of_surgeries;
 		if (selection == 1)
 		{
 			char* docSpecialty = new char[MAX_NAME];
-			Interface::getDoctorInfo(&name, &docSpecialty, depToAdd, hospital,&isSurgeon,&isResearcher);
-			hospital.addDoctor(name, docSpecialty, *depToAdd,isSurgeon,isResearcher);
+			Interface::getDoctorInfo(&name, &docSpecialty, depToAdd, hospital,&isSurgeon,&isResearcher,&num_of_surgeries);
+			hospital.addDoctor(name, docSpecialty, *depToAdd,isSurgeon,isResearcher,num_of_surgeries);
 			delete[] name;
 			delete[] docSpecialty;
 		}
@@ -254,56 +261,21 @@ void Interface::getVisitInfo(Patient** newPatient, Date* visitDate, char** visPu
 	*visPurpose = getInput();
 
 	int idToCheck;
-	int pick;
 	cout << "This is the list of doctors and nurses you can choose from:" << endl;
 	(*depToAdd)->showStaff();
-	cout << "Is the lead treating staff member is a doctor or a nurse?" << endl;
-	cout << "1. Doctor\n"
-		 << "2. Nurse" << endl;
-	cin >> pick;
-	switch (pick)
-	{
-	case 1: //treating doctor
-	{
-		cout << "Enter the Doctor ID: " << endl;
-		cin >> idToCheck;
-		*treatDoc = hospital.getDoctorByID(idToCheck);
+	   
+	cout << "Enter the staff member ID: " << endl;
+	cin >> idToCheck;
+	*treatDoc = hospital.getStaffMemberByID(idToCheck);
 
 	while (*treatDoc == 0)
 		{
-			cout << "Couldn't find Doctor, insert ID of doctor from the list above." << endl;
+			cout << "Couldn't find staff member, insert ID of doctor/nurse from the list above." << endl;
 			cin >> idToCheck;
-			*treatDoc = hospital.getDoctorByID(idToCheck);
+			*treatDoc = hospital.getStaffMemberByID(idToCheck);
 		}
-		cout << "Doctor set as treating staff." << endl;
+	cout << "Staff member set as treating staff." << endl;
 
-		break;
-	}
-
-	case 2: //treating nurse
-	{
-		cout << "Enter the Nurse ID: " << endl;
-		cin >> idToCheck;
-		*treatNurse = hospital.getNurseByID(idToCheck);
-		while (*treatNurse == 0)
-		{
-			cout << "Couldn't find Nurse, insert ID of nurse from the list above." << endl;
-			cin >> idToCheck;
-			*treatNurse = hospital.getNurseByID(idToCheck);
-		}
-		cout << "Nurse set as treating staff." << endl;
-
-		break;
-	}
-
-	default:
-	{
-		cout << "Invalid input" << endl;
-		//go back to main menu
-		break;
-	}
-
-	}
 }
 
 //utilities

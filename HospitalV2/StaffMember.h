@@ -21,6 +21,7 @@ public:
 	//c'tor and d'tor
 	StaffMember(char* name, Department* department);
 	StaffMember(const StaffMember& other);
+	StaffMember();
 	virtual ~StaffMember();
 
 	//getters and setters

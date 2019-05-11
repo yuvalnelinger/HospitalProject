@@ -62,7 +62,7 @@ void Patient::show() const
 	cout << "Patient Name: " << name << " Id: " << id << " Year Of Birth: " << " Gender: " << gender << endl;
 }
 
-void Patient::addVisit(Patient* patient, Date visitDate, char* visPurpose, Doctor* treatDoc, Nurse* treatNurse)
+void Patient::addVisit(Patient* patient, Date visitDate, char* visPurpose, StaffMember* treatDoc)
 {
 	if (num_of_visitations == size_of_visitations) //array increment if needed
 	{
@@ -74,7 +74,7 @@ void Patient::addVisit(Patient* patient, Date visitDate, char* visPurpose, Docto
 		arr_of_visitations = temp;
 	}
 
-	Visit* newVis = new Visit(patient, visitDate, visPurpose, treatDoc, treatNurse);
+	Visit* newVis = new Visit(patient, visitDate, visPurpose, treatDoc);
 	this->arr_of_visitations[num_of_visitations++] = newVis; //add new visit to this patient
 }
 

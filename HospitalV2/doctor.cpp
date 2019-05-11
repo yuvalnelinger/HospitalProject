@@ -3,11 +3,15 @@
 //c'tor and d'tor
 Doctor::Doctor(char* name, char* specialty, Department* depart) : StaffMember(name, depart)
 {
+	cout << "test5" << endl;
 	cout << "In Doctor c'tor..." << endl;
+	cout << "test6" << endl;
 	setSpecialty(specialty);
+	cout << "test7" << endl;
+
 }
 
-//why we need default???
+//why we need default??? - (Yuval) we don't, it was added to solve compilation error, we will remove once we have something working :)
 Doctor::Doctor() : StaffMember(name, nullptr)
 {
 	cout << "In Doctor default c'tor..." << endl;
@@ -15,7 +19,7 @@ Doctor::Doctor() : StaffMember(name, nullptr)
 	this->department = 0;
 }
 
-Doctor::Doctor(const Doctor& other)
+Doctor::Doctor(const Doctor& other) : StaffMember(other)
 {
 	cout << "In Doctor::Doctor(copy)\n";
 	*this = other;
@@ -47,10 +51,10 @@ void Doctor::setSpecialty(char* specialty)
 	strcpy(this->specialty, specialty);
 }
 
-void Doctor::setDepartment(Department* dep)
+/*void Doctor::setDepartment(Department* dep)
 {
 	department = dep;
-}
+}*/
 
 Department* Doctor::getDepartment() const
 {
@@ -58,7 +62,8 @@ Department* Doctor::getDepartment() const
 }
 
 //methods
-void Doctor::show() {
+void Doctor::show() const
+{
 
 	StaffMember::show();
 	cout << ", " << "Specialty: " << specialty;

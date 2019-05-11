@@ -4,12 +4,12 @@
 DoctorResearcher::DoctorResearcher(const Doctor& doc, const Researcher& researcher) : StaffMember(doc.getName(), doc.getDepartment()), Doctor(doc), Researcher(researcher)
 {}
 
-DoctorResearcher::DoctorResearcher(const DoctorResearcher& other);
+//DoctorResearcher::DoctorResearcher(const DoctorResearcher& other);
 
-void DoctorResearcher::show()
+void DoctorResearcher::show() const
 {
-	StaffMember::show();
 	Doctor::show();
+	Researcher::show();
 }
 
 

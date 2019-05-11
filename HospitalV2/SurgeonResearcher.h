@@ -21,7 +21,7 @@ public:
 
 
 	//methods
-
+	void show() const;
 };
 
 #endif
