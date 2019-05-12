@@ -12,6 +12,7 @@ Doctor::Doctor(char* name, char* specialty, Department* depart) : StaffMember(na
 }
 
 //why we need default??? - (Yuval) we don't, it was added to solve compilation error, we will remove once we have something working :)
+//(Sharon) ahla! :)
 Doctor::Doctor() : StaffMember(name, nullptr)
 {
 	cout << "In Doctor default c'tor..." << endl;

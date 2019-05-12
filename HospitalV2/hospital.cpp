@@ -110,9 +110,6 @@ void Hospital::addDepartment(char* name)
 	
 }
 
-//int size_of_stf_mem;
-//int num_of_stf_mem;
-
 void Hospital::addDoctor(char* name, char* docSpecialty, Department* assigned_dep,bool isSurgeon,bool isResearcher,int num_of_surgeries)
 {
 	if (num_of_stf_mem == size_of_stf_mem) //array increment if needed
@@ -124,14 +121,15 @@ void Hospital::addDoctor(char* name, char* docSpecialty, Department* assigned_de
 		delete[] staff_members;
 		staff_members = temp;
 	}
+
 	Doctor* doc = new Doctor(name, docSpecialty, assigned_dep);
 
 	if (isSurgeon==1 && isResearcher==0)
 	{
 		StaffMember* surgeon = new Surgeon(*doc, num_of_surgeries); //create a surgeon
-		this->staff_members[num_of_stf_mem++] = surgeon;	//add doctor to hospital
-		assigned_dep->addStaffMember(surgeon);   //add doctor to deparement
-		surgeon->setDepartment(assigned_dep);  //add department to the doctor
+		this->staff_members[num_of_stf_mem++] = surgeon;	//add surgeon to hospital
+		assigned_dep->addStaffMember(surgeon);   //add sergeon to deparement
+		//surgeon->setDepartment(assigned_dep);  // ***department set already in StaffMember c'tor...***
 
 	}
 	else if (isSurgeon && isResearcher)
@@ -139,7 +137,7 @@ void Hospital::addDoctor(char* name, char* docSpecialty, Department* assigned_de
 		StaffMember* surgeresearch = new SurgeonResearcher(Surgeon(*doc, num_of_surgeries), Researcher(name)); //create suegron research
 		this->staff_members[num_of_stf_mem++] = surgeresearch;	//add doctor to hospital
 		assigned_dep->addStaffMember(surgeresearch);   //add doctor to deparement
-		surgeresearch->setDepartment(assigned_dep);  //add department to the doctor
+		//surgeresearch->setDepartment(assigned_dep);  // ***department set already in StaffMember c'tor...***
 
 	}
 	else if (!isSurgeon && isResearcher)
@@ -147,14 +145,14 @@ void Hospital::addDoctor(char* name, char* docSpecialty, Department* assigned_de
 		StaffMember* docresearch = new DoctorResearcher(*doc, Researcher(name)); //create doctor research
 		this->staff_members[num_of_stf_mem++] = docresearch;	//add doctor to hospital
 		assigned_dep->addStaffMember(docresearch);   //add doctor to deparement
-		docresearch->setDepartment(assigned_dep);  //add department to the doctor
+		//docresearch->setDepartment(assigned_dep);  // ***department set already in StaffMember c'tor...***
 
 	}
 	else
 	{
 		this->staff_members[num_of_stf_mem++] = doc;	//add doctor to hospital
 		assigned_dep->addStaffMember(doc);   //add doctor to deparement
-		doc->setDepartment(assigned_dep);  //add department to the doctor
+		//doc->setDepartment(assigned_dep);  // ***department set already in StaffMember c'tor...***
 	}
 
 	cout << "Successfully added doctor to hospital" << endl;
