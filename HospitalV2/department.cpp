@@ -1,7 +1,7 @@
 #include "department.h"
 
 //c'tor and d'tor
-Department::Department(char* name) : name(nullptr), size_of_stf_mem(INIT_SIZE), size_of_patients(INIT_SIZE)
+Department::Department(const char* name) : name(nullptr), size_of_stf_mem(INIT_SIZE), size_of_patients(INIT_SIZE)
 {
 	setName(name);
 	staff_members = new StaffMember*[size_of_stf_mem];

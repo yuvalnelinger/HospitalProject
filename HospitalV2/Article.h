@@ -15,7 +15,7 @@ private:
 
 public:
 	//c'tor and d'tor
-	Article(Date p_date, char* title, char* name_of_magazine);
+	Article(Date p_date, const char* title, const char* name_of_magazine);
 	~Article();
 
 	//copy c'tor
@@ -26,8 +26,8 @@ public:
 	char* getTitle() const;
 	char* getNameOfMagazine() const;
 	void setPublishDate(const Date& d);
-	void setTitle(char* title);
-	void setNameOfMagazine(char* magazine_name);
+	void setTitle(const char* title);
+	void setNameOfMagazine(const char* magazine_name);
 
 	//methods
 	void show();

@@ -5,5 +5,4 @@ SurgeonResearcher::SurgeonResearcher(const Surgeon& surgeon, const Researcher& r
 void SurgeonResearcher::show() const
 {
 	Surgeon::show();
-	Researcher::show();
 }

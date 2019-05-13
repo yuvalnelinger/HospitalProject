@@ -17,7 +17,7 @@ protected:
 
 public:
 	//c'tor and d'tor
-	Researcher(char* name);
+	Researcher(const char* name);
 	Researcher(const Researcher& other);
 	~Researcher();
 

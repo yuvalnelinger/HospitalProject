@@ -1,4 +1,4 @@
-#include "hospital.h"
+/*#include "hospital.h"
 #include "Interface.h"
 #include <string.h>
 
@@ -242,3 +242,4 @@ int main()
 
 	cout << "Get well soon, Goodbye!" << endl;
 }
+*/

@@ -1,7 +1,7 @@
 #include "doctor.h"
 
 //c'tor and d'tor
-Doctor::Doctor(char* name, char* specialty, Department* depart) : StaffMember(name, depart)
+Doctor::Doctor(const char* name, const char* specialty, Department* depart) : StaffMember(name, depart), specialty(nullptr)
 {
 	cout << "test5" << endl;
 	cout << "In Doctor c'tor..." << endl;
@@ -23,7 +23,8 @@ Doctor::Doctor() : StaffMember(name, nullptr)
 Doctor::Doctor(const Doctor& other) : StaffMember(other)
 {
 	cout << "In Doctor::Doctor(copy)\n";
-	*this = other;
+	setSpecialty(other.specialty);
+	//*this = other;
 }
 
 Doctor::~Doctor()
@@ -45,7 +46,7 @@ Doctor::~Doctor()
 
 char* Doctor::getSpecialty() const { return specialty; }
 
-void Doctor::setSpecialty(char* specialty)
+void Doctor::setSpecialty(const char* specialty)
 {
 	delete[] this->specialty;
 	this->specialty = new char[strlen(specialty) + 1];
@@ -79,7 +80,6 @@ const Doctor& Doctor::operator=(const Doctor& other)
 //methods
 void Doctor::show() const
 {
-
 	StaffMember::show();
 	cout << ", " << "Specialty: " << specialty;
 }

@@ -13,7 +13,7 @@ protected:
 
 public:
 	//c'tor and d'tor
-	Doctor(char* name, char* specialty, Department* depart);
+	Doctor(const char* name, const char* specialty, Department* depart);
 	Doctor();
 	Doctor(const Doctor& other);
 	~Doctor();
@@ -23,9 +23,12 @@ public:
 	//char* getName() const;
 	char* getSpecialty() const;
 	//void setName(char* name);
-	void setSpecialty(char* specialty);
+	void setSpecialty(const char* specialty);
 	Department* getDepartment() const;
 	//void setDepartment(Department* dep);
+
+	//operators
+	const Doctor& operator=(const Doctor& other);
 
 	//methods
 	virtual void show() const;

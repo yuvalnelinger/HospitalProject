@@ -30,5 +30,8 @@ static void getVisitInfo(Patient** newPatient, Date* visitDate, char** visPurpos
 static char* getInput();
 static bool isValid(int check, int lower, int upper);
 
+//qq-for checking only
+static void updateDoc(Doctor& doc);
+
 };
 #endif

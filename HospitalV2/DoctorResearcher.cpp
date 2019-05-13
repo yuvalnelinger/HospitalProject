@@ -9,7 +9,6 @@ DoctorResearcher::DoctorResearcher(const Doctor& doc, const Researcher& research
 void DoctorResearcher::show() const
 {
 	Doctor::show();
-	Researcher::show();
 }
 
 

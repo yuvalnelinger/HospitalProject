@@ -22,7 +22,7 @@ private:
 
 public:
 	//c'tor and d'tor
-	Department(char* name);
+	Department(const char* name);
 	~Department();
 
 	//getters and setters

@@ -4,7 +4,7 @@
 
 int StaffMember::counter = 1000;
 
-StaffMember::StaffMember(char* name, Department* deparement) : name(nullptr)
+StaffMember::StaffMember(const char* name, Department* deparement) : name(nullptr)
 {
 	cout << "In Staff Member c'tor..." << endl;
 	cout << "test1" << endl;
@@ -39,10 +39,13 @@ int StaffMember::getId() { return id; }
 
 char* StaffMember::getName() const { return name; }
 
-void StaffMember::setName(char* name)
+void StaffMember::setName(const char* name)
 {
 	cout << "setting name" << endl;
-	delete[] this->name;
+	if (this->name)
+	{
+		delete[] this->name;
+	}
 	this->name = new char[strlen(name) + 1];
 	strcpy(this->name, name);
 }
@@ -74,7 +77,7 @@ void StaffMember::show() const
 
 	if (this->department)  //for the case of researcher that has no specipic department
 	{
-		cout << " , Department: " << department->getName();
+		cout << ", Department: " << department->getName();
 	}
 }
 

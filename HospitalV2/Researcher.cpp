@@ -2,7 +2,7 @@
 #include "Article.h"
 
 //c'tor and d'tor
-Researcher::Researcher(char* name) : StaffMember(name, nullptr), size_of_articles(INIT_SIZE)
+Researcher::Researcher(const char* name) : StaffMember(name, nullptr), size_of_articles(INIT_SIZE)
 {
 	articles = new Article*[size_of_articles];
 	num_of_articles = 0;
@@ -11,7 +11,19 @@ Researcher::Researcher(char* name) : StaffMember(name, nullptr), size_of_article
 Researcher::Researcher(const Researcher& other) : StaffMember(other)
 {
 	cout << "In Researcher::Researcher(copy)\n";
-	*this = other;
+	for (int i = 0; i < num_of_articles; i++)
+		delete articles[i];
+
+	delete[]articles;
+
+	size_of_articles = other.size_of_articles;
+	num_of_articles = other.num_of_articles;
+
+	articles = new Article*[size_of_articles];
+	for (int i = 0; i < num_of_articles; i++)
+		articles[i] = other.articles[i];
+
+	//*this = other;
 }
 
 Researcher::~Researcher()
@@ -74,7 +86,7 @@ void Researcher::addArticle(Article* article)
 
 void Researcher::setDepartment(Department* depart)
 {
-	this->department == nullptr;
+	this->department = nullptr;
 }
 
 

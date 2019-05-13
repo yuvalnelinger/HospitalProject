@@ -1,5 +1,9 @@
 #include "Date.h"
 
+//qq- c'tor only for checks!
+Date::Date(int day, int month, int year) : day(day), month(month), year(year)
+{}
+
 //getters
 int Date::getDay() { return day; }
 int Date::getMonth() { return month; }

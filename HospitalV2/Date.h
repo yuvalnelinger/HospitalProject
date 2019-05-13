@@ -12,6 +12,10 @@ private:
 	int year;
 
 public:
+	//qq- c'tor only for checks!
+	Date(int day, int month, int year);
+	Date() = default;
+
 	//getters
 	int getDay();
 	int getMonth();

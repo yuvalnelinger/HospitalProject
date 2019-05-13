@@ -296,3 +296,10 @@ bool Interface::isValid(int check, int lower, int upper)
 {
 	return (lower <= check) && (check <= upper);
 }
+
+//qq-for checking only
+void Interface::updateDoc(Doctor& doc)
+{
+	doc.setName("Sharon");
+
+}

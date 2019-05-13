@@ -8,7 +8,7 @@
 using namespace std;
 class Department;
 
-class Surgeon : virtual public Doctor
+class Surgeon : public Doctor
 {
 protected:
 	int num_of_surgeries;

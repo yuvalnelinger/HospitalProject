@@ -19,7 +19,7 @@ protected:
 
 public:
 	//c'tor and d'tor
-	StaffMember(char* name, Department* department);
+	StaffMember(const char* name, Department* department);
 	StaffMember(const StaffMember& other);
 	StaffMember();
 	virtual ~StaffMember();
@@ -27,7 +27,7 @@ public:
 	//getters and setters
 	int getId();
 	char* getName() const;
-	void setName(char* name);
+	void setName(const char* name);
 
 	//operators
 	const StaffMember& operator=(const StaffMember& other);

@@ -1,7 +1,7 @@
 #include "Article.h"
 
 //c'tor and d'tor
-Article::Article(Date p_date, char* title, char* name_of_magazine) : title (nullptr), name_of_magazine (nullptr)
+Article::Article(Date p_date, const char* title, const char* name_of_magazine) : title (nullptr), name_of_magazine (nullptr)
 {
 	publish_date = p_date;
 	setTitle(title);
@@ -38,14 +38,14 @@ void Article::setPublishDate(const Date& d)
 	this->publish_date = d;
 }
 
-void Article::setTitle(char* title)
+void Article::setTitle(const char* title)
 {
 	delete[] this->title;
 	this->title = new char[strlen(title) + 1];
 	strcpy(this->title, title);
 }
 
-void Article::setNameOfMagazine(char* name_of_magazine)
+void Article::setNameOfMagazine(const char* name_of_magazine)
 {
 	delete[] this->name_of_magazine;
 	this->name_of_magazine = new char[strlen(name_of_magazine) + 1];
