@@ -119,10 +119,10 @@
     <ClCompile Include="TestsVisit.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="main.cpp">
+    <ClCompile Include="main-temp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="main-real.cpp">
+    <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

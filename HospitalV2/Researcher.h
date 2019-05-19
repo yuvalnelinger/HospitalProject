@@ -28,9 +28,10 @@ public:
 	//operators
 	const Researcher& operator=(const Researcher& other);
 	bool operator>(const Researcher& other) const;
+	virtual void toOs(ostream& os) const override;
 
 	//methods
-	void addArticle(Article* article);
+	virtual void addArticle(Article* article);
 	virtual void setDepartment(Department* depart) override;
 	virtual void show() const override;
 

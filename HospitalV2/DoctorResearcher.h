@@ -17,8 +17,8 @@ public:
 	DoctorResearcher(const Doctor& doc, const Researcher& researcher);
 	//DoctorResearcher(const DoctorResearcher& other);
 
-	//getters and setters
-
+	//operators
+	virtual void toOs(ostream& os) const override;
 
 	//methods
 	void show() const;

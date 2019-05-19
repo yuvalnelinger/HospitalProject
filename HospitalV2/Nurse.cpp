@@ -1,6 +1,6 @@
 #include "Nurse.h"
 
-Nurse::Nurse(char* name, int y_exp, Department* depart) : StaffMember(name, department)
+Nurse::Nurse(const char* name, int y_exp, Department* depart) : StaffMember(name, depart)
 {
 	cout << "In Nurse c'tor..." << endl;
 	years_of_experience = y_exp;
@@ -44,6 +44,13 @@ const Nurse& Nurse::operator=(const Nurse& other)
 
 	return *this;
 }
+
+void Nurse::toOs(ostream& os) const
+{
+	os << ", Years of experience: " << years_of_experience
+		<< endl;
+}
+
 
 //methods
 void Nurse::show() const

@@ -28,7 +28,6 @@ Researcher::Researcher(const Researcher& other) : StaffMember(other)
 
 Researcher::~Researcher()
 {
-	delete[]name;
 	delete[]articles;
 }
 
@@ -68,6 +67,11 @@ bool Researcher::operator>(const Researcher& other) const
 	return (this->num_of_articles > other.num_of_articles);
 }
 
+void Researcher::toOs(ostream& os) const
+{
+	os << ", Number of articles: " << num_of_articles
+		<< endl;
+}
 
 //methods
 void Researcher::addArticle(Article* article)

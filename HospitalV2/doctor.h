@@ -29,6 +29,7 @@ public:
 
 	//operators
 	const Doctor& operator=(const Doctor& other);
+	virtual void toOs(ostream& os) const override;
 
 	//methods
 	virtual void show() const;

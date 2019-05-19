@@ -1,5 +1,256 @@
 #include "Interface.h"
 
+
+void Interface::mainMenu(Hospital& hospital)
+{
+	bool proceed = true;
+	int selection;
+	do {
+		cout << "Welcome to " << hospital.getName() << " hospital!" << endl;
+		Interface::printMainMenu();
+		cin >> selection;
+		switch (selection)
+		{
+		case 1: //add a department
+		{
+			char* name = new char[MAX_NAME];
+			Interface::getDepartmentInfo(&name);
+			hospital.addDepartment(name);
+			delete[] name;
+		}
+		break;
+		case 2: //add a staff member
+		{
+			//prevent from the user to add a staff member without any departments in the hospital
+			if (hospital.getNumOfDepartments() == 0)
+			{
+				cout << "It not possible to add a staff memeber without any departments!\n"
+					<< "please add a department first" << endl;
+				//create department
+				char* name = new char[MAX_NAME];
+				Interface::getDepartmentInfo(&name);
+				hospital.addDepartment(name);
+				delete[] name;
+			}
+
+			int selection;
+			char* name = new char[MAX_NAME];
+			Department* assigned_dep = nullptr;
+			bool isSurgeon;
+			bool isResearcher;
+			int num_of_surgeries;
+			Interface::printAddStaffMemberMenu();
+
+			bool again = true;
+			while (again)
+			{
+				again = false;
+				cin >> selection;
+				switch (selection)
+				{
+				case 1: //add doctor
+				{
+					char* docSpecialty = new char[MAX_NAME];
+					Interface::getDoctorInfo(&name, &docSpecialty, &assigned_dep, hospital, &isSurgeon, &isResearcher, &num_of_surgeries);
+					hospital.addDoctor(name, docSpecialty, assigned_dep, isSurgeon, isResearcher, num_of_surgeries);
+					delete[] docSpecialty;
+				}
+				break;
+				case 2: //add nurse
+				{
+					int yearsExperience;
+					Interface::getNurseInfo(&name, &yearsExperience, &assigned_dep, hospital);
+					hospital.addNurse(name, yearsExperience, assigned_dep);
+				}
+				break;
+
+				delete[] name;
+
+				default:
+				{
+					again = true;
+					cout << "Invalid selection. Please select again" << endl;
+				}
+				break;
+				}//end switch
+			}//end while
+		}
+		break;
+		case 3: //patient operations
+		{
+			int choice;
+			if (hospital.getNumOfDepartments() == 0)
+			{
+				cout << "You have to create a department before making any patient operations." << endl;
+				char* name = new char[MAX_NAME];
+				Interface::getDepartmentInfo(&name);
+				hospital.addDepartment(name);
+				delete[] name;
+			}
+			Interface::printPatientsMenu();
+			cin >> choice;
+			bool invalid = true;
+			while (invalid)
+			{
+				switch (choice)
+				{
+				case 1: //add a new visit
+				{
+					invalid = false;
+					bool isNewPatient = 0;
+					Patient* newPatient = nullptr;
+					Date visitDate;
+					char* visPurpose = new char[MAX_NAME];
+					Department* depToAdd;
+					StaffMember* treatDoc = nullptr;
+
+					Interface::getVisitInfo(&newPatient, &visitDate, &visPurpose, &depToAdd, &treatDoc, isNewPatient, hospital);
+					newPatient->addVisit(newPatient, visitDate, visPurpose, treatDoc);  //add new visit to patient
+					depToAdd->addPatient(newPatient); //add patient to current department (of visit)
+
+					if (isNewPatient = true) //add patient to hospital only if he is new patient
+						hospital.addPatient(newPatient);
+
+					delete[]visPurpose;
+					cout << "Successfully added visit." << endl;
+				}
+				break;
+				case 2: //show all patients that belong to a department
+				{
+					invalid = false;
+					int select;
+					Department* depToShow;
+					cout << "Please select a department: " << endl;
+					hospital.showDepartments();
+					cin >> select;
+					while (!Interface::isValid(select - 1, 0, hospital.getNumOfDepartments() - 1))
+					{
+						cout << "Invalid input. Please enter a valid department ID" << endl;
+						cin >> select;
+					}
+
+					depToShow = hospital.getDepartmentByIndex(select - 1);
+					cout << "These are the patients of department " << depToShow->getName() << endl;
+					depToShow->showPatients();
+					break;
+				}
+
+				case 3: //search a patient by ID
+				{
+					invalid = false;
+					int patID;
+					Patient* patientToShow;
+					cout << "Enter the ID of the patient to search:" << endl;
+					cin >> patID;
+					patientToShow = hospital.getPatientByID(patID);
+					if (patientToShow == 0)
+					{
+						cout << "Patient not found." << endl;
+					}
+					else
+					{
+						cout << "Patient with ID " << patID << "is " << patientToShow->getName() << "and his current department is " << patientToShow->getCurrentDepartment()->getName() << endl;
+					}
+					break;
+				}
+				default:
+				{
+					cout << "Invalid selection. Please try again" << endl;
+					break;
+				}
+
+				}
+			}
+			break;
+		}//end patient operations
+
+		case 4:  //enter the research institute
+		{
+			Interface::printRIMenu();
+			bool again = true;
+			while (again)
+			{
+				again = false;
+				int selection;
+				cin >> selection;
+				switch (selection)
+				{
+				case 1: //add a researcher
+				{
+					char* name = new char[MAX_NAME];
+					Interface::getResearcherInfo(&name);
+					hospital.getResearchInstitute().addResearcher(name);
+					delete[] name;
+				}
+				break;
+				case 2: //add an article
+				{
+					if (hospital.getResearchInstitute().getNumOfResearchers() == 0)
+					{
+						cout << "There are no researchers in the research institute. Please add a researcher first" << endl;
+						char* name = new char[MAX_NAME];
+						Interface::getResearcherInfo(&name);
+						hospital.getResearchInstitute().addResearcher(name);
+						hospital.getResearchInstitute().showResearchers();
+						delete[] name;
+					}
+					int r_index;
+					Date date;
+					char* title = new char[MAX_TITLE];
+					char* name_of_magazine = new char[MAX_NAME];
+					Interface::getArticleInfo(&title, &name_of_magazine, &date, &r_index, hospital);
+					hospital.getResearchInstitute().addArticle(date, title, name_of_magazine, r_index);
+					delete[] title;
+					delete[] name_of_magazine;
+				}
+				break;
+				case 3: //show all researchers
+					hospital.getResearchInstitute().showResearchers();
+					break;
+				default:
+				{
+					again = true;
+					cout << "Invalid value. Please try again" << endl;
+				}
+				break;
+				}//end switch
+			}//end while
+		}
+		break;
+		case 5: //show all staff members
+		{
+			hospital.showStaff();
+		}
+		break;
+		case 6: //show all doctor-researchers
+		{
+			hospital.showDocResearchers();
+		}
+		break;
+		case 7: //compare researchers by number of articles
+		{
+			Interface::compareResearchers(hospital.getResearchInstitute());
+		}
+		break;
+		default:
+		{
+			cout << "Invalid value. Please try again" << endl;
+		}
+		break;
+
+		}
+
+		cout << "Would you like to perform another action?\n"
+			<< "Press any key for YES or 0 for NO" << endl;
+		cin >> proceed;
+
+	} while (proceed);
+
+	cout << "Get well soon, Goodbye!" << endl;
+
+}
+
+
 //menues print
 void Interface::printMainMenu()
 {
@@ -8,7 +259,9 @@ void Interface::printMainMenu()
 	 	<< "2. Add a staff member\n"
 		<< "3. Patient operations\n"
 		<< "4. Enter the research institute\n"
-		<< "5. Show all staff members"
+		<< "5. Show all staff members\n"
+		<< "6. Show all Doctor-Researchers\n"
+		<< "7. Compare researchers by number of articles"
 		<< endl;
 }
 
@@ -278,14 +531,76 @@ void Interface::getVisitInfo(Patient** newPatient, Date* visitDate, char** visPu
 
 }
 
+void Interface::compareResearchers(Research_Institute& RI)
+{
+	if (RI.getNumOfResearchers() < 2)
+	{
+		cout << "There must be at least 2 researchers to compare" << endl;
+		return;
+	}
+
+	char* search_name;
+	int index;
+
+	cout << "Choose two researches to compare by their number of articles\n"
+		<< "This is the list of available researchers:" << endl;
+	RI.showResearchers();
+
+	cout << "Choose the first researcher, type the name:" << endl;
+
+	do
+	{
+		search_name = getInput();
+		index = RI.searchResearcherByName(search_name);
+	} while (index == -1);
+
+	StaffMember* temp1 = RI.getResearcherByIndex(index);
+
+	cout << "Choose the second researcher, type the name:" << endl;
+
+	do
+	{
+		search_name = getInput();
+		index = RI.searchResearcherByName(search_name);
+	} while (index == -1);
+
+	StaffMember* temp2 = RI.getResearcherByIndex(index);
+
+	Researcher* researcher1 = dynamic_cast<Researcher*>(temp1);
+	Researcher* researcher2 = dynamic_cast<Researcher*>(temp2);
+
+	if (*researcher1 > *researcher2)
+	{
+		cout << researcher1->getName() << " has more articles than " << researcher2->getName() << endl;
+	}
+	else
+	{
+		cout << researcher2->getName() << " has more articles than " << researcher1->getName() << endl;
+	}
+}
+
 //utilities
 char* Interface::getInput()
 {
 	char* input = new char[MAX_SIZE];
-	cin.ignore();
-	cin.getline(input, MAX_SIZE);
+	int logSize = 0;
+
+	int c = getchar();
+	if (c == '\n')
+		c = getchar();
+	while (c != '\n')
+	{
+		input[logSize] = c;
+		logSize++;
+
+		c = getchar();
+	}
+
+	input[logSize] = '\0';
 	char* resized_input = new char[strlen(input)+1];
 	strcpy(resized_input, input);
+	resized_input[logSize] = '\0';
+
 	delete[]input;
 	input = resized_input;
 
@@ -297,9 +612,18 @@ bool Interface::isValid(int check, int lower, int upper)
 	return (lower <= check) && (check <= upper);
 }
 
-//qq-for checking only
-void Interface::updateDoc(Doctor& doc)
+void Interface::cleanBuffer()
 {
-	doc.setName("Sharon");
+	int c = getchar();
+
+	while (c != EOF && c != '\n')
+		c = getchar();
 
 }
+
+////qq-for checking only
+//void Interface::updateDoc(Doctor& doc)
+//{
+//	doc.setName("Sharon");
+//
+//}

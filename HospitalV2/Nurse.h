@@ -16,7 +16,7 @@ private:
 
 public:
 	//c'tor and d'tor
-	Nurse(char* name, int y_exp, Department* depart);
+	Nurse(const char* name, int y_exp, Department* depart);
 	~Nurse();
 
 	//getters and setters
@@ -29,6 +29,7 @@ public:
 
 	//operatoes
 	const Nurse& operator=(const Nurse& other);
+	virtual void toOs(ostream& os) const override;
 
 	//methods
 	virtual void show() const;

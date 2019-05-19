@@ -17,8 +17,8 @@ public:
 	//c'tor and d'tor
 	SurgeonResearcher(const Surgeon& surgeon, const Researcher& researcher);
 
-	//getters and setters
-
+	//operators
+	virtual void toOs(ostream& os) const override;
 
 	//methods
 	void show() const;

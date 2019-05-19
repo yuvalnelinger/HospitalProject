@@ -30,8 +30,11 @@ public:
 	char* getName() const;
 	void setName(const char* name);
 
+	//operators
+	const Department& operator+=(const StaffMember& mem);
+
 	//methods
-	void addStaffMember(StaffMember* mem);
+	void addStaffMember(const StaffMember* mem);
 	void addPatient(Patient* patient);
 	void showPatients() const;
 	void showStaff() const;

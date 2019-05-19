@@ -25,6 +25,12 @@ int Surgeon::getNumOfSurgeries() const
 	return this->num_of_surgeries;
 }
 
+void Surgeon::toOs(ostream& os) const
+{
+	os << ", Number of surgeries: " << num_of_surgeries
+		<< endl;
+}
+
 void Surgeon::show() const
 {
 	StaffMember::show();

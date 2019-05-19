@@ -92,7 +92,7 @@ void Hospital::setName(const char* name)
 
 
 //methods
-void Hospital::addDepartment(char* name)
+void Hospital::addDepartment(const char* name)
 {
 	if (num_of_departments == size_of_departments) //array increment if needed
 	{
@@ -107,10 +107,9 @@ void Hospital::addDepartment(char* name)
 	Department* dep = new Department(name);
 	this->departments[num_of_departments++] = dep;  //add department to hospital
 	cout << "Successfully added department to hospital" << endl;
-	
 }
 
-void Hospital::addDoctor(char* name, char* docSpecialty, Department* assigned_dep,bool isSurgeon,bool isResearcher,int num_of_surgeries)
+void Hospital::addDoctor(const char* name, const char* docSpecialty, Department* assigned_dep,bool isSurgeon,bool isResearcher,int num_of_surgeries)
 {
 	if (num_of_stf_mem == size_of_stf_mem) //array increment if needed
 	{
@@ -124,41 +123,48 @@ void Hospital::addDoctor(char* name, char* docSpecialty, Department* assigned_de
 
 	Doctor* doc = new Doctor(name, docSpecialty, assigned_dep);
 
-	if (isSurgeon==1 && isResearcher==0)
+	if (isSurgeon && !isResearcher)
 	{
 		StaffMember* surgeon = new Surgeon(*doc, num_of_surgeries); //create a surgeon
-		this->staff_members[num_of_stf_mem++] = surgeon;	//add surgeon to hospital
-		assigned_dep->addStaffMember(surgeon);   //add sergeon to deparement
+		this->staff_members[num_of_stf_mem++] = surgeon;	//add to hospital
+		//assigned_dep->addStaffMember(surgeon);//add to deparement
+		*assigned_dep += *surgeon;	//add to deparement
 		//surgeon->setDepartment(assigned_dep);  // ***department set already in StaffMember c'tor...***
 
 	}
 	else if (isSurgeon && isResearcher)
 	{
-		StaffMember* surgeresearch = new SurgeonResearcher(Surgeon(*doc, num_of_surgeries), Researcher(name)); //create suegron research
-		this->staff_members[num_of_stf_mem++] = surgeresearch;	//add doctor to hospital
-		assigned_dep->addStaffMember(surgeresearch);   //add doctor to deparement
+		Surgeon* surge = new Surgeon(*doc, num_of_surgeries);
+		StaffMember* surgeResearch = new SurgeonResearcher(*surge, Researcher(name));  //create a surgeon-researcher
+		this->staff_members[num_of_stf_mem++] = surgeResearch;	//add to hospital
+		//assigned_dep->addStaffMember(surgeResearch);   //add to deparement
+		*assigned_dep += *surgeResearch;	//add to deparement
+		addToRI(surgeResearch); //add to Research Institute
 		//surgeresearch->setDepartment(assigned_dep);  // ***department set already in StaffMember c'tor...***
-
+		delete surge;
 	}
 	else if (!isSurgeon && isResearcher)
 	{
-		StaffMember* docresearch = new DoctorResearcher(*doc, Researcher(name)); //create doctor research
-		this->staff_members[num_of_stf_mem++] = docresearch;	//add doctor to hospital
-		assigned_dep->addStaffMember(docresearch);   //add doctor to deparement
+		StaffMember* docResearcher = new DoctorResearcher(*doc, Researcher(name)); //create doctor research
+		this->staff_members[num_of_stf_mem++] = docResearcher;	//add to hospital
+		//assigned_dep->addStaffMember(docResearcher);   //add to deparement
+		*assigned_dep += *docResearcher;	//add to deparement
+		addToRI(docResearcher); //add to Research Institute
 		//docresearch->setDepartment(assigned_dep);  // ***department set already in StaffMember c'tor...***
 
 	}
-	else
+	else // regular doctor
 	{
-		this->staff_members[num_of_stf_mem++] = doc;	//add doctor to hospital
-		assigned_dep->addStaffMember(doc);   //add doctor to deparement
+		this->staff_members[num_of_stf_mem++] = doc;	//add to hospital
+		//assigned_dep->addStaffMember(doc);   //add to deparement
+		*assigned_dep += *doc;	//add to deparement
 		//doc->setDepartment(assigned_dep);  // ***department set already in StaffMember c'tor...***
 	}
 
 	cout << "Successfully added doctor to hospital" << endl;
 }
 
-void Hospital::addNurse(char* name, int yearsExperience, Department* assigned_dep)
+void Hospital::addNurse(const char* name, int yearsExperience, Department* assigned_dep)
 {
 	if (num_of_stf_mem == size_of_stf_mem) //array increment if needed
 	{
@@ -172,9 +178,9 @@ void Hospital::addNurse(char* name, int yearsExperience, Department* assigned_de
 
 	StaffMember* nurse = new Nurse(name, yearsExperience, assigned_dep);
 	this->staff_members[num_of_stf_mem++] = nurse;	//add nurse to hospital
-	//assigned_dep->addNurse(nurse);   OLD
-	nurse->setDepartment(assigned_dep);  //add department to the nurse
-	assigned_dep->addStaffMember(nurse);
+	//assigned_dep->addStaffMember(nurse);
+	*assigned_dep += *nurse;	//add to deparement
+	//nurse->setDepartment(assigned_dep);  // ***department set already in StaffMember c'tor...***
 	cout << "Successfully added nurse to hospital" << endl;
 }
 
@@ -192,6 +198,12 @@ void Hospital::addPatient(Patient* patientToAdd)
 
 	patients[num_of_patients++] = patientToAdd;
 	cout << "Successfully added patient to hospital" << endl;
+}
+
+void Hospital::addToRI(StaffMember* mem)
+{
+	StaffMember** arr = getResearchInstitute().researchers;
+	arr[getResearchInstitute().num_of_researchers++] = mem;
 }
 
 void Hospital::showDepartments() const
@@ -215,6 +227,18 @@ void Hospital::showPatientById(int id) const
 	}
 }
 
+void Hospital::showDocResearchers() const
+{
+	for (int i = 0; i < num_of_stf_mem; i++)
+	{
+		StaffMember* temp = dynamic_cast<DoctorResearcher*>(staff_members[i]);
+		if (temp)
+		{
+			cout << "\t" << i+1 <<"." << *temp;
+		}
+	}
+}
+
 void Hospital::showStaff() const
 {
 	int i;
@@ -228,10 +252,7 @@ void Hospital::showStaff() const
 		cout << "List of staff members: \n";
 		for (i = 0; i < num_of_stf_mem; i++)
 		{
-			//Researcher* temp = dynamic_cast<Researcher*>(staff_members[i]); //do not print researchers
-
-			//if (temp)
-			cout << "\t" << i + 1 << "." << staff_members[i]->getName() << endl;
+			cout << "\t" << i + 1 << "." << *staff_members[i] << endl;
 		}
 	}
 }

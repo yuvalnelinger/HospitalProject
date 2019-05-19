@@ -10,6 +10,7 @@
 #include <iostream>
 using namespace std;
 #include "department.h"
+#include "StaffMember.h"
 #include "Nurse.h"   
 #include "doctor.h"
 #include "Research_Institute.h"
@@ -50,12 +51,14 @@ public:
 	void setName(const char* name);
 
 	//methods
-	void addDepartment(char* name);
-	void addDoctor(char* name, char* docSpecialty, Department* assigned_dep,bool isSurgeon,bool isResearcher,int num_of_surgeries);
-	void addNurse(char* name, int yearsExperience, Department* assigned_dep);
+	void addDepartment(const char* name);
+	void addDoctor(const char* name, const char* docSpecialty, Department* assigned_dep,bool isSurgeon,bool isResearcher,int num_of_surgeries);
+	void addNurse(const char* name, int yearsExperience, Department* assigned_dep);
 	void addPatient(Patient* patientToAdd);
+	void addToRI(StaffMember* mem);
 	void showDepartments() const;
 	void showPatientById(int id) const;
+	void showDocResearchers() const;
 	void showStaff() const;
 	void show() const;
 

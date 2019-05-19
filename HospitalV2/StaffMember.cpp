@@ -1,6 +1,7 @@
 #include "StaffMember.h"
 #include "department.h"
 #include "Researcher.h"
+#include <iostream>
 
 int StaffMember::counter = 1000;
 
@@ -28,16 +29,19 @@ StaffMember::StaffMember()
 	setName(0);
 	this->department = 0;
 }
+
 StaffMember::~StaffMember()
 {
-	cout << "In Staff Member d'tor..." << endl;
 	delete[] name;
+	cout << "In Staff Member d'tor..." << endl;
 }
 
 //getters and setters
 int StaffMember::getId() { return id; }
 
 char* StaffMember::getName() const { return name; }
+
+Department* StaffMember::getDepartment() const { return department; }
 
 void StaffMember::setName(const char* name)
 {
@@ -67,6 +71,22 @@ const StaffMember& StaffMember::operator=(const StaffMember& other)
 	return *this;
 }
 
+ostream& operator<<(ostream& os, const StaffMember& stf_mem)
+{
+	cout << "In operator<< (StaffMember&)" << endl;
+	os << "Id: " << stf_mem.id << ", "
+		<< "Type: " << typeid(stf_mem).name() + 6 <<
+		", Name: " << stf_mem.name;
+	if (stf_mem.department)		//researcher has no department
+	{
+		cout << ", Department: " << stf_mem.getDepartment()->getName();
+	}
+	
+	stf_mem.toOs(os);
+	return os;
+}
+
+void StaffMember::addArticle(Article* article) {}
 
 //methods
 void StaffMember::show() const

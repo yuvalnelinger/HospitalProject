@@ -8,7 +8,7 @@
 using namespace std;
 class Department;
 
-class Surgeon : public Doctor
+class Surgeon : virtual public Doctor
 {
 protected:
 	int num_of_surgeries;
@@ -21,6 +21,9 @@ public:
 	//getters and setters
 	int getNumOfSurgeries() const;
 	void addSurgery();
+
+	//operators
+	virtual void toOs(ostream& os) const override;
 
 	//methods
 	void show() const;

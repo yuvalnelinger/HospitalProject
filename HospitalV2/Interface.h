@@ -12,6 +12,9 @@ class Department;
 class Interface
 {
 public:
+
+static void mainMenu(Hospital& hospital);
+
 	//menues print
 static void printMainMenu();
 static void printAddStaffMemberMenu();
@@ -25,12 +28,15 @@ static void getNurseInfo(char** name, int* yearsExperience, Department** depart,
 static void getResearcherInfo(char** name);
 static void getArticleInfo(char** title, char** name_of_magazine, Date* p_date, int* r_index, Hospital& hospital);
 static void getVisitInfo(Patient** newPatient, Date* visitDate, char** visPurpose, Department** depToAdd, StaffMember** treatDoc, bool isNewPatient, Hospital& hospital);
+static void compareResearchers(Research_Institute& RI);
 
 	//utilities
 static char* getInput();
 static bool isValid(int check, int lower, int upper);
+static void cleanBuffer();
 
-//qq-for checking only
+
+//qq-for checking only-delete this!!
 static void updateDoc(Doctor& doc);
 
 };

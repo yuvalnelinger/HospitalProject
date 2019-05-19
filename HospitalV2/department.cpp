@@ -29,8 +29,16 @@ void Department::setName(const char* name)
 	strcpy(this->name, name);
 }
 
+//operators
+const Department& Department::operator+=(const StaffMember& mem)
+{
+	cout << "test" << endl;
+	this->addStaffMember(&mem);
+	return *this;
+}
+
 //methods
-void Department::addStaffMember(StaffMember* mem)
+void Department::addStaffMember(const StaffMember* mem)
 {
 	if (num_of_stf_mem == size_of_stf_mem) //array increment if needed
 	{
@@ -41,7 +49,7 @@ void Department::addStaffMember(StaffMember* mem)
 		delete[] staff_members;
 		staff_members = temp;
 	}
-	staff_members[num_of_stf_mem++] = mem;
+	staff_members[num_of_stf_mem++] = (StaffMember*)mem;
 }
 
 void Department::addPatient(Patient* patient)

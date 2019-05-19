@@ -2,7 +2,7 @@
 
 Research_Institute::Research_Institute() : size_of_researchers(INIT_SIZE), size_of_articles(INIT_SIZE)
 {
-	researchers = new Researcher*[size_of_researchers];
+	researchers = new StaffMember*[size_of_researchers];
 	num_of_researchers = 0;
 	articles = new Article*[size_of_articles];
 	num_of_articles = 0;
@@ -25,12 +25,14 @@ int Research_Institute::getNumOfResearchers() const { return num_of_researchers;
 
 int Research_Institute::getNumOfArticles() const { return num_of_articles; }
 
+StaffMember* Research_Institute::getResearcherByIndex(int i) { return this->researchers[i]; }
+
 void Research_Institute::addResearcher(char* name)
 {
 	if (num_of_researchers == size_of_researchers) //array increment if needed
 	{
 		size_of_researchers *= 2;
-		Researcher** temp = new Researcher*[size_of_researchers];
+		StaffMember** temp = new StaffMember*[size_of_researchers];
 		for (int i = 0; i < num_of_researchers; i++) //copy from old array to new array
 			temp[i] = researchers[i];
 		delete[] researchers;
@@ -41,7 +43,6 @@ void Research_Institute::addResearcher(char* name)
 	researchers[num_of_researchers++] = researcher; //add researcher to RI
 	cout << "Successfully added researcher to the research institute" << endl;
 }
-
 
 void Research_Institute::addArticle(Date date, char* title, char* name_of_magazine, int r_index)
 {
@@ -60,6 +61,7 @@ void Research_Institute::addArticle(Date date, char* title, char* name_of_magazi
 	articles[num_of_articles++] = article; //add article to the research institue
 	researchers[r_index]->addArticle(article); //add article to researcher
 
+	cout << "You have added the following article: " << endl;
 	article->show();
 	cout << "Article successfully added" << endl;
 }
@@ -73,7 +75,6 @@ int Research_Institute::searchResearcherByName(char* name) const
 			return i;
 		}
 	}
-
 	return -1;
 }
 
