@@ -32,7 +32,6 @@ Department* Patient::getCurrentDepartment() const
 	return curr_department;
 }
 
-
 void Patient::setName(char* name)
 {
 	delete[] this->name;

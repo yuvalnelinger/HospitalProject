@@ -113,9 +113,6 @@
     <ClCompile Include="SurgeryVisit.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="main-temp.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

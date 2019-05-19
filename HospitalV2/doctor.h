@@ -14,18 +14,11 @@ protected:
 public:
 	//c'tor and d'tor
 	Doctor(const char* name, const char* specialty, Department* depart);
-	Doctor();
-	Doctor(const Doctor& other);
 	~Doctor();
 
-	//getters and setters
-	//int getId();
-	//char* getName() const;
 	char* getSpecialty() const;
-	//void setName(char* name);
 	void setSpecialty(const char* specialty);
 	Department* getDepartment() const;
-	//void setDepartment(Department* dep);
 
 	//operators
 	const Doctor& operator=(const Doctor& other);
@@ -34,6 +27,8 @@ public:
 	//methods
 	virtual void show() const;
 
+protected:
+	Doctor(const Doctor& other); //prevent from the user making a copy of a doctor
 };
 
 #endif

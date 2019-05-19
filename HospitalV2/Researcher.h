@@ -18,12 +18,7 @@ protected:
 public:
 	//c'tor and d'tor
 	Researcher(const char* name);
-	Researcher(const Researcher& other);
 	~Researcher();
-
-	//getters and setters
-	//char* getName() const;
-	//void setName(char* name);
 
 	//operators
 	const Researcher& operator=(const Researcher& other);
@@ -35,8 +30,9 @@ public:
 	virtual void setDepartment(Department* depart) override;
 	virtual void show() const override;
 
-
-
+protected:
+	//copy c'tor
+	Researcher(const Researcher& other); //prevent from the user making a copy of a reseacher
 };
 #endif
 

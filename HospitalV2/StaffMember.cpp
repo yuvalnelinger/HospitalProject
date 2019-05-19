@@ -7,7 +7,6 @@ int StaffMember::counter = 1000;
 
 StaffMember::StaffMember(const char* name, Department* deparement) : name(nullptr)
 {
-	cout << "In Staff Member c'tor..." << endl;
 	this->id = counter++;
 	setName(name);
 	this->department = deparement;
@@ -15,7 +14,6 @@ StaffMember::StaffMember(const char* name, Department* deparement) : name(nullpt
 
 StaffMember::StaffMember(const StaffMember& other)
 {
-	cout << "In StaffMember copy \n";
 	*this = other;
 }
 
@@ -29,7 +27,6 @@ StaffMember::StaffMember()
 StaffMember::~StaffMember()
 {
 	delete[] name;
-	cout << "In Staff Member d'tor..." << endl;
 }
 
 //getters and setters
@@ -52,7 +49,6 @@ void StaffMember::setName(const char* name)
 //operators
 const StaffMember& StaffMember::operator=(const StaffMember& other)
 {
-	cout << "StaffMember::In operator=" << endl;
 	if (this != &other)
 	{
 		id = other.id;
@@ -68,8 +64,7 @@ const StaffMember& StaffMember::operator=(const StaffMember& other)
 
 ostream& operator<<(ostream& os, const StaffMember& stf_mem)
 {
-	cout << "In operator<< (StaffMember&)" << endl;
-	os << "Id: " << stf_mem.id << ", "
+	os << "ID: " << stf_mem.id << ", "
 		<< "Type: " << typeid(stf_mem).name() + 6 <<
 		", Name: " << stf_mem.name;
 	if (stf_mem.department)		//researcher has no department
@@ -81,12 +76,11 @@ ostream& operator<<(ostream& os, const StaffMember& stf_mem)
 	return os;
 }
 
-void StaffMember::addArticle(Article* article) {}
+void StaffMember::addArticle(Article* article) {} //method of an abstract class can not be reached
 
 //methods
 void StaffMember::show() const
 {
-
 	cout << "Id: " << id << ", "
 		<< "Name: " << name;
 

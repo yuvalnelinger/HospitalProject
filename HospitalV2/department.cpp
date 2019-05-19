@@ -32,7 +32,6 @@ void Department::setName(const char* name)
 //operators
 const Department& Department::operator+=(const StaffMember& mem)
 {
-	cout << "test" << endl;
 	this->addStaffMember(&mem);
 	return *this;
 }
@@ -91,7 +90,7 @@ void Department::showStaff() const
 	else
 	{
 		for (int i = 0; i < num_of_stf_mem; i++)
-			cout << this->staff_members[i]->getName() << " , ID " << this->staff_members[i]->getId() << endl;
+			cout << this->staff_members[i]->getName() << ", ID " << this->staff_members[i]->getId() << endl;
 	}
 
 }

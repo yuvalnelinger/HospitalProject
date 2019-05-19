@@ -1,11 +1,9 @@
 #include "SurgeonResearcher.h"
 
-
-//SurgeonResearcher::SurgeonResearcher(const Surgeon& surgeon, const Researcher& researcher) : StaffMember(surgeon.getName(),surgeon.getDepartment()),
-	//																						 Surgeon(surgeon), Researcher(researcher) {}
-
+//c'tor
 SurgeonResearcher::SurgeonResearcher(const Surgeon& surgeon, const Researcher& researcher) : StaffMember(surgeon), Doctor(surgeon),Surgeon(surgeon), Researcher(researcher) {}
 
+//operators
 void SurgeonResearcher::toOs(ostream& os) const
 {
 	os << ", Specialty: " << specialty
@@ -14,6 +12,7 @@ void SurgeonResearcher::toOs(ostream& os) const
 		<< endl;
 }
 
+//methods
 void SurgeonResearcher::show() const
 {
 	Surgeon::show();

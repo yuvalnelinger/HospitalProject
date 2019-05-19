@@ -44,7 +44,6 @@
     <ClCompile Include="DoctorResearcher.cpp" />
     <ClCompile Include="hospital.cpp" />
     <ClCompile Include="Interface.cpp" />
-    <ClCompile Include="main-temp.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Nurse.cpp" />
     <ClCompile Include="patient.cpp" />

@@ -33,11 +33,6 @@ static void compareResearchers(Research_Institute& RI);
 	//utilities
 static char* getInput();
 static bool isValid(int check, int lower, int upper);
-static void cleanBuffer();
-
-
-//qq-for checking only-delete this!!
-static void updateDoc(Doctor& doc);
 
 };
 #endif

@@ -20,10 +20,7 @@ public:
 	~Nurse();
 
 	//getters and setters
-//	int getId();
-//	char* getName() const;
 	int getYearsOfExperience() const;
-//	void setName(char* name);
 	void setYearsOfExperience(int years);
 	virtual void setDepartment(Department* depart);
 

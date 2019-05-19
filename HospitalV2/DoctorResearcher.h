@@ -15,13 +15,15 @@ class DoctorResearcher : public Doctor, public Researcher
 public:
 	//c'tor and d'tor
 	DoctorResearcher(const Doctor& doc, const Researcher& researcher);
-	//DoctorResearcher(const DoctorResearcher& other);
 
 	//operators
 	virtual void toOs(ostream& os) const override;
 
 	//methods
 	void show() const;
+
+private:
+	DoctorResearcher(const DoctorResearcher& other); //prevent from the user making a copy of a doctor-researcher
 };
 
 #endif

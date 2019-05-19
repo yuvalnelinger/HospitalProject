@@ -14,7 +14,7 @@ class SurgeonResearcher : public Surgeon, public Researcher
 private:
 
 public:
-	//c'tor and d'tor
+	//c'tor
 	SurgeonResearcher(const Surgeon& surgeon, const Researcher& researcher);
 
 	//operators
@@ -22,6 +22,9 @@ public:
 
 	//methods
 	void show() const;
+
+private:
+	SurgeonResearcher(const SurgeonResearcher& other); //prevent making a copy
 };
 
 #endif

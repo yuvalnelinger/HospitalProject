@@ -16,8 +16,6 @@ Visit::Visit() : visitPurpose(nullptr), treatDoc(nullptr)
 	this->dateOfArrival = Date();
 }
 
-
-
 //copy c'tor
 Visit::Visit(const Visit& other)
 {

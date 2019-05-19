@@ -2,32 +2,33 @@
 #include "StaffMember.h"
 #include "doctor.h"
 
+//c'tor
 Surgeon::Surgeon(const Doctor& base, int num_of_surgeries) : StaffMember(base.getName(), base.getDepartment()), Doctor(base), num_of_surgeries(num_of_surgeries)
-{
-	cout << "In Surgeon c'tor..." << endl;
-}
+{}
 
 Surgeon::Surgeon(const Surgeon& other) : Doctor(other)
 {
-	cout << "In Surgeon copy..." << endl;
 	this->num_of_surgeries = other.num_of_surgeries;
 }
 
-void Surgeon::addSurgery()
-{
-	this->num_of_surgeries++;
-}
-
+//getters
 int Surgeon::getNumOfSurgeries() const
 {
 	return this->num_of_surgeries;
 }
 
+//operators
 void Surgeon::toOs(ostream& os) const
 {
-	Doctor::toOs(os);
-	os << ", Number of surgeries: " << num_of_surgeries
+	os << ", Specialty: " << specialty
+		<<", Number of surgeries: " << num_of_surgeries
 		<< endl;
+}
+
+//methods
+void Surgeon::addSurgery()
+{
+	this->num_of_surgeries++;
 }
 
 void Surgeon::show() const

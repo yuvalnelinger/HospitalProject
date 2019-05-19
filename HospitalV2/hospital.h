@@ -8,7 +8,6 @@
 #define _CRT_SECURE_NO_WARNINGS
 
 #include <iostream>
-using namespace std;
 #include "department.h"
 #include "StaffMember.h"
 #include "Nurse.h"   
@@ -18,6 +17,7 @@ using namespace std;
 #include "Surgeon.h"
 #include "SurgeonResearcher.h"
 #include "DoctorResearcher.h"
+using namespace std;
 
 
 class Hospital

@@ -1,9 +1,5 @@
 #include "Date.h"
 
-//qq- c'tor only for checks!
-Date::Date(int day, int month, int year) : day(day), month(month), year(year)
-{}
-
 //getters
 int Date::getDay() { return day; }
 int Date::getMonth() { return month; }
@@ -12,9 +8,9 @@ int Date::getYear() { return year; }
 //setters
 bool Date::setDay(int d)
 {
-	if (d < 1 || d > 31)
+	if (d < FIRST_DAY_IN_MONTH || d > MAX_DAY_IN_MONTH)
 	{
-		cout << "Day has to be between 1-31. please set day again" << endl;
+		cout << "Day has to be between " << FIRST_DAY_IN_MONTH << "-" << MAX_DAY_IN_MONTH <<". " << "please set day again" << endl;
 		return false;
 	}
 	else
@@ -26,9 +22,9 @@ bool Date::setDay(int d)
 
 bool Date::setMonth(int m)
 {
-	if (m < 1 || m > 12)
+	if (m < FIRST_MONTH || m > MAX_MONTH)
 	{
-		cout << "Month has to be between 1-12. please set month again" << endl;
+		cout << "Month has to be between " << FIRST_MONTH << "-" << MAX_MONTH << ". " << "please set month again" << endl;
 		return false;
 	}
 	else
@@ -40,9 +36,9 @@ bool Date::setMonth(int m)
 
 bool Date::setYear(int y)
 {
-	if (y < 1900 || y > 2019)
+	if (y < MIN_YEAR || y > MAX_YEAR)
 	{
-		cout << "Year has to be between 1900-2019. please set year again" << endl;
+		cout << "Year has to be between " << MIN_YEAR << "-" << MAX_YEAR << ". " << "please set year again" << endl;
 		return false;
 	}
 	else

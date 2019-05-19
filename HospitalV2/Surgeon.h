@@ -14,11 +14,10 @@ protected:
 	int num_of_surgeries;
 
 public:
-	//c'tor and d'tor
+	//c'tor
 	Surgeon(const Doctor& base, int num_of_surgeries);
-	Surgeon(const Surgeon& other);
 
-	//getters and setters
+	//getters
 	int getNumOfSurgeries() const;
 	void addSurgery();
 
@@ -27,6 +26,9 @@ public:
 
 	//methods
 	void show() const;
+
+protected:
+	Surgeon(const Surgeon& other); //prevent from the user making a copy of a surgeon
 };
 
 #endif

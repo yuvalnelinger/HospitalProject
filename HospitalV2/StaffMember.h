@@ -17,7 +17,6 @@ protected:
 	Department* department;
 	static int counter;
 
-
 public:
 	//c'tor and d'tor
 	StaffMember(const char* name, Department* department);
@@ -40,7 +39,6 @@ public:
 	virtual void addArticle(Article* article);
 	virtual void setDepartment(Department* depart) { department = depart; }
 	virtual void show() const =0;
-
 };
 
 #endif

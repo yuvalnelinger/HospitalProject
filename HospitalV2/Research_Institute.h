@@ -20,7 +20,10 @@ private:
 	int num_of_articles;
 
 public:
-	friend class Hospital;
+
+	friend class Hospital; //The Researcher institue is associated with the hospital and has to have access to
+						   //doctors that are also researchers.
+
 	//c'tor and d'tor
 	Research_Institute();
 	~Research_Institute();
@@ -37,6 +40,7 @@ public:
 	void showResearchers() const;
 
 private:
+	//copy c'tor
 	Research_Institute(const Research_Institute&); //prevent from user to make a copy of the RI
 };
 

@@ -1,6 +1,5 @@
 #include "Interface.h"
 
-
 void Interface::mainMenu(Hospital& hospital)
 {
 	int proceed;
@@ -152,7 +151,7 @@ void Interface::mainMenu(Hospital& hospital)
 					}
 					else
 					{
-						cout << "Patient with ID " << patID << " is " << patientToShow->getName() << " and his current department is " << patientToShow->getCurrentDepartment()->getName() << "." << endl;
+						cout << "Patient with ID " << patID << " is " << patientToShow->getName() << " and his/her current department is " << patientToShow->getCurrentDepartment()->getName() << "." << endl;
 						if (patientToShow->getLastVisitType())
 						{
 							cout << "The patient's last visit was for surgery, in room " << ((SurgeryVisit*)(patientToShow->getLastVisit()))->getRoomNum();
@@ -378,11 +377,12 @@ void Interface::getResearcherInfo(char** name)
 {
 	cout << "Please enter name:" << endl;
 	*name = getInput();
-
 }
 
 void Interface::getArticleInfo(char** title, char** name_of_magazine, Date* p_date, int* r_index, Hospital& hospital)
 {
+	cout << "This is the list of researchers:" << endl;
+	hospital.getResearchInstitute().showResearchers();
 	char* search_name = new char[MAX_NAME];
 	cout << "To whom you would like to add the article? please type name:" << endl;
 	search_name = getInput();
@@ -557,7 +557,7 @@ void Interface::getVisitInfo(Patient** newPatient, Date* visitDate, char** visPu
 	int idToCheck;
 	cout << "This is the list of doctors and nurses you can choose from:" << endl;
 	(*depToAdd)->showStaff();
-	   
+	
 	cout << "Enter the staff member ID: " << endl;
 	cin >> idToCheck;
 	*treatDoc = hospital.getStaffMemberByID(idToCheck);
@@ -652,19 +652,3 @@ bool Interface::isValid(int check, int lower, int upper)
 {
 	return (lower <= check) && (check <= upper);
 }
-
-void Interface::cleanBuffer()
-{
-	int c = getchar();
-
-	while (c != EOF && c != '\n')
-		c = getchar();
-
-}
-
-////qq-for checking only
-//void Interface::updateDoc(Doctor& doc)
-//{
-//	doc.setName("Sharon");
-//
-//}
