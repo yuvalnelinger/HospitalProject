@@ -1,23 +1,17 @@
 #include "doctor.h"
 
 //c'tor and d'tor
-Doctor::Doctor(const char* name, const char* specialty, Department* depart) : StaffMember(name, depart), specialty(NULL)
+Doctor::Doctor(const char* name, const char* specialty, Department* depart) : StaffMember(name, depart)
 {
-	cout << "test5" << endl;
 	cout << "In Doctor c'tor..." << endl;
-	cout << "test6" << endl;
 	setSpecialty(specialty);
-	cout << "test7" << endl;
 
 }
 
-//why we need default??? - (Yuval) we don't, it was added to solve compilation error, we will remove once we have something working :)
-//(Sharon) ahla! :)
 Doctor::Doctor() : StaffMember(name, nullptr)
 {
 	cout << "In Doctor default c'tor..." << endl;
-	setSpecialty(0);
-	this->department = 0;
+	setSpecialty(this->specialty);
 }
 
 Doctor::Doctor(const Doctor& other) : StaffMember(other)
@@ -52,9 +46,16 @@ void Doctor::setSpecialty(const char* specialty)
 	{
 		delete[] this->specialty;
 	}
-
-	this->specialty = new char[strlen(specialty) + 1];
-	strcpy(this->specialty, specialty);
+	if (specialty==0)
+	{
+		this->specialty = 0;
+	}
+	else
+	{
+		this->specialty = new char[strlen(specialty) + 1];
+		strcpy(this->specialty, specialty);
+	}
+	
 }
 
 /*void Doctor::setDepartment(Department* dep)

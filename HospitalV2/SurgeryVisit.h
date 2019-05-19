@@ -23,8 +23,11 @@ public:
 	//copy c'tor
 	SurgeryVisit(const SurgeryVisit& other);
 
-	//setters and getters
+	~SurgeryVisit();
 
+	//setters and getters
+	int getRoomNum();
+	bool getIsFast();
 };
 
 #endif

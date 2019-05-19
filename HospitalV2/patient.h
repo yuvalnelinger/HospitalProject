@@ -9,6 +9,8 @@ using namespace std;
 #include "StaffMember.h"
 #include "doctor.h"
 #include "Nurse.h"
+#include "SurgeryVisit.h"
+#include "TestsVisit.h"
 
 class Department;
 
@@ -34,7 +36,9 @@ public:
 
 	//methods
 	void show() const;
-	void addVisit(Patient* patient, Date visitDate, char*visPurpose, StaffMember* treatDoc);
+	void addVisit(Patient* patient, Date visitDate ,StaffMember* treatDoc,char* purpose,bool* isFast, int roomNum, bool* isSurgery);
+	bool getLastVisitType();
+	Visit* getLastVisit();
 
 private:
 	int id;

@@ -17,11 +17,12 @@ private:
 	Date dateOfArrival;
 	Patient* patient;
 	char* visitPurpose;
+	bool isSurgery;
 	StaffMember* treatDoc;
 
 public:
 	//c'tor
-	Visit(Patient* patient, Date date, char* purpose, StaffMember* doc);
+	Visit(Patient* patient, Date date, char* purpose, bool isSurgery,StaffMember* doc);
 	Visit();
 
 	//copy c'tor
@@ -30,6 +31,7 @@ public:
 	//setters and getters
 	char* getVisitPurpose() const;
 	void setVisitPurpose(const char* purpose);
+	bool getVisitType() const;
 };
 
 #endif

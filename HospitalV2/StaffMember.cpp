@@ -8,13 +8,9 @@ int StaffMember::counter = 1000;
 StaffMember::StaffMember(const char* name, Department* deparement) : name(nullptr)
 {
 	cout << "In Staff Member c'tor..." << endl;
-	cout << "test1" << endl;
 	this->id = counter++;
-	cout << "test2" << endl;
 	setName(name);
-	cout << "test3" << endl;
 	this->department = deparement;
-	cout << "test4" << endl;
 }
 
 StaffMember::StaffMember(const StaffMember& other)
@@ -45,7 +41,6 @@ Department* StaffMember::getDepartment() const { return department; }
 
 void StaffMember::setName(const char* name)
 {
-	cout << "setting name" << endl;
 	if (this->name)
 	{
 		delete[] this->name;

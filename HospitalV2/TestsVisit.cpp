@@ -1,3 +1,4 @@
+/*
 #include "TestsVisit.h"
 
 //c'tor
@@ -8,3 +9,4 @@ TestsVisit::TestsVisit(Patient* patient, Date date, char* purpose, StaffMember* 
 
 
 //setters and getters
+*/

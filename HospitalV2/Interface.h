@@ -27,7 +27,7 @@ static void getDoctorInfo(char** name, char** specialty, Department** depart, Ho
 static void getNurseInfo(char** name, int* yearsExperience, Department** depart, Hospital& hospital);
 static void getResearcherInfo(char** name);
 static void getArticleInfo(char** title, char** name_of_magazine, Date* p_date, int* r_index, Hospital& hospital);
-static void getVisitInfo(Patient** newPatient, Date* visitDate, char** visPurpose, Department** depToAdd, StaffMember** treatDoc, bool isNewPatient, Hospital& hospital);
+static void getVisitInfo(Patient** newPatient, Date* visitDate, char** visPurpose, Department** depToAdd, StaffMember** treatDoc, bool isNewPatient, bool* isFast, int* roomm,bool* isSurgery,Hospital& hospital);
 static void compareResearchers(Research_Institute& RI);
 
 	//utilities

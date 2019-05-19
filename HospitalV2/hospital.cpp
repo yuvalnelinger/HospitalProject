@@ -23,7 +23,12 @@ Hospital::~Hospital()
 	delete[]departments;
 
 	for (i = 0; i < num_of_stf_mem; i++)
-		delete staff_members[i];
+	{
+		StaffMember* temp1 = dynamic_cast<DoctorResearcher*>(staff_members[i]);
+		StaffMember* temp2 = dynamic_cast<SurgeonResearcher*>(staff_members[i]);
+		if (temp1 && temp2)
+			delete staff_members[i];
+	}
 	delete[]staff_members;
 
 	for (i = 0; i < num_of_patients; i++)
@@ -140,7 +145,7 @@ void Hospital::addDoctor(const char* name, const char* docSpecialty, Department*
 		//assigned_dep->addStaffMember(surgeResearch);   //add to deparement
 		*assigned_dep += *surgeResearch;	//add to deparement
 		addToRI(surgeResearch); //add to Research Institute
-		//surgeresearch->setDepartment(assigned_dep);  // ***department set already in StaffMember c'tor...***
+		//surgeResearch->setDepartment(assigned_dep);  // ***department set already in StaffMember c'tor...***
 		delete surge;
 	}
 	else if (!isSurgeon && isResearcher)

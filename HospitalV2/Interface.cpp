@@ -3,7 +3,7 @@
 
 void Interface::mainMenu(Hospital& hospital)
 {
-	bool proceed = true;
+	int proceed;
 	int selection;
 	do {
 		cout << "Welcome to " << hospital.getName() << " hospital!" << endl;
@@ -97,15 +97,18 @@ void Interface::mainMenu(Hospital& hospital)
 				case 1: //add a new visit
 				{
 					invalid = false;
-					bool isNewPatient = 0;
+					bool isNewPatient = false;
+					bool isSurgery=false;
+					bool isFast = false;
+					int room;
 					Patient* newPatient = nullptr;
 					Date visitDate;
 					char* visPurpose = new char[MAX_NAME];
 					Department* depToAdd;
 					StaffMember* treatDoc = nullptr;
 
-					Interface::getVisitInfo(&newPatient, &visitDate, &visPurpose, &depToAdd, &treatDoc, isNewPatient, hospital);
-					newPatient->addVisit(newPatient, visitDate, visPurpose, treatDoc);  //add new visit to patient
+					Interface::getVisitInfo(&newPatient, &visitDate, &visPurpose, &depToAdd, &treatDoc, isNewPatient, &isFast, &room,&isSurgery, hospital);
+					newPatient->addVisit(newPatient, visitDate, treatDoc,visPurpose,&isFast,room,&isSurgery);  //add new visit to patient
 					depToAdd->addPatient(newPatient); //add patient to current department (of visit)
 
 					if (isNewPatient = true) //add patient to hospital only if he is new patient
@@ -149,7 +152,23 @@ void Interface::mainMenu(Hospital& hospital)
 					}
 					else
 					{
-						cout << "Patient with ID " << patID << "is " << patientToShow->getName() << "and his current department is " << patientToShow->getCurrentDepartment()->getName() << endl;
+						cout << "Patient with ID " << patID << " is " << patientToShow->getName() << " and his current department is " << patientToShow->getCurrentDepartment()->getName() << "." << endl;
+						if (patientToShow->getLastVisitType())
+						{
+							cout << "The patient's last visit was for surgery, in room " << ((SurgeryVisit*)(patientToShow->getLastVisit()))->getRoomNum();
+							if (((SurgeryVisit*)(patientToShow->getLastVisit()))->getIsFast())
+							{
+								cout << " and was in fast." << endl;
+							}
+							else
+							{
+								cout << " and wasn't in fast." << endl;
+							}
+						}
+						else
+						{
+							cout << "The patient's last visit was for tests." << endl;
+						}
 					}
 					break;
 				}
@@ -241,8 +260,13 @@ void Interface::mainMenu(Hospital& hospital)
 		}
 
 		cout << "Would you like to perform another action?\n"
-			<< "Press any key for YES or 0 for NO" << endl;
+			<< "Press 1 for YES or 0 for NO" << endl;
 		cin >> proceed;
+		while(proceed != 0 && proceed != 1)
+		{
+			cout << "Invalid choice. Press 1 for YES or 0 for NO" << endl;
+			cin >> proceed;
+		} 
 
 	} while (proceed);
 
@@ -312,7 +336,8 @@ void Interface::getDoctorInfo(char** name, char** specialty, Department** depart
 	while (!isValid(depIndex-1, 0, hospital.getNumOfDepartments()-1))
 	{
 		cout << "Invalid input. Please enter a valid department ID" << endl;
-		cin >> depIndex;
+		cin.ignore();
+		cin >>depIndex;
 	}
 
 	*depart = hospital.getDepartmentByIndex(depIndex-1);
@@ -408,7 +433,7 @@ void Interface::getArticleInfo(char** title, char** name_of_magazine, Date* p_da
 	delete[] search_name;
 }
 
-void Interface::getVisitInfo(Patient** newPatient, Date* visitDate, char** visPurpose, Department** depToAdd, StaffMember** treatDoc, bool isNewPatient, Hospital& hospital)
+void Interface::getVisitInfo(Patient** newPatient, Date* visitDate, char** visPurpose, Department** depToAdd, StaffMember** treatDoc, bool isNewPatient, bool* isFast, int* room, bool* isSurgery,Hospital& hospital)
 {
 	int patientID;
 	char* nameToAdd = new char[MAX_NAME];
@@ -510,9 +535,25 @@ void Interface::getVisitInfo(Patient** newPatient, Date* visitDate, char** visPu
 
 	} while (res != true);
 
-	cout << "Enter the visit purpose: " << endl;
-	*visPurpose = getInput();
+	int visPurp=0;
+	cout << "What is the visit type? for surgery press 2, for tests press 1: " << endl;
+	cin >> visPurp;
+	while (visPurp != 1 && visPurp != 2)
+	{
+		cout << "Invalid selection. Please press 1 for tests visit, 2 for surgery visit" << endl;
+		cin >> visPurp;
+	}
 
+	if (visPurp == 2)
+	{
+		*isSurgery = true;
+		cout << "Is the patient in fast? press 1 if YES, 0 if NO" << endl;
+		cin >> *isFast;
+		cout << "What is the room number of the surgery?" << endl;
+		cin >> *room;
+	}
+	cout << "What is the visit purpose?" << endl;
+	*visPurpose = getInput();
 	int idToCheck;
 	cout << "This is the list of doctors and nurses you can choose from:" << endl;
 	(*depToAdd)->showStaff();

@@ -34,7 +34,6 @@
     <ClInclude Include="Surgeon.h" />
     <ClInclude Include="SurgeonResearcher.h" />
     <ClInclude Include="SurgeryVisit.h" />
-    <ClInclude Include="TestsVisit.h" />
     <ClInclude Include="visit.h" />
   </ItemGroup>
   <ItemGroup>
@@ -55,7 +54,6 @@
     <ClCompile Include="Surgeon.cpp" />
     <ClCompile Include="SurgeonResearcher.cpp" />
     <ClCompile Include="SurgeryVisit.cpp" />
-    <ClCompile Include="TestsVisit.cpp" />
     <ClCompile Include="visit.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
