@@ -12,12 +12,12 @@ using namespace std;
 class Research_Institute
 {
 private:
-	StaffMember** researchers;
-	int size_of_researchers;
-	int num_of_researchers;
-	Article** articles;
-	int size_of_articles;
-	int num_of_articles;
+	vector<StaffMember*> researchers;
+	//int size_of_researchers;
+	//int num_of_researchers;
+	vector<Article*> articles;
+	//int size_of_articles;
+	//int num_of_articles;
 
 public:
 

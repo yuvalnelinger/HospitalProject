@@ -2,18 +2,19 @@
 #define __Researcher_H
 
 #define _CRT_SECURE_NO_WARNINGS
+#define INIT_SIZE 50
 #include <iostream>
 #include "StaffMember.h"
+#include <vector>
 using namespace std;
 class Article;
-#define INIT_SIZE 50
 
 class Researcher : virtual public StaffMember
 {
 protected:
-	Article** articles;
-	int size_of_articles;
-	int num_of_articles;
+	vector<Article*> articles;
+	//int size_of_articles;
+	//int num_of_articles;
 
 public:
 	//c'tor and d'tor

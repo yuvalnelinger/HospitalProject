@@ -6,6 +6,7 @@
 #include "doctor.h"
 #include "Nurse.h"
 #include "patient.h"
+#include <vector>
 #include <iostream>
 using namespace std;
 
@@ -13,12 +14,12 @@ class Department
 {
 private:
 	char* name;
-	StaffMember** staff_members;
-	int size_of_stf_mem;
-	int num_of_stf_mem;
-	Patient** patients;
-	int size_of_patients;
-	int num_of_patients;
+	vector<StaffMember*> staff_members;
+	//int size_of_stf_mem;
+	//int num_of_stf_mem;
+	vector<Patient*> patients;
+	//int size_of_patients;
+	//int num_of_patients;
 
 public:
 	//c'tor and d'tor
@@ -31,11 +32,11 @@ public:
 	void setName(const char* name);
 
 	//operators
-	const Department& operator+=(const StaffMember& mem);
+	const Department& operator+=(const StaffMember* mem);
 
 	//methods
 	void addStaffMember(const StaffMember* mem);
-	void addPatient(Patient* patient);
+	void addPatient(const Patient* patient);
 	void showPatients() const;
 	void showStaff() const;
 

@@ -17,6 +17,7 @@
 #include "Surgeon.h"
 #include "SurgeonResearcher.h"
 #include "DoctorResearcher.h"
+#include <vector>
 using namespace std;
 
 
@@ -24,16 +25,10 @@ class Hospital
 {
 private:
 	char* name;
-	Department** departments;
-	int size_of_departments;
-	int num_of_departments;
+	vector <Department*> departments;
 	Research_Institute RI;
-	StaffMember** staff_members;
-	int size_of_stf_mem;
-	int num_of_stf_mem;
-	Patient** patients;
-	int size_of_patients;
-	int num_of_patients;
+	vector <StaffMember*> staff_members;
+	vector <Patient*> patients;
 
 public:
 	//c'tor and d'tor

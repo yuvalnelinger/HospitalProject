@@ -8,7 +8,7 @@ void SurgeonResearcher::toOs(ostream& os) const
 {
 	os << ", Specialty: " << specialty
 		<< ", Number of surgeries: " << num_of_surgeries
-		<< ", Number of articles: " << num_of_articles
+		<< ", Number of articles: " << articles.size()
 		<< endl;
 }
 

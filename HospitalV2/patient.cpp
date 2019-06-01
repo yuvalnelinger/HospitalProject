@@ -1,21 +1,21 @@
 #include "patient.h"
 
-Patient::Patient(char* name, int id, int year, int gender) : name(nullptr), curr_department(nullptr), size_of_visitations(INIT_SIZE)
+Patient::Patient(char* name, int id, int year, int gender) : name(nullptr), curr_department(nullptr)
 {
 	this->id = id;
 	setName(name);
 	this->yearOfBirth = year;
 	this->gender = gender;
-	arr_of_visitations = new Visit*[size_of_visitations];
-	num_of_visitations = 0;
+	//arr_of_visitations = new Visit*[size_of_visitations];
+	//num_of_visitations = 0;
 }
 
 Patient::~Patient()
 {
 	delete[]name;
 
-	for (int i = 0; i < num_of_visitations; i++)
-		delete arr_of_visitations[i];
+	for (int i = 0; i < visitations.size(); i++)
+		delete visitations[i];
 }
 
 //getters and setters
@@ -63,15 +63,15 @@ void Patient::show() const
 
 void Patient::addVisit(Patient* patient, Date visitDate, StaffMember* treatDoc,char* purpose, bool* isFast, int roomNum,bool* isSurgery)
 {
-	if (num_of_visitations == size_of_visitations) //array increment if needed
-	{
-		size_of_visitations *= 2;
-		Visit** temp = new Visit*[size_of_visitations];
-		for (int i = 0; i < num_of_visitations; i++) //copy from old array to new array
-			temp[i] = arr_of_visitations[i];
-		delete[] arr_of_visitations;
-		arr_of_visitations = temp;
-	}
+	//if (num_of_visitations == size_of_visitations) //array increment if needed
+	//{
+	//	size_of_visitations *= 2;
+	//	Visit** temp = new Visit*[size_of_visitations];
+	//	for (int i = 0; i < num_of_visitations; i++) //copy from old array to new array
+	//		temp[i] = visitations[i];
+	//	delete[] visitations;
+	//	visitations = temp;
+	//}
 	Visit* newVis;
 	
 	if (*isSurgery)
@@ -82,16 +82,17 @@ void Patient::addVisit(Patient* patient, Date visitDate, StaffMember* treatDoc,c
 	{
 		newVis = new Visit(patient,visitDate,purpose,false,treatDoc);
 	}
-	this->arr_of_visitations[num_of_visitations++] = newVis; //add new visit to this patient
+	//this->visitations[num_of_visitations++] = newVis; 
+	visitations.push_back(newVis); //add new visit to this patient
 }
 
 bool Patient::getLastVisitType()
 {
-	return this->arr_of_visitations[num_of_visitations-1]->getVisitType();
+	return this->visitations[visitations.size()-1]->getVisitType();
 }
 
 Visit* Patient::getLastVisit()
 {
-	return this->arr_of_visitations[num_of_visitations-1];
+	return this->visitations[visitations.size()-1];
 }
 

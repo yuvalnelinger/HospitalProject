@@ -7,7 +7,7 @@ DoctorResearcher::DoctorResearcher(const Doctor& doc, const Researcher& research
 void DoctorResearcher::toOs(ostream& os) const
 {
 	os << ", Specialty: " << specialty 
-		<< ", Number of articles: " << num_of_articles
+		<< ", Number of articles: " << articles.size()
 		<< endl;
 }
 

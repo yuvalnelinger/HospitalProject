@@ -4,13 +4,14 @@
 #define _CRT_SECURE_NO_WARNINGS
 #define INIT_SIZE 50
 #include <iostream>
-using namespace std;
 #include "visit.h"
 #include "StaffMember.h"
 #include "doctor.h"
 #include "Nurse.h"
 #include "SurgeryVisit.h"
 #include "TestsVisit.h"
+#include <vector>
+using namespace std;
 
 class Department;
 
@@ -46,9 +47,9 @@ private:
 	int yearOfBirth;
 	int gender;
 	Department* curr_department;
-	Visit** arr_of_visitations;
-	int size_of_visitations;
-	int num_of_visitations;
+	vector<Visit*> visitations;
+	//int size_of_visitations;
+	//int num_of_visitations;
 
 private:
 	//copy c'tor

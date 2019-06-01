@@ -15,53 +15,53 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Researcher.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="visit.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="patient.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Research_Institute.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="doctor.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="Article.h">
-      <Filter>Source Files</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Date.h">
-      <Filter>Source Files</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="department.h">
-      <Filter>Source Files</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="hospital.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Nurse.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Interface.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="StaffMember.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Surgeon.h">
-      <Filter>Source Files</Filter>
+    <ClInclude Include="doctor.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="DoctorResearcher.h">
-      <Filter>Source Files</Filter>
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hospital.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Interface.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Nurse.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="patient.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Research_Institute.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Researcher.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StaffMember.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Surgeon.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SurgeonResearcher.h">
-      <Filter>Source Files</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SurgeryVisit.h">
-      <Filter>Source Files</Filter>
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="visit.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
