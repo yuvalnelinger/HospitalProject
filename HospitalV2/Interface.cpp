@@ -1,4 +1,5 @@
 #include "Interface.h"
+#include <iostream>
 
 void Interface::mainMenu(Hospital& hospital)
 {
@@ -261,6 +262,12 @@ void Interface::mainMenu(Hospital& hospital)
 		cout << "Would you like to perform another action?\n"
 			<< "Press 1 for YES or 0 for NO" << endl;
 		cin >> proceed;
+
+		if (proceed == 0)
+		{
+			saveHospitalToFiles(hospital);
+		}
+
 		while(proceed != 0 && proceed != 1)
 		{
 			cout << "Invalid choice. Press 1 for YES or 0 for NO" << endl;
@@ -651,4 +658,35 @@ char* Interface::getInput()
 bool Interface::isValid(int check, int lower, int upper)
 {
 	return (lower <= check) && (check <= upper);
+}
+
+
+void Interface::saveHospitalToFiles(Hospital& hospital)
+{
+	//saves all hospital data to file: hospitalSave.txt
+
+	//open file for writing
+	ofstream outFile("hospital_save.txt", ios::trunc);
+	
+	outFile << hospital.getName() << endl;
+	saveDepartments(hospital.departments, hospital.departments.size(), outFile);
+	//saveRI(hospital.getResearchInstitute(), outFile); //qq
+	//saveStaffMembers(hospital.staff_members, hospital.staff_members.size(), outFile;
+	//savePatients(hospital.patients, hospital.patients.size(), outFile);
+
+	outFile.close();
+}
+
+
+void Interface::saveDepartments(vector<Department*>& v, int size, ofstream& outFile)
+{
+	outFile << size << " ";  //save number of departments
+
+	vector<Department*>::iterator itr = v.begin();
+	vector<Department*>::iterator itrEnd = v.end();
+
+	for ( ; itr!=itrEnd; ++itr)
+	{
+		outFile << *itr;
+	}
 }
