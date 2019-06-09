@@ -37,9 +37,9 @@ char* Hospital::getName() const { return name; }
 
 Department* Hospital::getDepartmentByIndex(int num) const throw (const char*)
 { 
-	if (num < 0 || num > departments.size())
+	if (num < 0 || num > departments.size()-1)
 	{
-		throw "Invalid Index!";
+		throw "Invalid Index! Please try again";
 	}
 	return departments[num]; 
 }

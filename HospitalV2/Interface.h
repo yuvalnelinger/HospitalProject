@@ -35,11 +35,9 @@ static void compareResearchers(Research_Institute& RI);
 static char* getInput();
 static void isValid(int check, int lower, int upper) throw (const char*);
 
-	//files methods
+//files methods
 static void saveHospitalToFiles(Hospital& hospital);
 static void saveDepartments(vector<Department*>& vector, int size, ofstream& outFile);
-
-
 
 };
 #endif
