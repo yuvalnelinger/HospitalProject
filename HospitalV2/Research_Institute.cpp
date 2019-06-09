@@ -69,7 +69,7 @@ void Research_Institute::addArticle(Date date, char* title, char* name_of_magazi
 	cout << "Article successfully added" << endl;
 }
 
-int Research_Institute::searchResearcherByName(char* name) const
+int Research_Institute::searchResearcherByName(char* name) const throw (const char*)
 {
 	for (int i = 0; i < researchers.size(); i++)
 	{
@@ -78,7 +78,9 @@ int Research_Institute::searchResearcherByName(char* name) const
 			return i;
 		}
 	}
-	return -1;
+	
+	throw "Researcher not found, please try again";
+
 }
 
 void Research_Institute::showResearchers() const

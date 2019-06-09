@@ -25,9 +25,9 @@ public:
 	int getYear();
 
 	//setters
-	bool setDay(int d);
-	bool setMonth(int m);
-	bool setYear(int y);
+	void setDay(int d) throw (const char*);
+	void setMonth(int m) throw (const char*);
+	void setYear(int y) throw (const char*);
 
 	//methods
 	void show();

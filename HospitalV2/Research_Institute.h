@@ -36,7 +36,7 @@ public:
 	//methods
 	void addResearcher(char* name); //adds researcher ptr to the array
 	void addArticle(Date date, char* title, char* name_of_magazine, int r_index);
-	int searchResearcherByName(char* name) const;
+	int searchResearcherByName(char* name) const throw (const char*);
 	void showResearchers() const;
 
 private:

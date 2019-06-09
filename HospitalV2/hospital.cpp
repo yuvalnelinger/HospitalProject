@@ -35,10 +35,23 @@ Hospital::~Hospital()
 //getters and setters
 char* Hospital::getName() const { return name; }
 
-Department* Hospital::getDepartmentByIndex(int num) const { return departments[num]; }
+Department* Hospital::getDepartmentByIndex(int num) const throw (const char*)
+{ 
+	if (num < 0 || num > departments.size())
+	{
+		throw "Invalid Index!";
+	}
+	return departments[num]; 
+}
 
-Patient* Hospital::getPatientByID(int id) const
+Patient* Hospital::getPatientByID(int id) const throw (const char*)
 {
+	int numOfDigits = (int)log10((double)id) + 1;
+	if (numOfDigits != 9)
+	{
+		throw "Please enter an ID with 9 digits";
+	}
+		
 	for (int i = 0; i < patients.size(); i++)
 	{
 		if (patients[i]->getId() == id)
@@ -49,7 +62,7 @@ Patient* Hospital::getPatientByID(int id) const
 	return nullptr;
 }
 
-StaffMember* Hospital::getStaffMemberByID(int id) const
+StaffMember* Hospital::getStaffMemberByID(int id) const throw (const char*)
 {
 	for (int i = 0; i < staff_members.size(); i++)
 	{
@@ -58,7 +71,7 @@ StaffMember* Hospital::getStaffMemberByID(int id) const
 			return staff_members[i];
 		}
 	}
-	return 0;
+	throw "Staff Member not found, please try again";
 }
 
 int Hospital::getNumOfDepartments()

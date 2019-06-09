@@ -32,7 +32,7 @@ static void compareResearchers(Research_Institute& RI);
 
 	//utilities
 static char* getInput();
-static bool isValid(int check, int lower, int upper);
+static void isValid(int check, int lower, int upper) throw (const char*);
 
 };
 #endif

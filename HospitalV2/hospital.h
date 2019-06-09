@@ -37,9 +37,9 @@ public:
 
 	//getters and setters
 	char* getName() const;
-	Department* getDepartmentByIndex(int num) const;
-	Patient* getPatientByID(int id) const;
-	StaffMember* getStaffMemberByID(int id) const;
+	Department* getDepartmentByIndex(int num) const throw (const char*);  
+	Patient* getPatientByID(int id) const throw (const char*); 
+	StaffMember* getStaffMemberByID(int id) const throw (const char*); 
 	//Nurse* getNurseByID(int id) const; OLD
 	int getNumOfDepartments();
 	Research_Institute& getResearchInstitute();
