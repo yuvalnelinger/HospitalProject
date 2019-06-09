@@ -5,6 +5,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include "hospital.h"
 #include <iostream>
+#include <fstream>
 using namespace std;
 
 class Department;
@@ -33,6 +34,12 @@ static void compareResearchers(Research_Institute& RI);
 	//utilities
 static char* getInput();
 static void isValid(int check, int lower, int upper) throw (const char*);
+
+	//files methods
+static void saveHospitalToFiles(Hospital& hospital);
+static void saveDepartments(vector<Department*>& vector, int size, ofstream& outFile);
+
+
 
 };
 #endif

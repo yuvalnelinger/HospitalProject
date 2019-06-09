@@ -9,4 +9,6 @@ int main()
 	Hospital hospital("Assuta");
 
 	Interface::mainMenu(hospital);
+
+
 }

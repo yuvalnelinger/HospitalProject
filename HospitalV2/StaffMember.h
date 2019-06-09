@@ -39,6 +39,37 @@ public:
 	virtual void addArticle(Article* article);
 	virtual void setDepartment(Department* depart) { department = depart; }
 	virtual void show() const =0;
+
+	////files methods
+	//friend ostream& operator<<(ostream& out, const Department& d)
+	//{
+	//	if (typeid(out) == typeid(ofstream))
+	//	{
+	//		//save to file:
+	//		//name of department, names of assigned staff members
+	//		//and names of assigned patients
+
+	//		out << "Dep: ";
+	//		out << d.name << ",";
+
+	//		out << "Staff: ";
+	//		for (int i = 0; i < d.staff_members.size(); i++)
+	//		{
+	//			out << d.staff_members[i]->getName() << ",";
+	//		}
+
+	//		out << "Patients: ";
+	//		for (int i = 0; i < d.patients.size(); i++)
+	//		{
+	//			out << d.patients[i]->getName() << ",";
+	//		}
+	//	}
+
+	//	else //(typeid(out) == typeid(ostream))
+	//	{
+	//		//qq-to fill in print to screen
+	//	}
+	//}
 };
 
 #endif

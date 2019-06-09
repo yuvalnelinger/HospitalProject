@@ -31,6 +31,8 @@ private:
 	vector <Patient*> patients;
 
 public:
+	friend class Interface;
+
 	//c'tor and d'tor
 	Hospital(const char* name);
 	~Hospital();

@@ -1,4 +1,5 @@
 #include "Interface.h"
+#include <iostream>
 
 void Interface::mainMenu(Hospital& hospital)
 {
@@ -121,23 +122,17 @@ void Interface::mainMenu(Hospital& hospital)
 				{
 					invalid = false;
 					int select;
-					Department* depToShow=0;
+					Department* depToShow;
 					cout << "Please select a department: " << endl;
 					hospital.showDepartments();
-					bool isValidDep = false;
-					while (!isValidDep)
+					cin >> select;
+					while (!Interface::isValid(select - 1, 0, hospital.getNumOfDepartments() - 1))
 					{
+						cout << "Invalid input. Please enter a valid department ID" << endl;
 						cin >> select;
-						try
-						{
-							depToShow = hospital.getDepartmentByIndex(select - 1);
-							isValidDep = true;
-						}
-						catch (const char* msg)
-						{
-							cout << msg << endl;
-						}
 					}
+
+					depToShow = hospital.getDepartmentByIndex(select - 1);
 					cout << "These are the patients of department " << depToShow->getName() << endl;
 					depToShow->showPatients();
 					break;
@@ -267,6 +262,12 @@ void Interface::mainMenu(Hospital& hospital)
 		cout << "Would you like to perform another action?\n"
 			<< "Press 1 for YES or 0 for NO" << endl;
 		cin >> proceed;
+
+		if (proceed == 0)
+		{
+			saveHospitalToFiles(hospital);
+		}
+
 		while(proceed != 0 && proceed != 1)
 		{
 			cout << "Invalid choice. Press 1 for YES or 0 for NO" << endl;
@@ -336,21 +337,16 @@ void Interface::getDoctorInfo(char** name, char** specialty, Department** depart
 	*specialty = getInput();
 	cout << "In which department is the doctor going to work? Insert the index" << endl;
 	hospital.showDepartments();
-	bool isValidDep = false;
-	while (!isValidDep)
+	cin >> depIndex;
+
+	while (!isValid(depIndex-1, 0, hospital.getNumOfDepartments()-1))
 	{
-		cin >> depIndex;
-		try
-		{
-			*depart = hospital.getDepartmentByIndex(depIndex - 1);
-			isValidDep = true;
-		}
-		catch (const char* msg)
-		{
-			cout << msg << endl;
-		}
+		cout << "Invalid input. Please enter a valid department ID" << endl;
+		cin.ignore();
+		cin >>depIndex;
 	}
-	
+
+	*depart = hospital.getDepartmentByIndex(depIndex-1);
 	cout << "Is this doctor a surgeon? press 1 for YES, 0 for NO" << endl;
 	cin >> *isSurgeon;
 	if (*isSurgeon==1)
@@ -375,20 +371,13 @@ void Interface::getNurseInfo(char** name, int* yearsExperience, Department** dep
 	hospital.showDepartments();
 	cin >> depIndex;
 
-	bool isValidDep = false;
-	while (!isValidDep)
+	while (!isValid(depIndex-1, 0, hospital.getNumOfDepartments()-1))
 	{
+		cout << "Invalid input. Please enter a valid department ID" << endl;
 		cin >> depIndex;
-		try
-		{
-			*depart = hospital.getDepartmentByIndex(depIndex - 1);
-			isValidDep = true;
-		}
-		catch (const char* msg)
-		{
-			cout << msg << endl;
-		}
 	}
+
+	*depart = hospital.getDepartmentByIndex(depIndex-1);
 }
 
 void Interface::getResearcherInfo(char** name)
@@ -403,22 +392,16 @@ void Interface::getArticleInfo(char** title, char** name_of_magazine, Date* p_da
 	hospital.getResearchInstitute().showResearchers();
 	char* search_name = new char[MAX_NAME];
 	cout << "To whom you would like to add the article? please type name:" << endl;
-	bool nameFound = false;
+	search_name = getInput();
 
-	while (!nameFound)
+	*r_index = hospital.getResearchInstitute().searchResearcherByName(search_name);
+
+	while (*r_index == NOT_FOUND)
 	{
+		cout << "There is no researcher with this name! please try again:" << endl;
+		delete[] search_name;
 		search_name = getInput();
-		try
-		{
-			*r_index = hospital.getResearchInstitute().searchResearcherByName(search_name);
-			nameFound = true;
-		}
-		catch (const char* msg)
-		{
-			cout << msg << endl;
-			delete[] search_name;
-		}
-
+		*r_index = hospital.getResearchInstitute().searchResearcherByName(search_name);
 	}
 
 	//researcher found
@@ -426,49 +409,26 @@ void Interface::getArticleInfo(char** title, char** name_of_magazine, Date* p_da
 	cout << "What is the article's date?" << endl;
 
 	int day, month, year;
-	bool res=false;
+	bool res;
 
 	do {
 		cout << "please enter day:" << endl;
 		cin >> day;
-		try
-		{
-			p_date->setDay(day);
-			res = true;
-		}
-		catch (char const* msg)
-		{
-			cout << msg << endl;
-		}
+		res = p_date->setDay(day);
 
 	} while (res != true);
-	res = false;
+
 	do {
 		cout << "please enter month:" << endl;
 		cin >> month;
-		try
-		{
-			p_date->setMonth(month);
-			res = true;
-		}
-		catch (char const* msg)
-		{
-			cout << msg << endl;
-		}
+		res = p_date->setMonth(month);
+
 	} while (res != true);
-	res = false;
+
 	do {
 		cout << "please enter year:" << endl;
 		cin >> year;
-		try
-		{
-			p_date->setYear(year);
-			res = true;
-		}
-		catch (const char* msg)
-		{
-			cout << msg << endl;
-		}
+		res = p_date->setYear(year);
 
 	} while (res != true);
 
@@ -487,22 +447,17 @@ void Interface::getVisitInfo(Patient** newPatient, Date* visitDate, char** visPu
 	int newYear = 0;
 	int newGen = 0;
 	int genIndex = 0;
-	bool isValidID = false;
 
-	while (!isValidID)
+	cout << "Adding a new visit, Please enter Patient ID (9 digits): " << endl;
+	cin >> patientID;
+	int numOfDigits = (int)log10((double)patientID) + 1;
+	while (numOfDigits != 9)
 	{
-		cout << "Adding a new visit, Please enter Patient ID (9 digits): " << endl;
+		cout << "Patint ID must be 9 digits. Please enter ID" << endl;
 		cin >> patientID;
-		try
-		{
-			*newPatient = hospital.getPatientByID(patientID);
-			isValidID = true;
-		}
-		catch (const char* msg)
-		{
-			cout << msg << endl;
-		}
+		numOfDigits = (int)log10((double)patientID) + 1;
 	}
+	*newPatient = hospital.getPatientByID(patientID);
 
 	if (!*newPatient)
 	{
@@ -523,43 +478,25 @@ void Interface::getVisitInfo(Patient** newPatient, Date* visitDate, char** visPu
 	cout << "What is the department the visit is to? insert the index of it " << endl;
 	int patDep;
 	hospital.showDepartments();
-	bool isValidDep = false;
-	while (!isValidDep)
+	cin >> patDep;
+	while (!isValid(patDep-1, 0, hospital.getNumOfDepartments()-1))
 	{
+		cout << "Invalid input. Please enter a valid department ID" << endl;
 		cin >> patDep;
-		try
-		{
-			*depToAdd = hospital.getDepartmentByIndex(patDep - 1);
-			(*newPatient)->setCurrDepartment(*depToAdd);
-			isValidDep = true;
-		}
-		catch (const char* msg)
-		{
-			cout << msg << endl;
-		}
 	}
-	
+	*depToAdd = hospital.getDepartmentByIndex(patDep-1);
+	(*newPatient)->setCurrDepartment(*depToAdd);
 	if ((*depToAdd)->getNumOfStaffMembers() == 0)
 	{
 		cout << "No staff in this department yet. Please add staff" << endl;
 		int selection;
 		printAddStaffMemberMenu();
-		bool validSel = false;
-		while (!validSel)
+		cin >> selection;
+		while (!isValid(selection, 1, 2))
 		{
-			try
-			{
-				cin >> selection;
-				isValid(selection, 1, 2);
-				validSel = true;
-
-			}
-			catch (const char* msg)
-			{
-				cout << msg << endl;
-			}
+			cout << "Invalid input, select between Nurse to Doctor" << endl;
+			cin >> selection;
 		}
-
 		char* name = new char[MAX_NAME];
 		bool isSurgeon;
 		bool isResearcher;
@@ -583,68 +520,35 @@ void Interface::getVisitInfo(Patient** newPatient, Date* visitDate, char** visPu
 	}
 	cout << "Enter visit details. Visit date (day, month, year): " << endl;
 	int day, month, year;
-	bool res = false;
-
+	bool res;
 	do {
 		cout << "please enter day:" << endl;
 		cin >> day;
-		try
-		{
-			visitDate->setDay(day);
-			res = true;
-		}
-		catch (char const* msg)
-		{
-			cout << msg << endl;
-		}
+		res = visitDate->setDay(day);
 
 	} while (res != true);
-	res = false;
+
 	do {
 		cout << "please enter month:" << endl;
 		cin >> month;
-		try
-		{
-			visitDate->setMonth(month);
-			res = true;
-		}
-		catch (char const* msg)
-		{
-			cout << msg << endl;
-		}
+		res = visitDate->setMonth(month);
+
 	} while (res != true);
-	res = false;
+
 	do {
 		cout << "please enter year:" << endl;
 		cin >> year;
-		try
-		{
-			visitDate->setYear(year);
-			res = true;
-		}
-		catch (const char* msg)
-		{
-			cout << msg << endl;
-		}
+		res = visitDate->setYear(year);
 
 	} while (res != true);
 
 	int visPurp=0;
 	cout << "What is the visit type? for surgery press 2, for tests press 1: " << endl;
-	bool validSel = false;
-	while (!validSel)
-	{	
+	cin >> visPurp;
+	while (visPurp != 1 && visPurp != 2)
+	{
+		cout << "Invalid selection. Please press 1 for tests visit, 2 for surgery visit" << endl;
 		cin >> visPurp;
-		try
-		{
-			isValid(visPurp, 1, 2);
-			validSel = true;
-
-		}
-		catch (const char* msg)
-		{
-			cout << msg << endl;
-		}
 	}
 
 	if (visPurp == 2)
@@ -662,30 +566,25 @@ void Interface::getVisitInfo(Patient** newPatient, Date* visitDate, char** visPu
 	(*depToAdd)->showStaff();
 	
 	cout << "Enter the staff member ID: " << endl;
+	cin >> idToCheck;
+	*treatDoc = hospital.getStaffMemberByID(idToCheck);
 
-	bool validID = false;
-	while (!validID)
-	{
-		cin >> idToCheck;
-		try
+	while (*treatDoc == 0)
 		{
+			cout << "Couldn't find staff member, insert ID of doctor/nurse from the list above." << endl;
+			cin >> idToCheck;
 			*treatDoc = hospital.getStaffMemberByID(idToCheck);
-			validID = true;
 		}
-		catch (const char* msg)
-		{
-			cout << msg << endl;
-		}
-	}
 	cout << "Staff member set as treating staff." << endl;
 
 }
 
-void Interface::compareResearchers(Research_Institute& RI) throw (const char*)
+void Interface::compareResearchers(Research_Institute& RI)
 {
 	if (RI.getNumOfResearchers() < 2)
 	{
-		throw "There must be at least 2 researchers to compare";
+		cout << "There must be at least 2 researchers to compare" << endl;
+		return;
 	}
 
 	char* search_name;
@@ -696,39 +595,22 @@ void Interface::compareResearchers(Research_Institute& RI) throw (const char*)
 	RI.showResearchers();
 
 	cout << "Choose the first researcher, type the name:" << endl;
-	bool validSel = false;
-	while (!validSel)
+
+	do
 	{
 		search_name = getInput();
-		try
-		{
-			index = RI.searchResearcherByName(search_name);
-			validSel = true;
-		}
-		catch (const char* msg)
-		{
-			cout << msg << endl;
-		}
-	}
+		index = RI.searchResearcherByName(search_name);
+	} while (index == -1);
 
 	StaffMember* temp1 = RI.getResearcherByIndex(index);
 
 	cout << "Choose the second researcher, type the name:" << endl;
 
-	validSel = false;
-	while (!validSel)
+	do
 	{
 		search_name = getInput();
-		try
-		{
-			index = RI.searchResearcherByName(search_name);
-			validSel = true;
-		}
-		catch (const char* msg)
-		{
-			cout << msg << endl;
-		}
-	}
+		index = RI.searchResearcherByName(search_name);
+	} while (index == -1);
 
 	StaffMember* temp2 = RI.getResearcherByIndex(index);
 
@@ -773,10 +655,38 @@ char* Interface::getInput()
 	return input;
 }
 
-void Interface::isValid(int check, int lower, int upper) throw (const char*)
+bool Interface::isValid(int check, int lower, int upper)
 {
-	if (((lower <= check) && (check <= upper)) == true)
-		return;
-	else
-		throw "Invalid input, please try again";
+	return (lower <= check) && (check <= upper);
+}
+
+
+void Interface::saveHospitalToFiles(Hospital& hospital)
+{
+	//saves all hospital data to file: hospitalSave.txt
+
+	//open file for writing
+	ofstream outFile("hospital_save.txt", ios::trunc);
+	
+	outFile << hospital.getName() << endl;
+	saveDepartments(hospital.departments, hospital.departments.size(), outFile);
+	//saveRI(hospital.getResearchInstitute(), outFile); //qq
+	//saveStaffMembers(hospital.staff_members, hospital.staff_members.size(), outFile;
+	//savePatients(hospital.patients, hospital.patients.size(), outFile);
+
+	outFile.close();
+}
+
+
+void Interface::saveDepartments(vector<Department*>& v, int size, ofstream& outFile)
+{
+	outFile << size << " ";  //save number of departments
+
+	vector<Department*>::iterator itr = v.begin();
+	vector<Department*>::iterator itrEnd = v.end();
+
+	for ( ; itr!=itrEnd; ++itr)
+	{
+		outFile << *itr;
+	}
 }
