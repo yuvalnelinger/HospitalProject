@@ -9,13 +9,16 @@
 #include <vector>
 #include <iostream>
 #include <fstream>
+#include "Array.h"
+
 using namespace std;
 
 class Department
 {
 private:
 	char* name;
-	vector<StaffMember*> staff_members;
+	//vector<StaffMember*> staff_members;
+	Array<StaffMember*> staff_members;
 	//int size_of_stf_mem;
 	//int num_of_stf_mem;
 	vector<Patient*> patients;
@@ -28,7 +31,7 @@ public:
 	~Department();
 
 	//getters and setters
-	int getNumOfStaffMembers() const;
+	int getNumOfStaffMembers();
 	char* getName() const;
 	void setName(const char* name);
 
@@ -39,7 +42,7 @@ public:
 	void addStaffMember(const StaffMember* mem);
 	void addPatient(const Patient* patient);
 	void showPatients() const;
-	void showStaff() const;
+	void showStaff();
 	//files methods
 	/*
 	friend ostream& operator<<(ostream& out, const Department& d)

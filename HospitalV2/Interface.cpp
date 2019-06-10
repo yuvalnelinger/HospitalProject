@@ -379,7 +379,6 @@ void Interface::getNurseInfo(char** name, int* yearsExperience, Department** dep
 	cin >> *yearsExperience;
 	cout << "In which department is the nurse going to work? Insert the index" << endl;
 	hospital.showDepartments();
-	cin >> depIndex;
 
 	bool isValidDep = false;
 	while (!isValidDep)

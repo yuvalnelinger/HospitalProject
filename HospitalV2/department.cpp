@@ -13,12 +13,13 @@ Department::Department(const char* name) : name(nullptr)
 Department::~Department()
 {
 	delete[] name;
-	staff_members.clear();
+	//staff_members.clear();
+	staff_members.~Array();
 	patients.clear();
 }
 
 //getters and setters
-int Department::getNumOfStaffMembers() const { return staff_members.size(); }
+int Department::getNumOfStaffMembers()  { return staff_members.arrSize(); }
 
 char* Department::getName() const { return name; }
 
@@ -32,7 +33,8 @@ void Department::setName(const char* name)
 //operators
 const Department& Department::operator+=(const StaffMember* mem)
 {	
-	staff_members.push_back((StaffMember*)mem);
+	staff_members += (StaffMember*)mem;
+	//staff_members.push_back((StaffMember*)mem);
 	//this->addStaffMember(&mem);
 	return *this;
 }
@@ -49,8 +51,9 @@ void Department::addStaffMember(const StaffMember* mem)
 	//	delete[] staff_members;
 	//	staff_members = temp;
 	//}
+	staff_members += (StaffMember*)mem;
 
-	staff_members.push_back((StaffMember*)mem);
+	//staff_members.push_back((StaffMember*)mem);
 	//staff_members[num_of_stf_mem++] = (StaffMember*)mem;
 }
 
@@ -84,17 +87,17 @@ void Department::showPatients() const
 	}
 }
 
-void Department::showStaff() const 
+void Department::showStaff() 
 {
 	cout << "This is department " << name;
 	cout << " with the following staff members: " << endl;
-	if (staff_members.size() == 0)
+	if (staff_members.arrSize() == 0)
 	{
 		cout << "No staff members yet." << endl;
 	}
 	else
 	{
-		for (int i = 0; i < staff_members.size(); i++)
+		for (int i = 0; i < staff_members.arrSize(); i++)
 			cout << this->staff_members[i]->getName() << ", ID " << this->staff_members[i]->getId() << endl;
 	}
 

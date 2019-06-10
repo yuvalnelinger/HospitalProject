@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Array.h" />
     <ClInclude Include="Article.h" />
     <ClInclude Include="Date.h" />
     <ClInclude Include="department.h" />
