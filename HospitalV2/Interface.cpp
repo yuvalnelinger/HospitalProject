@@ -793,25 +793,64 @@ void Interface::saveHospitalToFiles(Hospital& hospital)
 	//open file for writing
 	ofstream outFile("hospital_save.txt", ios::trunc);
 
+	//print hospital's name
 	outFile << hospital.getName() << endl;
-	saveDepartments(hospital.departments, hospital.departments.size(), outFile);
-	//saveRI(hospital.getResearchInstitute(), outFile); //qq
-	//saveStaffMembers(hospital.staff_members, hospital.staff_members.size(), outFile;
-	//savePatients(hospital.patients, hospital.patients.size(), outFile);
+
+	//print departments
+	int num_of_dep = hospital.departments.size();
+	int cur_num_of_stf_mem;
+	outFile << num_of_dep << " ";
+
+	for (int i = 0; i < num_of_dep; i++)
+	{
+		outFile << hospital.departments[i]->getName() << " ";
+		cur_num_of_stf_mem = hospital.departments[i]->getNumOfStaffMembers();
+		outFile << cur_num_of_stf_mem << " ";
+		hospital.departments[i]->printNamesOfStaff(outFile);
+	}
+	outFile << endl;
+
+	//print staff members
+	int num_of_staff_mem = hospital.staff_members.size();
+	outFile << num_of_staff_mem << " ";
+
+	for (int i = 0; i < num_of_staff_mem; i++)
+	{
+		outFile << typeid(*(hospital.staff_members[i])).name() + 6 << " ";  //print type
+
+		outFile << hospital.staff_members[i]->getId() << " "
+			<< hospital.staff_members[i]->getName() << " "
+			<< hospital.staff_members[i]->getDepartmentName() << " ";
+
+		
+		if (Doctor* doctemp = dynamic_cast<Doctor*>(hospital.staff_members[i]))
+		{
+			outFile << doctemp->getSpecialty() << " ";
+
+			if (Surgeon* temp = (dynamic_cast<Surgeon*>(hospital.staff_members[i])))
+			{
+				outFile << temp->getNumOfSurgeries() << " ";
+			}
+
+			else if (Researcher* temp = (dynamic_cast<Researcher*>(hospital.staff_members[i])))
+			{
+				//no special data members
+			}
+
+			else if (SurgeonResearcher* temp = (dynamic_cast<SurgeonResearcher*>(hospital.staff_members[i])))
+			{
+				outFile << temp->getNumOfSurgeries() << " ";
+			}
+			else  // (dynamic_cast<DoctorResearcher*>(hospital.staff_members[i])
+			{
+				//no special data members
+			}
+		}
+		else if (Nurse* nursetemp = (dynamic_cast<Nurse*>(hospital.staff_members[i])))
+		{
+			outFile << nursetemp->getYearsOfExperience() << " ";
+		}
+	}
 
 	outFile.close();
-}
-
-
-void Interface::saveDepartments(vector<Department*>& v, int size, ofstream& outFile)
-{
-	outFile << size << " ";  //save number of departments
-
-	vector<Department*>::iterator itr = v.begin();
-	vector<Department*>::iterator itrEnd = v.end();
-
-	for (; itr != itrEnd; ++itr)
-	{
-		outFile << *itr;
-	}
 }

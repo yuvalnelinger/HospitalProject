@@ -13,8 +13,6 @@ class Researcher : virtual public StaffMember
 {
 protected:
 	vector<Article*> articles;
-	//int size_of_articles;
-	//int num_of_articles;
 
 public:
 	//c'tor and d'tor

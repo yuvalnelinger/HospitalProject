@@ -17,7 +17,6 @@ Hospital::~Hospital()
 		delete departments[i];
 	departments.clear();
 
-	//qq-I don't remember why we did this...
 	for (i = 0; i < staff_members.size(); i++)
 	{
 		StaffMember* temp1 = dynamic_cast<DoctorResearcher*>(staff_members[i]);

@@ -4,17 +4,11 @@
 Department::Department(const char* name) : name(nullptr)
 {
 	setName(name);
-	//staff_members = new StaffMember*[size_of_stf_mem];
-	//num_of_stf_mem = 0;
-	//patients = new Patient*[size_of_patients];
-	//num_of_patients = 0;
 }
 
 Department::~Department()
 {
 	delete[] name;
-	//staff_members.clear();
-	staff_members.~Array();
 	patients.clear();
 }
 
@@ -100,5 +94,13 @@ void Department::showStaff()
 		for (int i = 0; i < staff_members.arrSize(); i++)
 			cout << this->staff_members[i]->getName() << ", ID " << this->staff_members[i]->getId() << endl;
 	}
+}
 
+void Department::printNamesOfStaff(ofstream &out)
+{
+	int size = staff_members.arrSize();
+	for (int i = 0; i < size; i++)
+	{
+		out << staff_members[i]->getName() << " ";
+	}
 }

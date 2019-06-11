@@ -44,7 +44,10 @@ Array<T>::Array(const Array& other) : arr(NULL)
 template<class T>
 Array<T>::~Array()
 {
-	delete[]arr;
+	if (logicalSize != 0)
+	{
+		delete[]arr;
+	}
 }
 
 template<class T>

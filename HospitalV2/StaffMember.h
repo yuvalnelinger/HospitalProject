@@ -12,14 +12,15 @@ class Department;
 class StaffMember
 {
 protected:
+	static int counter;
 	int id;
 	char* name;
 	Department* department;
-	static int counter;
 
 public:
 	//c'tor and d'tor
 	StaffMember(const char* name, Department* department);
+	StaffMember(ifstream& inFile);
 	StaffMember(const StaffMember& other);
 	StaffMember();
 	virtual ~StaffMember();
@@ -28,6 +29,7 @@ public:
 	int getId();
 	char* getName() const;
 	Department* getDepartment() const;
+	char* getDepartmentName() const;
 	void setName(const char* name);
 
 	//operators
@@ -39,37 +41,6 @@ public:
 	virtual void addArticle(Article* article);
 	virtual void setDepartment(Department* depart) { department = depart; }
 	virtual void show() const =0;
-
-	////files methods
-	//friend ostream& operator<<(ostream& out, const Department& d)
-	//{
-	//	if (typeid(out) == typeid(ofstream))
-	//	{
-	//		//save to file:
-	//		//name of department, names of assigned staff members
-	//		//and names of assigned patients
-
-	//		out << "Dep: ";
-	//		out << d.name << ",";
-
-	//		out << "Staff: ";
-	//		for (int i = 0; i < d.staff_members.size(); i++)
-	//		{
-	//			out << d.staff_members[i]->getName() << ",";
-	//		}
-
-	//		out << "Patients: ";
-	//		for (int i = 0; i < d.patients.size(); i++)
-	//		{
-	//			out << d.patients[i]->getName() << ",";
-	//		}
-	//	}
-
-	//	else //(typeid(out) == typeid(ostream))
-	//	{
-	//		//qq-to fill in print to screen
-	//	}
-	//}
 };
 
 #endif

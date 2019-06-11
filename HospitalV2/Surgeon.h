@@ -16,6 +16,7 @@ protected:
 public:
 	//c'tor
 	Surgeon(const Doctor& base, int num_of_surgeries);
+	Surgeon(ifstream& inFile);
 
 	//getters
 	int getNumOfSurgeries() const;
