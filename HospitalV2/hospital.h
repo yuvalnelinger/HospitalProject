@@ -41,7 +41,6 @@ public:
 	Department* getDepartmentByIndex(int num) const throw (const char*);  
 	Patient* getPatientByID(int id) const throw (const char*); 
 	StaffMember* getStaffMemberByID(int id) const throw (const char*); 
-	//Nurse* getNurseByID(int id) const; OLD
 	int getNumOfDepartments();
 	Research_Institute& getResearchInstitute();
 	void setName(const char* name);

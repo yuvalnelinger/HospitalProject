@@ -37,7 +37,5 @@ static void isValid(int check, int lower, int upper) throw (const char*);
 
 //files methods
 static void saveHospitalToFiles(Hospital& hospital);
-static void saveDepartments(vector<Department*>& vector, int size, ofstream& outFile);
-
 };
 #endif

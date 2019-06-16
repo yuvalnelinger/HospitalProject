@@ -6,12 +6,6 @@
 Surgeon::Surgeon(const Doctor& base, int num_of_surgeries) : StaffMember(base.getName(), base.getDepartment()), Doctor(base), num_of_surgeries(num_of_surgeries)
 {}
 
-Surgeon::Surgeon(ifstream& inFile) : Doctor(inFile)
-{
-	inFile >> num_of_surgeries;
-}
-
-
 Surgeon::Surgeon(const Surgeon& other) : Doctor(other)
 {
 	this->num_of_surgeries = other.num_of_surgeries;

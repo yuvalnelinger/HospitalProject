@@ -41,41 +41,6 @@ public:
 	void showStaff();
 	void printNamesOfStaff(ofstream &out);
 
-	//files methods
-
-	
-	friend ostream& operator<<(ostream& out, const Department& d)
-	{
-		//save to file:
-		//name of department, names of assigned staff members
-
-		out << d.getName() << " ";
-
-		//int sm_size = d.staff_members.size();
-		//out << sm_size << " ";		//save number of staff members
-
-		//vector<StaffMember*>::iterator itr = v.begin();
-		//vector<StaffMember*>::iterator itrEnd = v.end();
-
-		//while (itr != itrEnd)
-		//{
-		//	outFile << *itr;
-		//	++itr;
-		//}
-		//
-		//for (int i = 0; i < sm_size; i++)
-		//{
-		//	out << d.staff_members[i]->getName() << ",";
-		//}
-
-		//int p_size = d.patients.size();
-		//out << p_size << " ";		//save number of patients
-		//for (int i = 0; i < p_size; i++)
-		//{
-		//	out << d.patients[i]->getName() << ",";
-		//}
-	}
-	
 private:
 	//copy c'tor
 	Department(const Department&); //prevent from user to make a copy of department

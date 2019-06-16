@@ -48,8 +48,6 @@ private:
 	int gender;
 	Department* curr_department;
 	vector<Visit*> visitations;
-	//int size_of_visitations;
-	//int num_of_visitations;
 
 private:
 	//copy c'tor

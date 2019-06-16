@@ -20,13 +20,13 @@ protected:
 public:
 	//c'tor and d'tor
 	StaffMember(const char* name, Department* department);
-	StaffMember(ifstream& inFile);
 	StaffMember(const StaffMember& other);
 	StaffMember();
 	virtual ~StaffMember();
 
 	//getters and setters
-	int getId();
+	static int getIDCounter();
+	int getId() const;
 	char* getName() const;
 	Department* getDepartment() const;
 	char* getDepartmentName() const;

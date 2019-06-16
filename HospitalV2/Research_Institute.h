@@ -13,11 +13,7 @@ class Research_Institute
 {
 private:
 	vector<StaffMember*> researchers;
-	//int size_of_researchers;
-	//int num_of_researchers;
 	vector<Article*> articles;
-	//int size_of_articles;
-	//int num_of_articles;
 
 public:
 

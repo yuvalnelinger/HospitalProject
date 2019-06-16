@@ -9,12 +9,11 @@ using namespace std;
 class Doctor : virtual public StaffMember
 {
 protected:
-	String specialty;
+	char* specialty;
 
 public:
 	//c'tor and d'tor
 	Doctor(const char* name, const char* specialty, Department* depart);
-	Doctor(ifstream& inFile);
 	~Doctor();
 
 	char* getSpecialty() const;
@@ -24,10 +23,6 @@ public:
 	//operators
 	const Doctor& operator=(const Doctor& other);
 	virtual void toOs(ostream& os) const override;
-	friend istream& operator>> (istream& in, Doctor& d)
-	{
-		in >> d.specialty;
-	}
 
 	//methods
 	virtual void show() const;

@@ -6,12 +6,6 @@ Doctor::Doctor(const char* name, const char* specialty, Department* depart) : St
 	setSpecialty(specialty);
 }
 
-Doctor::Doctor(ifstream& inFile) : StaffMember(inFile)
-{
-	inFile >> specialty;
-}
-
-
 Doctor::~Doctor()
 {
 	delete[] specialty;

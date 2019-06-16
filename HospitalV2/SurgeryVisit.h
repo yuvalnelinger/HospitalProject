@@ -3,9 +3,9 @@
 
 #define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
-using namespace std;
 #include "Date.h"
 #include "visit.h"
+using namespace std;
 class Patient;
 class Doctor;
 class Nurse;

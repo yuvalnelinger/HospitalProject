@@ -793,10 +793,10 @@ void Interface::saveHospitalToFiles(Hospital& hospital)
 	//open file for writing
 	ofstream outFile("hospital_save.txt", ios::trunc);
 
-	//print hospital's name
+	//save hospital's name
 	outFile << hospital.getName() << endl;
 
-	//print departments
+	//save departments
 	int num_of_dep = hospital.departments.size();
 	int cur_num_of_stf_mem;
 	outFile << num_of_dep << " ";
@@ -810,7 +810,8 @@ void Interface::saveHospitalToFiles(Hospital& hospital)
 	}
 	outFile << endl;
 
-	//print staff members
+	//save staff members
+	outFile << StaffMember::getIDCounter() << endl;			//save counter for id's
 	int num_of_staff_mem = hospital.staff_members.size();
 	outFile << num_of_staff_mem << " ";
 

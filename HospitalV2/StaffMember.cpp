@@ -12,11 +12,6 @@ StaffMember::StaffMember(const char* name, Department* deparement) : name(nullpt
 	this->department = deparement;
 }
 
-StaffMember::StaffMember(ifstream& inFile)
-{
-	inFile >> id >> name >> nullptr;
-}
-
 StaffMember::StaffMember(const StaffMember& other)
 {
 	*this = other;
@@ -35,7 +30,9 @@ StaffMember::~StaffMember()
 }
 
 //getters and setters
-int StaffMember::getId() { return id; }
+int StaffMember::getIDCounter() { return counter; }
+
+int StaffMember::getId() const { return id; }
 
 char* StaffMember::getName() const { return name; }
 

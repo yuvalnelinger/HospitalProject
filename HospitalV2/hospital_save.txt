@@ -1,3 +1,4 @@
 Assuta
-1 pnimit A 5 moshe kobi misha yoni yamit 
-5 1000 moshe pnimit A Doctor aaa 1003 kobi pnimit A DoctorResearcher bbb 1005 misha pnimit A Surgeon ccc 4 1007 yoni pnimit A SurgeonResearcher ddd 9 1009 yamit pnimit A Nurse 10 
+1 pnimit A 2 moshe yamit 
+1003
+2 Surgeon 1001 moshe pnimit A dd 9 Nurse 1002 yamit pnimit A 10 
