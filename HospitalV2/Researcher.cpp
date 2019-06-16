@@ -2,7 +2,7 @@
 #include "Article.h"
 
 //c'tor and d'tor
-Researcher::Researcher(const char* name) : StaffMember(name, nullptr)
+Researcher::Researcher(string name) : StaffMember(name, nullptr)
 {
 	//articles = new Article*[size_of_articles];
 	//num_of_articles = 0;

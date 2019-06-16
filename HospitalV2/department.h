@@ -16,20 +16,20 @@ using namespace std;
 class Department
 {
 private:
-	char* name;
+	string name;
 	Array<StaffMember*> staff_members;
 	vector<Patient*> patients;
 
 
 public:
 	//c'tor and d'tor
-	Department(const char* name);
+	Department(string name);
 	~Department();
 
 	//getters and setters
 	int getNumOfStaffMembers();
-	char* getName() const;
-	void setName(const char* name);
+	string getName() const;
+	void setName(string name);
 
 	//operators
 	const Department& operator+=(const StaffMember* mem);

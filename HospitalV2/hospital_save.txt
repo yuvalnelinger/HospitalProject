@@ -1,4 +1,4 @@
 Assuta
-1 pnimit A 2 moshe yamit 
-1003
-2 Surgeon 1001 moshe pnimit A dd 9 Nurse 1002 yamit pnimit A 10 
+1 sdsd 1 sddd 
+1001
+1 Doctor 1000 sddd sdsd spoer 

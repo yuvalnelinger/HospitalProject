@@ -1,7 +1,7 @@
 #include "visit.h"
 
 //c'tor
-Visit::Visit(Patient* patient, Date date, char* purpose, bool isSurgery,StaffMember* doc) : visitPurpose(nullptr), treatDoc(nullptr)
+Visit::Visit(Patient* patient, Date date, string purpose, bool isSurgery,StaffMember* doc) : treatDoc(nullptr)
 {
 	this->patient = patient;
 	this->dateOfArrival = date;
@@ -21,20 +21,17 @@ Visit::Visit(const Visit& other)
 {
 	dateOfArrival = other.dateOfArrival;
 	patient = other.patient;
-	visitPurpose = new char[strlen(other.visitPurpose) + 1];
-	strcpy(visitPurpose, other.visitPurpose);
+	visitPurpose = other.visitPurpose;
 	treatDoc = other.treatDoc;
 	isSurgery = other.isSurgery;
 }
 
 //setters and getters
-char* Visit::getVisitPurpose() const { return visitPurpose; }
+string Visit::getVisitPurpose() const { return visitPurpose; }
 
-void Visit::setVisitPurpose(const char* purpose)
+void Visit::setVisitPurpose(const string purpose)
 {
-	delete[] this->visitPurpose;
-	this->visitPurpose = new char[strlen(purpose) + 1];
-	strcpy(this->visitPurpose, purpose);
+	this->visitPurpose = purpose;
 }
 
 bool Visit::getVisitType() const

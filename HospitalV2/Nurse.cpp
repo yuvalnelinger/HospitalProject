@@ -1,7 +1,7 @@
 #include "Nurse.h"
 
 //c'tor and d'tor
-Nurse::Nurse(const char* name, int y_exp, Department* depart) : StaffMember(name, depart)
+Nurse::Nurse(const string name, int y_exp, Department* depart) : StaffMember(name, depart)
 {
 	years_of_experience = y_exp;
 }

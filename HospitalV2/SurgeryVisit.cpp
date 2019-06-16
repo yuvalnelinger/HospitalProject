@@ -1,7 +1,7 @@
 #include "SurgeryVisit.h"
 
 //c'tor and d'tor
-SurgeryVisit::SurgeryVisit(Patient* patient, Date date, char* purpose, StaffMember* doc, int roomNum, bool isFast) : Visit(patient, date, purpose, true,doc), roomNum(roomNum), isFast(isFast)
+SurgeryVisit::SurgeryVisit(Patient* patient, Date date, string purpose, StaffMember* doc, int roomNum, bool isFast) : Visit(patient, date, purpose, true,doc), roomNum(roomNum), isFast(isFast)
 {
 	this->roomNum = roomNum;
 	this->isFast = isFast;

@@ -9,15 +9,15 @@ using namespace std;
 class Doctor : virtual public StaffMember
 {
 protected:
-	char* specialty;
+	string specialty;
 
 public:
 	//c'tor and d'tor
-	Doctor(const char* name, const char* specialty, Department* depart);
+	Doctor(const string name, const string specialty, Department* depart);
 	~Doctor();
 
-	char* getSpecialty() const;
-	void setSpecialty(const char* specialty);
+	string getSpecialty() const;
+	void setSpecialty(const string specialty);
 	Department* getDepartment() const;
 
 	//operators

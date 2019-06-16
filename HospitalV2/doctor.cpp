@@ -1,34 +1,21 @@
 #include "doctor.h"
 
 //c'tor and d'tor
-Doctor::Doctor(const char* name, const char* specialty, Department* depart) : StaffMember(name, depart)
+Doctor::Doctor(const string name, const string specialty, Department* depart) : StaffMember(name, depart)
 {
 	setSpecialty(specialty);
 }
 
 Doctor::~Doctor()
 {
-	delete[] specialty;
 }
 
 //getters and setters
-char* Doctor::getSpecialty() const { return specialty; }
+string Doctor::getSpecialty() const { return specialty; }
 
-void Doctor::setSpecialty(const char* specialty)
+void Doctor::setSpecialty(const string specialty)
 {
-	if (this->specialty)
-	{
-		delete[] this->specialty;
-	}
-	if (specialty==0)
-	{
-		this->specialty = 0;
-	}
-	else
-	{
-		this->specialty = new char[strlen(specialty) + 1];
-		strcpy(this->specialty, specialty);
-	}
+	this->specialty = specialty;
 }
 
 Department* Doctor::getDepartment() const
@@ -41,16 +28,14 @@ const Doctor& Doctor::operator=(const Doctor& other)
 {
 	StaffMember::operator=(other);
 
-	delete[]specialty;
-	specialty = new char[strlen(other.specialty) + 1];
-	strcpy(specialty, other.specialty);
+	specialty = other.specialty;
 
 	return *this;
 }
 
 void Doctor::toOs(ostream& os) const
 {
-	os << ", Specialty: " << specialty
+	os << ", Specialty: " << specialty.c_str()
 		<< endl;
 }
 
@@ -58,7 +43,7 @@ void Doctor::toOs(ostream& os) const
 void Doctor::show() const
 {
 	StaffMember::show();
-	cout << ", " << "Specialty: " << specialty;
+	cout << ", " << "Specialty: " << specialty.c_str();
 }
 
 Doctor::Doctor(const Doctor& other) : StaffMember(other)

@@ -20,7 +20,7 @@ int Surgeon::getNumOfSurgeries() const
 //operators
 void Surgeon::toOs(ostream& os) const
 {
-	os << ", Specialty: " << specialty
+	os << ", Specialty: " << specialty.c_str()
 		<<", Number of surgeries: " << num_of_surgeries
 		<< endl;
 }

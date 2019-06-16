@@ -21,29 +21,29 @@ public:
 	enum eGender { MALE, FEMALE };
 
 	//c'tor and d'tor
-	Patient(char* name, int id, int year, int gender);
+	Patient(string name, int id, int year, int gender);
 	~Patient();
 
 	//getters and setters
 	int getId() const;
-	char* getName() const;
+	string getName() const;
 	int getYearOfBirth() const;
 	int getGender() const;
 	Department* getCurrentDepartment() const;
-	void setName(char* name);
+	void setName(string name);
 	void setYearOfBirth(int year);
 	void setGender(int gender);
 	void setCurrDepartment(Department* dep);
 
 	//methods
 	void show() const;
-	void addVisit(Patient* patient, Date visitDate ,StaffMember* treatDoc,char* purpose,bool* isFast, int roomNum, bool* isSurgery);
+	void addVisit(Patient* patient, Date visitDate ,StaffMember* treatDoc,string purpose,bool* isFast, int roomNum, bool* isSurgery);
 	bool getLastVisitType();
 	Visit* getLastVisit();
 
 private:
 	int id;
-	char* name;
+	string name;
 	int yearOfBirth;
 	int gender;
 	Department* curr_department;

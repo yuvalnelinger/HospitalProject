@@ -9,13 +9,13 @@ using namespace std;
 class Article
 {
 private:
-	char* title;
+	string title;
 	Date publish_date;
-	char* name_of_magazine;
+	string name_of_magazine;
 
 public:
 	//c'tor and d'tor
-	Article(Date p_date, const char* title, const char* name_of_magazine);
+	Article(Date p_date, const string title, const string name_of_magazine);
 	~Article();
 
 	//copy c'tor
@@ -23,11 +23,11 @@ public:
 
 	//getters and setters
 	Date& getPublishDate();
-	char* getTitle() const;
-	char* getNameOfMagazine() const;
+	string getTitle() const;
+	string getNameOfMagazine() const;
 	void setPublishDate(const Date& d);
-	void setTitle(const char* title);
-	void setNameOfMagazine(const char* magazine_name);
+	void setTitle(const string title);
+	void setNameOfMagazine(const string magazine_name);
 
 	//methods
 	void show();
