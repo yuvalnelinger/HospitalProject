@@ -1,10 +1,12 @@
+#pragma warning(disable: 4250)		//disable warning C4250 - inheritance via dominance
+									//warning related to diamond inheritance
 #ifndef __SURGESEARCHER_H
 #define __SURGEEARCHER_H
 
 #define _CRT_SECURE_NO_WARNINGS
-#include <iostream>
-#include "Surgeon.h"
 #include "Researcher.h"
+#include "Surgeon.h"
+#include <iostream>
 
 using namespace std;
 class Department;

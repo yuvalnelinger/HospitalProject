@@ -797,7 +797,7 @@ void Interface::saveHospitalToFiles(Hospital& hospital)
 	outFile << hospital.getName() << endl;
 
 	//save departments
-	int num_of_dep = hospital.departments.size();
+	int num_of_dep = (int)hospital.departments.size();
 	int cur_num_of_stf_mem;
 	outFile << num_of_dep << " ";
 
@@ -812,7 +812,7 @@ void Interface::saveHospitalToFiles(Hospital& hospital)
 
 	//save staff members
 	outFile << StaffMember::getIDCounter() << endl;			//save counter for id's
-	int num_of_staff_mem = hospital.staff_members.size();
+	int num_of_staff_mem = (int)hospital.staff_members.size();
 	outFile << num_of_staff_mem << " ";
 
 	for (int i = 0; i < num_of_staff_mem; i++)

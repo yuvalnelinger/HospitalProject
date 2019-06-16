@@ -2,36 +2,21 @@
 #include "Article.h"
 
 //c'tor and d'tor
-Researcher::Researcher(const char* name) : StaffMember(name, nullptr)
-{
-	//articles = new Article*[size_of_articles];
-	//num_of_articles = 0;
-}
+Researcher::Researcher(const char* name) : StaffMember(name, nullptr) {}
 
 Researcher::Researcher(const Researcher& other) : StaffMember(other)
 {
-	//for (int i = 0; i <articles.size(); i++)
-	//	delete articles[i];
-
-	//articles.clear();
-	
-	int logSize = other.articles.size();
+	int logSize = (int)other.articles.size();
 	articles.reserve(logSize);
-	
-	//size_of_articles = other.size_of_articles;
-	//num_of_articles = other.num_of_articles;
 
-	//articles = new Article*[size_of_articles];
 	for (int i = 0; i < logSize; i++)
 	{
-		//articles[i] = other.articles[i];
 		articles.push_back(other.articles[i]);
 	}
 }
 
 Researcher::~Researcher()
 {
-	//delete[]articles;
 	articles.clear();
 }
 
@@ -42,26 +27,17 @@ const Researcher& Researcher::operator=(const Researcher& other)
 
 	for (int i = 0; i < articles.size(); i++)
 		delete articles[i];
-	
-	//delete[]articles;
+
 	articles.clear();
 
-	//size_of_articles = other.size_of_articles;
-	//num_of_articles = other.num_of_articles;
-
-	int logSize = other.articles.size();
+	int logSize = (int)other.articles.size();
 	articles.reserve(logSize);
-
-	//articles = new Article*[size_of_articles];
-	//for (int i = 0; i < num_of_articles; i++)
-	//	articles[i] = other.articles[i];
 
 	for (int i = 0; i < logSize; i++)
 	{
 		//articles[i] = other.articles[i];
 		articles.push_back(other.articles[i]);
 	}
-
 	return *this;
 }
 

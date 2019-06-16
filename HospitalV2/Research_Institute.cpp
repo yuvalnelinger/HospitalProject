@@ -21,9 +21,9 @@ Research_Institute::~Research_Institute()
 	articles.clear();
 }
 
-int Research_Institute::getNumOfResearchers() const { return researchers.size(); }
+int Research_Institute::getNumOfResearchers() const { return (int)researchers.size(); }
 
-int Research_Institute::getNumOfArticles() const { return articles.size(); }
+int Research_Institute::getNumOfArticles() const { return (int)articles.size(); }
 
 StaffMember* Research_Institute::getResearcherByIndex(int i) { return this->researchers[i]; }
 

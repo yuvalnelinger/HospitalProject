@@ -75,7 +75,7 @@ StaffMember* Hospital::getStaffMemberByID(int id) const throw (const char*)
 
 int Hospital::getNumOfDepartments()
 {
-	return departments.size();
+	return (int)departments.size();
 }
 
 Research_Institute& Hospital::getResearchInstitute()

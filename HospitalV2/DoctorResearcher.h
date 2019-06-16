@@ -1,3 +1,6 @@
+#pragma warning(disable: 4250)		//disable warning C4250 - inheritance via dominance
+									//warning related to diamond inheritance
+
 #ifndef __DOCSEARCHER_H
 #define __DOCSEARCHER_H
 
