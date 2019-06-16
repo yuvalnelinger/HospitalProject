@@ -16,21 +16,21 @@ class Visit
 private:
 	Date dateOfArrival;
 	Patient* patient;
-	char* visitPurpose;
+	string visitPurpose;
 	bool isSurgery;
 	StaffMember* treatDoc;
 
 public:
 	//c'tor
-	Visit(Patient* patient, Date date, char* purpose, bool isSurgery,StaffMember* doc);
+	Visit(Patient* patient, Date date, string purpose, bool isSurgery,StaffMember* doc);
 	Visit();
 
 	//copy c'tor
 	Visit(const Visit& other);
 
 	//setters and getters
-	char* getVisitPurpose() const;
-	void setVisitPurpose(const char* purpose);
+	string getVisitPurpose() const;
+	void setVisitPurpose(const string purpose);
 	bool getVisitType() const;
 };
 

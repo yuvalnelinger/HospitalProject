@@ -30,9 +30,9 @@ public:
 	StaffMember* getResearcherByIndex(int i);
 
 	//methods
-	void addResearcher(char* name); //adds researcher ptr to the array
-	void addArticle(Date date, char* title, char* name_of_magazine, int r_index);
-	int searchResearcherByName(char* name) const throw (const char*);
+	void addResearcher(string name); //adds researcher ptr to the array
+	void addArticle(Date date, string title, string name_of_magazine, int r_index);
+	int searchResearcherByName(string name) const throw (const string);
 	void showResearchers() const;
 
 private:

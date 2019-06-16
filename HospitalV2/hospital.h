@@ -24,7 +24,7 @@ using namespace std;
 class Hospital
 {
 private:
-	char* name;
+	string name;
 	vector <Department*> departments;
 	Research_Institute RI;
 	vector <StaffMember*> staff_members;
@@ -33,22 +33,22 @@ private:
 public:
 	friend class Interface;
 	//c'tor and d'tor
-	Hospital(const char* name);
+	Hospital(const string name);
 	~Hospital();
 
 	//getters and setters
-	char* getName() const;
-	Department* getDepartmentByIndex(int num) const throw (const char*);  
-	Patient* getPatientByID(int id) const throw (const char*); 
-	StaffMember* getStaffMemberByID(int id) const throw (const char*); 
+	string getName() const;
+	Department* getDepartmentByIndex(int num) const throw (const string);  
+	Patient* getPatientByID(int id) const throw (const string); 
+	StaffMember* getStaffMemberByID(int id) const throw (const string); 
 	int getNumOfDepartments();
 	Research_Institute& getResearchInstitute();
-	void setName(const char* name);
+	void setName(const string name);
 
 	//methods
-	void addDepartment(const char* name);
-	void addDoctor(const char* name, const char* docSpecialty, Department* assigned_dep,bool isSurgeon,bool isResearcher,int num_of_surgeries);
-	void addNurse(const char* name, int yearsExperience, Department* assigned_dep);
+	void addDepartment(const string name);
+	void addDoctor(const string name, const string docSpecialty, Department* assigned_dep,bool isSurgeon,bool isResearcher,int num_of_surgeries);
+	void addNurse(const string name, int yearsExperience, Department* assigned_dep);
 	void addPatient(Patient* patientToAdd);
 	void addToRI(StaffMember* mem);
 	void showDepartments() const;

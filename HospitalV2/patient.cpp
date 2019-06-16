@@ -1,6 +1,6 @@
 #include "patient.h"
 
-Patient::Patient(char* name, int id, int year, int gender) : name(nullptr), curr_department(nullptr)
+Patient::Patient(string name, int id, int year, int gender) : curr_department(nullptr)
 {
 	this->id = id;
 	setName(name);
@@ -12,7 +12,6 @@ Patient::Patient(char* name, int id, int year, int gender) : name(nullptr), curr
 
 Patient::~Patient()
 {
-	delete[]name;
 
 	for (int i = 0; i < visitations.size(); i++)
 		delete visitations[i];
@@ -21,7 +20,7 @@ Patient::~Patient()
 //getters and setters
 int Patient::getId() const { return id; }
 
-char* Patient::getName() const { return name; }
+string Patient::getName() const { return name; }
 
 int Patient::getYearOfBirth() const { return yearOfBirth; }
 
@@ -32,11 +31,9 @@ Department* Patient::getCurrentDepartment() const
 	return curr_department;
 }
 
-void Patient::setName(char* name)
+void Patient::setName(string name)
 {
-	delete[] this->name;
-	this->name = new char[strlen(name) + 1];
-	strcpy(this->name, name);
+	this->name = name;
 }
 
 void Patient::setYearOfBirth(int year)
@@ -58,10 +55,10 @@ void Patient::setCurrDepartment(Department* dep)
 //methods
 void Patient::show() const
 {
-	cout << "Patient Name: " << name << " Id: " << id << " Year Of Birth: " << " Gender: " << gender << endl;
+	cout << "Patient Name: " << name.c_str() << " Id: " << id << " Year Of Birth: " << " Gender: " << gender << endl;
 }
 
-void Patient::addVisit(Patient* patient, Date visitDate, StaffMember* treatDoc,char* purpose, bool* isFast, int roomNum,bool* isSurgery)
+void Patient::addVisit(Patient* patient, Date visitDate, StaffMember* treatDoc,string purpose, bool* isFast, int roomNum,bool* isSurgery)
 {
 	//if (num_of_visitations == size_of_visitations) //array increment if needed
 	//{

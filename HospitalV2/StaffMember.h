@@ -14,12 +14,12 @@ class StaffMember
 protected:
 	static int counter;
 	int id;
-	char* name;
+	string name;
 	Department* department;
 
 public:
 	//c'tor and d'tor
-	StaffMember(const char* name, Department* department);
+	StaffMember(const string name, Department* department);
 	StaffMember(const StaffMember& other);
 	StaffMember();
 	virtual ~StaffMember();
@@ -27,10 +27,10 @@ public:
 	//getters and setters
 	static int getIDCounter();
 	int getId() const;
-	char* getName() const;
+	string getName() const;
 	Department* getDepartment() const;
-	char* getDepartmentName() const;
-	void setName(const char* name);
+	string getDepartmentName() const;
+	void setName(const string name);
 
 	//operators
 	const StaffMember& operator=(const StaffMember& other);

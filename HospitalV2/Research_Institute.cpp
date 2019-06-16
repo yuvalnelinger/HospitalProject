@@ -27,7 +27,7 @@ int Research_Institute::getNumOfArticles() const { return (int)articles.size(); 
 
 StaffMember* Research_Institute::getResearcherByIndex(int i) { return this->researchers[i]; }
 
-void Research_Institute::addResearcher(char* name)
+void Research_Institute::addResearcher(string name)
 {
 	//if (num_of_researchers == size_of_researchers) //array increment if needed
 	//{
@@ -45,7 +45,7 @@ void Research_Institute::addResearcher(char* name)
 	cout << "Successfully added researcher to the research institute" << endl;
 }
 
-void Research_Institute::addArticle(Date date, char* title, char* name_of_magazine, int r_index)
+void Research_Institute::addArticle(Date date, string title, string name_of_magazine, int r_index)
 {
 	//if (num_of_articles == size_of_articles) //array increment if needed
 	//{
@@ -69,11 +69,11 @@ void Research_Institute::addArticle(Date date, char* title, char* name_of_magazi
 	cout << "Article successfully added" << endl;
 }
 
-int Research_Institute::searchResearcherByName(char* name) const throw (const char*)
+int Research_Institute::searchResearcherByName(string name) const throw (string)
 {
 	for (int i = 0; i < researchers.size(); i++)
 	{
-		if (strcmp(researchers[i]->getName(), name) == 0)
+		if (researchers[i]->getName()== name)
 		{
 			return i;
 		}
@@ -88,6 +88,6 @@ void Research_Institute::showResearchers() const
 	cout << "In the Research Institute there are " << researchers.size() << " researchers: \n";
 	for (int i = 0; i < researchers.size(); i++)
 	{
-		cout << i + 1 << ". " << researchers[i]->getName() << endl;
+		cout << i + 1 << ". " << researchers[i]->getName().c_str() << endl;
 	}
 }

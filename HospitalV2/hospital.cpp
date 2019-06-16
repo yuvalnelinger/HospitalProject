@@ -2,7 +2,7 @@
 #include <string>
 
 //c'tor and d'tor
-Hospital::Hospital(const char* name) : name(nullptr)
+Hospital::Hospital(const string name) 
 {
 	setName(name);
 }
@@ -11,7 +11,6 @@ Hospital::~Hospital()
 {
 	int i;
 
-	delete[] name;
 
 	for (i = 0; i < departments.size(); i++)  
 		delete departments[i];
@@ -32,9 +31,9 @@ Hospital::~Hospital()
 }
 
 //getters and setters
-char* Hospital::getName() const { return name; }
+string Hospital::getName() const { return name; }
 
-Department* Hospital::getDepartmentByIndex(int num) const throw (const char*)
+Department* Hospital::getDepartmentByIndex(int num) const throw (const string)
 { 
 	if (num < 0 || num > departments.size()-1)
 	{
@@ -43,7 +42,7 @@ Department* Hospital::getDepartmentByIndex(int num) const throw (const char*)
 	return departments[num]; 
 }
 
-Patient* Hospital::getPatientByID(int id) const throw (const char*)
+Patient* Hospital::getPatientByID(int id) const throw (const string)
 {
 	int numOfDigits = (int)log10((double)id) + 1;
 	if (numOfDigits != 9)
@@ -61,7 +60,7 @@ Patient* Hospital::getPatientByID(int id) const throw (const char*)
 	return nullptr;
 }
 
-StaffMember* Hospital::getStaffMemberByID(int id) const throw (const char*)
+StaffMember* Hospital::getStaffMemberByID(int id) const throw (const string)
 {
 	for (int i = 0; i < staff_members.size(); i++)
 	{
@@ -83,15 +82,13 @@ Research_Institute& Hospital::getResearchInstitute()
 	return RI;
 }
 
-void Hospital::setName(const char* name)
+void Hospital::setName(const string name)
 {
-	delete[] this->name;
-	this->name = new char[strlen(name) + 1];
-	strcpy(this->name, name);
+	this->name = name;
 }
 
 //methods
-void Hospital::addDepartment(const char* name)
+void Hospital::addDepartment(const string name)
 {
 	Department* dep = new Department(name);
 	departments.push_back(dep);
@@ -99,7 +96,7 @@ void Hospital::addDepartment(const char* name)
 	cout << "Successfully added department to hospital" << endl;
 }
 
-void Hospital::addDoctor(const char* name, const char* docSpecialty, Department* assigned_dep,bool isSurgeon,bool isResearcher,int num_of_surgeries)
+void Hospital::addDoctor(const string name, const string docSpecialty, Department* assigned_dep,bool isSurgeon,bool isResearcher,int num_of_surgeries)
 {
 	//if (num_of_stf_mem == size_of_stf_mem) //array increment if needed
 	//{
@@ -147,7 +144,7 @@ void Hospital::addDoctor(const char* name, const char* docSpecialty, Department*
 	cout << "Successfully added doctor to hospital" << endl;
 }
 
-void Hospital::addNurse(const char* name, int yearsExperience, Department* assigned_dep)
+void Hospital::addNurse(const string name, int yearsExperience, Department* assigned_dep)
 {
 	//if (num_of_stf_mem == size_of_stf_mem) //array increment if needed
 	//{

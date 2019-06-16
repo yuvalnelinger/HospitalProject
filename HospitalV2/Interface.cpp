@@ -6,7 +6,7 @@ void Interface::mainMenu(Hospital& hospital)
 	int proceed;
 	int selection;
 	do {
-		cout << "Welcome to " << hospital.getName() << " hospital!" << endl;
+		cout << "Welcome to " << hospital.getName().c_str() << " hospital!" << endl;
 		Interface::printMainMenu();
 		cin >> selection;
 
@@ -14,10 +14,9 @@ void Interface::mainMenu(Hospital& hospital)
 		{
 		case 1: //add a department
 		{
-			char* name = new char[MAX_NAME];
+			string name;
 			Interface::getDepartmentInfo(&name);
 			hospital.addDepartment(name);
-			delete[] name;
 		}
 		break;
 		case 2: //add a staff member
@@ -28,14 +27,13 @@ void Interface::mainMenu(Hospital& hospital)
 				cout << "It not possible to add a staff memeber without any departments!\n"
 					<< "please add a department first" << endl;
 				//create department
-				char* name = new char[MAX_NAME];
+				string name;
 				Interface::getDepartmentInfo(&name);
 				hospital.addDepartment(name);
-				delete[] name;
 			}
 
 			int selection;
-			char* name = new char[MAX_NAME];
+			string name;
 			Department* assigned_dep = nullptr;
 			bool isSurgeon;
 			bool isResearcher;
@@ -51,10 +49,9 @@ void Interface::mainMenu(Hospital& hospital)
 				{
 				case 1: //add doctor
 				{
-					char* docSpecialty = new char[MAX_NAME];
+					string docSpecialty;
 					Interface::getDoctorInfo(&name, &docSpecialty, &assigned_dep, hospital, &isSurgeon, &isResearcher, &num_of_surgeries);
 					hospital.addDoctor(name, docSpecialty, assigned_dep, isSurgeon, isResearcher, num_of_surgeries);
-					delete[] docSpecialty;
 				}
 				break;
 				case 2: //add nurse
@@ -65,7 +62,6 @@ void Interface::mainMenu(Hospital& hospital)
 				}
 				break;
 
-				delete[] name;
 
 				default:
 				{
@@ -83,10 +79,9 @@ void Interface::mainMenu(Hospital& hospital)
 			if (hospital.getNumOfDepartments() == 0)
 			{
 				cout << "You have to create a department before making any patient operations." << endl;
-				char* name = new char[MAX_NAME];
+				string name;
 				Interface::getDepartmentInfo(&name);
 				hospital.addDepartment(name);
-				delete[] name;
 			}
 			Interface::printPatientsMenu();
 			cin >> choice;
@@ -104,7 +99,7 @@ void Interface::mainMenu(Hospital& hospital)
 					int room;
 					Patient* newPatient = nullptr;
 					Date visitDate;
-					char* visPurpose = new char[MAX_NAME];
+					string visPurpose;
 					Department* depToAdd;
 					StaffMember* treatDoc = nullptr;
 
@@ -115,7 +110,6 @@ void Interface::mainMenu(Hospital& hospital)
 					if (isNewPatient = true) //add patient to hospital only if he is new patient
 						hospital.addPatient(newPatient);
 
-					delete[]visPurpose;
 					cout << "Successfully added visit." << endl;
 				}
 				break;
@@ -135,12 +129,12 @@ void Interface::mainMenu(Hospital& hospital)
 							depToShow = hospital.getDepartmentByIndex(select - 1);
 							isValidDep = true;
 						}
-						catch (const char* msg)
+						catch (const string msg)
 						{
-							cout << msg << endl;
+							cout << msg.c_str() << endl;
 						}
 					}
-					cout << "These are the patients of department " << depToShow->getName() << endl;
+					cout << "These are the patients of department " << depToShow->getName().c_str() << endl;
 					depToShow->showPatients();
 					break;
 				}
@@ -159,7 +153,7 @@ void Interface::mainMenu(Hospital& hospital)
 					}
 					else
 					{
-						cout << "Patient with ID " << patID << " is " << patientToShow->getName() << " and his/her current department is " << patientToShow->getCurrentDepartment()->getName() << "." << endl;
+						cout << "Patient with ID " << patID << " is " << patientToShow->getName().c_str() << " and his/her current department is " << patientToShow->getCurrentDepartment()->getName().c_str() << "." << endl;
 						if (patientToShow->getLastVisitType())
 						{
 							cout << "The patient's last visit was for surgery, in room " << ((SurgeryVisit*)(patientToShow->getLastVisit()))->getRoomNum();
@@ -203,10 +197,9 @@ void Interface::mainMenu(Hospital& hospital)
 				{
 				case 1: //add a researcher
 				{
-					char* name = new char[MAX_NAME];
+					string name;
 					Interface::getResearcherInfo(&name);
 					hospital.getResearchInstitute().addResearcher(name);
-					delete[] name;
 				}
 				break;
 				case 2: //add an article
@@ -214,20 +207,18 @@ void Interface::mainMenu(Hospital& hospital)
 					if (hospital.getResearchInstitute().getNumOfResearchers() == 0)
 					{
 						cout << "There are no researchers in the research institute. Please add a researcher first" << endl;
-						char* name = new char[MAX_NAME];
+						string name;
 						Interface::getResearcherInfo(&name);
 						hospital.getResearchInstitute().addResearcher(name);
 						hospital.getResearchInstitute().showResearchers();
-						delete[] name;
 					}
 					int r_index;
 					Date date;
-					char* title = new char[MAX_TITLE];
-					char* name_of_magazine = new char[MAX_NAME];
+					string title;
+					string name_of_magazine;
 					Interface::getArticleInfo(&title, &name_of_magazine, &date, &r_index, hospital);
 					hospital.getResearchInstitute().addArticle(date, title, name_of_magazine, r_index);
-					delete[] title;
-					delete[] name_of_magazine;
+
 				}
 				break;
 				case 3: //show all researchers
@@ -255,7 +246,14 @@ void Interface::mainMenu(Hospital& hospital)
 		break;
 		case 7: //compare researchers by number of articles
 		{
-			Interface::compareResearchers(hospital.getResearchInstitute());
+			if (hospital.getResearchInstitute().getNumOfResearchers() < 2)
+			{
+				cout << "There must be at least 2 researchers to compare\n";
+			}
+			else
+			{
+				Interface::compareResearchers(hospital.getResearchInstitute());
+			}
 		}
 		break;
 		default:
@@ -326,13 +324,13 @@ void Interface::printRIMenu()
 }
 
 //cases
-void Interface::getDepartmentInfo(char** name)
+void Interface::getDepartmentInfo(string* name)
 {
 	cout << "Adding a new department, choose name: " << endl;
 	*name = getInput();
 }
 
-void Interface::getDoctorInfo(char** name, char** specialty, Department** depart, Hospital& hospital,bool* isSurgeon,bool* isResearcher, int* num_of_surgeries)
+void Interface::getDoctorInfo(string* name, string* specialty, Department** depart, Hospital& hospital,bool* isSurgeon,bool* isResearcher, int* num_of_surgeries)
 {
 	int depIndex;
 
@@ -351,9 +349,9 @@ void Interface::getDoctorInfo(char** name, char** specialty, Department** depart
 			*depart = hospital.getDepartmentByIndex(depIndex - 1);
 			isValidDep = true;
 		}
-		catch (const char* msg)
+		catch (const string msg)
 		{
-			cout << msg << endl;
+			cout << msg.c_str() << endl;
 		}
 	}
 	
@@ -369,7 +367,7 @@ void Interface::getDoctorInfo(char** name, char** specialty, Department** depart
 	cin >> *isResearcher;
 }
 
-void Interface::getNurseInfo(char** name, int* yearsExperience, Department** depart, Hospital& hospital)
+void Interface::getNurseInfo(string* name, int* yearsExperience, Department** depart, Hospital& hospital)
 {
 	int depIndex;
 
@@ -389,24 +387,24 @@ void Interface::getNurseInfo(char** name, int* yearsExperience, Department** dep
 			*depart = hospital.getDepartmentByIndex(depIndex - 1);
 			isValidDep = true;
 		}
-		catch (const char* msg)
+		catch (const string msg)
 		{
-			cout << msg << endl;
+			cout << msg.c_str() << endl;
 		}
 	}
 }
 
-void Interface::getResearcherInfo(char** name)
+void Interface::getResearcherInfo(string* name)
 {
 	cout << "Please enter name:" << endl;
 	*name = getInput();
 }
 
-void Interface::getArticleInfo(char** title, char** name_of_magazine, Date* p_date, int* r_index, Hospital& hospital)
+void Interface::getArticleInfo(string* title, string* name_of_magazine, Date* p_date, int* r_index, Hospital& hospital)
 {
 	cout << "This is the list of researchers:" << endl;
 	hospital.getResearchInstitute().showResearchers();
-	char* search_name = new char[MAX_NAME];
+	string search_name;
 	cout << "To whom you would like to add the article? please type name:" << endl;
 	bool nameFound = false;
 
@@ -418,16 +416,15 @@ void Interface::getArticleInfo(char** title, char** name_of_magazine, Date* p_da
 			*r_index = hospital.getResearchInstitute().searchResearcherByName(search_name);
 			nameFound = true;
 		}
-		catch (const char* msg)
+		catch (const string msg)
 		{
-			cout << msg << endl;
-			delete[] search_name;
+			cout << msg.c_str() << endl;
 		}
 
 	}
 
 	//researcher found
-	cout << "Adding a new article for " << search_name << ":" << endl;
+	cout << "Adding a new article for " << search_name.c_str() << ":" << endl;
 	cout << "What is the article's date?" << endl;
 
 	int day, month, year;
@@ -470,9 +467,9 @@ void Interface::getArticleInfo(char** title, char** name_of_magazine, Date* p_da
 			p_date->setYear(year);
 			res = true;
 		}
-		catch (const char* msg)
+		catch (const string msg)
 		{
-			cout << msg << endl;
+			cout << msg.c_str() << endl;
 		}
 
 	} while (res != true);
@@ -482,13 +479,12 @@ void Interface::getArticleInfo(char** title, char** name_of_magazine, Date* p_da
 	cout << "enter the magazine's name: " << endl;
 	*name_of_magazine = getInput();
 
-	delete[] search_name;
 }
 
-void Interface::getVisitInfo(Patient** newPatient, Date* visitDate, char** visPurpose, Department** depToAdd, StaffMember** treatDoc, bool isNewPatient, bool* isFast, int* room, bool* isSurgery,Hospital& hospital)
+void Interface::getVisitInfo(Patient** newPatient, Date* visitDate, string* visPurpose, Department** depToAdd, StaffMember** treatDoc, bool isNewPatient, bool* isFast, int* room, bool* isSurgery,Hospital& hospital)
 {
 	int patientID;
-	char* nameToAdd = new char[MAX_NAME];
+	string nameToAdd;
 	int newYear = 0;
 	int newGen = 0;
 	int genIndex = 0;
@@ -503,9 +499,9 @@ void Interface::getVisitInfo(Patient** newPatient, Date* visitDate, char** visPu
 			*newPatient = hospital.getPatientByID(patientID);
 			isValidID = true;
 		}
-		catch (const char* msg)
+		catch (const string msg)
 		{
-			cout << msg << endl;
+			cout << msg.c_str() << endl;
 		}
 	}
 
@@ -522,7 +518,6 @@ void Interface::getVisitInfo(Patient** newPatient, Date* visitDate, char** visPu
 		cout << "Received details, creating Patient" << endl;
 		*newPatient = new Patient(nameToAdd, patientID, newYear, newGen);
 		isNewPatient = true;
-		delete[] nameToAdd;
 	}
 
 	cout << "What is the department the visit is to? insert the index of it " << endl;
@@ -538,9 +533,9 @@ void Interface::getVisitInfo(Patient** newPatient, Date* visitDate, char** visPu
 			(*newPatient)->setCurrDepartment(*depToAdd);
 			isValidDep = true;
 		}
-		catch (const char* msg)
+		catch (const string msg)
 		{
-			cout << msg << endl;
+			cout << msg.c_str() << endl;
 		}
 	}
 	
@@ -559,30 +554,28 @@ void Interface::getVisitInfo(Patient** newPatient, Date* visitDate, char** visPu
 				validSel = true;
 
 			}
-			catch (const char* msg)
+			catch (const string msg)
 			{
-				cout << msg << endl;
+				cout << msg.c_str() << endl;
 			}
 		}
 
-		char* name = new char[MAX_NAME];
+		string name;
 		bool isSurgeon;
 		bool isResearcher;
 		int num_of_surgeries;
 		if (selection == 1)
 		{
-			char* docSpecialty = new char[MAX_NAME];
+			string docSpecialty;
 			Interface::getDoctorInfo(&name, &docSpecialty, depToAdd, hospital,&isSurgeon,&isResearcher,&num_of_surgeries);
 			hospital.addDoctor(name, docSpecialty, *depToAdd,isSurgeon,isResearcher,num_of_surgeries);
-			delete[] name;
-			delete[] docSpecialty;
+
 		}
 		else
 		{
 			int yearsExperience;
 			Interface::getNurseInfo(&name, &yearsExperience, depToAdd, hospital);
 			hospital.addNurse(name, yearsExperience, *depToAdd);
-			delete[] name;
 		}
 
 	}
@@ -627,9 +620,9 @@ void Interface::getVisitInfo(Patient** newPatient, Date* visitDate, char** visPu
 			visitDate->setYear(year);
 			res = true;
 		}
-		catch (const char* msg)
+		catch (const string msg)
 		{
-			cout << msg << endl;
+			cout << msg.c_str() << endl;
 		}
 
 	} while (res != true);
@@ -646,9 +639,9 @@ void Interface::getVisitInfo(Patient** newPatient, Date* visitDate, char** visPu
 			validSel = true;
 
 		}
-		catch (const char* msg)
+		catch (const string msg)
 		{
-			cout << msg << endl;
+			cout << msg.c_str() << endl;
 		}
 	}
 
@@ -677,23 +670,20 @@ void Interface::getVisitInfo(Patient** newPatient, Date* visitDate, char** visPu
 			*treatDoc = hospital.getStaffMemberByID(idToCheck);
 			validID = true;
 		}
-		catch (const char* msg)
+		catch (const string msg)
 		{
-			cout << msg << endl;
+			cout << msg.c_str() << endl;
 		}
 	}
 	cout << "Staff member set as treating staff." << endl;
 
 }
 
-void Interface::compareResearchers(Research_Institute& RI) throw (const char*)
+void Interface::compareResearchers(Research_Institute& RI) 
 {
-	if (RI.getNumOfResearchers() < 2)
-	{
-		throw "There must be at least 2 researchers to compare";
-	}
 
-	char* search_name;
+
+	string search_name;
 	int index;
 
 	cout << "Choose two researches to compare by their number of articles\n"
@@ -710,9 +700,9 @@ void Interface::compareResearchers(Research_Institute& RI) throw (const char*)
 			index = RI.searchResearcherByName(search_name);
 			validSel = true;
 		}
-		catch (const char* msg)
+		catch (const string msg)
 		{
-			cout << msg << endl;
+			cout << msg.c_str() << endl;
 		}
 	}
 
@@ -729,9 +719,9 @@ void Interface::compareResearchers(Research_Institute& RI) throw (const char*)
 			index = RI.searchResearcherByName(search_name);
 			validSel = true;
 		}
-		catch (const char* msg)
+		catch (const string msg)
 		{
-			cout << msg << endl;
+			cout << msg.c_str() << endl;
 		}
 	}
 
@@ -742,16 +732,16 @@ void Interface::compareResearchers(Research_Institute& RI) throw (const char*)
 
 	if (*researcher1 > *researcher2)
 	{
-		cout << researcher1->getName() << " has more articles than " << researcher2->getName() << endl;
+		cout << researcher1->getName().c_str() << " has more articles than " << researcher2->getName().c_str() << endl;
 	}
 	else
 	{
-		cout << researcher2->getName() << " has more articles than " << researcher1->getName() << endl;
+		cout << researcher2->getName().c_str() << " has more articles than " << researcher1->getName().c_str() << endl;
 	}
 }
 
 //utilities
-char* Interface::getInput()
+ char* Interface::getInput()
 {
 	char* input = new char[MAX_SIZE];
 	int logSize = 0;
@@ -778,7 +768,7 @@ char* Interface::getInput()
 	return input;
 }
 
-void Interface::isValid(int check, int lower, int upper) throw (const char*)
+void Interface::isValid(int check, int lower, int upper) throw (const string)
 {
 	if (((lower <= check) && (check <= upper)) == true)
 		return;
@@ -794,7 +784,7 @@ void Interface::saveHospitalToFiles(Hospital& hospital)
 	ofstream outFile("hospital_save.txt", ios::trunc);
 
 	//save hospital's name
-	outFile << hospital.getName() << endl;
+	outFile << hospital.getName().c_str() << endl;
 
 	//save departments
 	int num_of_dep = (int)hospital.departments.size();
@@ -803,7 +793,7 @@ void Interface::saveHospitalToFiles(Hospital& hospital)
 
 	for (int i = 0; i < num_of_dep; i++)
 	{
-		outFile << hospital.departments[i]->getName() << " ";
+		outFile << hospital.departments[i]->getName().c_str() << " ";
 		cur_num_of_stf_mem = hospital.departments[i]->getNumOfStaffMembers();
 		outFile << cur_num_of_stf_mem << " ";
 		hospital.departments[i]->printNamesOfStaff(outFile);
@@ -820,13 +810,13 @@ void Interface::saveHospitalToFiles(Hospital& hospital)
 		outFile << typeid(*(hospital.staff_members[i])).name() + 6 << " ";  //print type
 
 		outFile << hospital.staff_members[i]->getId() << " "
-			<< hospital.staff_members[i]->getName() << " "
-			<< hospital.staff_members[i]->getDepartmentName() << " ";
+			<< hospital.staff_members[i]->getName().c_str() << " "
+			<< hospital.staff_members[i]->getDepartmentName().c_str() << " ";
 
 		
 		if (Doctor* doctemp = dynamic_cast<Doctor*>(hospital.staff_members[i]))
 		{
-			outFile << doctemp->getSpecialty() << " ";
+			outFile << doctemp->getSpecialty().c_str() << " ";
 
 			if (Surgeon* temp = (dynamic_cast<Surgeon*>(hospital.staff_members[i])))
 			{

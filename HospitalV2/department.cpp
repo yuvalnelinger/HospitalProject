@@ -1,27 +1,24 @@
 #include "department.h"
 
 //c'tor and d'tor
-Department::Department(const char* name) : name(nullptr)
+Department::Department(string name) 
 {
 	setName(name);
 }
 
 Department::~Department()
 {
-	delete[] name;
 	patients.clear();
 }
 
 //getters and setters
 int Department::getNumOfStaffMembers()  { return staff_members.arrSize(); }
 
-char* Department::getName() const { return name; }
+string Department::getName() const { return name; }
 
-void Department::setName(const char* name)
+void Department::setName(string name)
 {
-	delete[] this->name;
-	this->name = new char[strlen(name) + 1];
-	strcpy(this->name, name);
+	this->name = name;
 }
 
 //operators
@@ -77,13 +74,13 @@ void Department::showPatients() const
 	else
 	{
 		for (int i = 0; i < patients.size(); i++)
-			cout << this->patients[i]->getName() << " , ID " << this->patients[i]->getId() << endl;
+			cout << this->patients[i]->getName().c_str() << " , ID " << this->patients[i]->getId() << endl;
 	}
 }
 
 void Department::showStaff() 
 {
-	cout << "This is department " << name;
+	cout << "This is department " << name.c_str();
 	cout << " with the following staff members: " << endl;
 	if (staff_members.arrSize() == 0)
 	{
@@ -92,7 +89,7 @@ void Department::showStaff()
 	else
 	{
 		for (int i = 0; i < staff_members.arrSize(); i++)
-			cout << this->staff_members[i]->getName() << ", ID " << this->staff_members[i]->getId() << endl;
+			cout << this->staff_members[i]->getName().c_str() << ", ID " << this->staff_members[i]->getId() << endl;
 	}
 }
 
@@ -101,6 +98,6 @@ void Department::printNamesOfStaff(ofstream &out)
 	int size = staff_members.arrSize();
 	for (int i = 0; i < size; i++)
 	{
-		out << staff_members[i]->getName() << " ";
+		out << staff_members[i]->getName().c_str() << " ";
 	}
 }
