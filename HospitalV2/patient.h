@@ -2,15 +2,14 @@
 #define __PATIENT_H
 
 #define _CRT_SECURE_NO_WARNINGS
-#define INIT_SIZE 50
 #include <iostream>
+#include <vector>
 #include "visit.h"
 #include "StaffMember.h"
 #include "doctor.h"
 #include "Nurse.h"
 #include "SurgeryVisit.h"
 #include "TestsVisit.h"
-#include <vector>
 using namespace std;
 
 class Department;

@@ -6,10 +6,6 @@ Doctor::Doctor(const string name, const string specialty, Department* depart) : 
 	setSpecialty(specialty);
 }
 
-Doctor::~Doctor()
-{
-}
-
 //getters and setters
 string Doctor::getSpecialty() const { return specialty; }
 
@@ -27,9 +23,7 @@ Department* Doctor::getDepartment() const
 const Doctor& Doctor::operator=(const Doctor& other)
 {
 	StaffMember::operator=(other);
-
 	specialty = other.specialty;
-
 	return *this;
 }
 

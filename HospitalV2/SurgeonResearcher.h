@@ -13,8 +13,6 @@ class Department;
 
 class SurgeonResearcher : public Surgeon, public Researcher
 {
-private:
-
 public:
 	//c'tor
 	SurgeonResearcher(const Surgeon& surgeon, const Researcher& researcher);

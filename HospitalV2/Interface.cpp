@@ -1,5 +1,6 @@
 #include "Interface.h"
 #include <iostream>
+using namespace std;
 
 void Interface::mainMenu(Hospital& hospital)
 {
@@ -8,6 +9,7 @@ void Interface::mainMenu(Hospital& hospital)
 	do {
 		cout << "Welcome to " << hospital.getName().c_str() << " hospital!" << endl;
 		Interface::printMainMenu();
+
 		cin >> selection;
 
 		switch (selection)
@@ -129,9 +131,9 @@ void Interface::mainMenu(Hospital& hospital)
 							depToShow = hospital.getDepartmentByIndex(select - 1);
 							isValidDep = true;
 						}
-						catch (const string msg)
+						catch (char const* msg)
 						{
-							cout << msg.c_str() << endl;
+							cout << msg << endl;
 						}
 					}
 					cout << "These are the patients of department " << depToShow->getName().c_str() << endl;
@@ -349,9 +351,9 @@ void Interface::getDoctorInfo(string* name, string* specialty, Department** depa
 			*depart = hospital.getDepartmentByIndex(depIndex - 1);
 			isValidDep = true;
 		}
-		catch (const string msg)
+		catch (const char* msg)
 		{
-			cout << msg.c_str() << endl;
+			cout << msg << endl;
 		}
 	}
 	
@@ -387,9 +389,9 @@ void Interface::getNurseInfo(string* name, int* yearsExperience, Department** de
 			*depart = hospital.getDepartmentByIndex(depIndex - 1);
 			isValidDep = true;
 		}
-		catch (const string msg)
+		catch (char const* msg)
 		{
-			cout << msg.c_str() << endl;
+			cout << msg << endl;
 		}
 	}
 }
@@ -416,9 +418,9 @@ void Interface::getArticleInfo(string* title, string* name_of_magazine, Date* p_
 			*r_index = hospital.getResearchInstitute().searchResearcherByName(search_name);
 			nameFound = true;
 		}
-		catch (const string msg)
+		catch (char const* msg)
 		{
-			cout << msg.c_str() << endl;
+			cout << msg << endl;
 		}
 
 	}
@@ -467,9 +469,9 @@ void Interface::getArticleInfo(string* title, string* name_of_magazine, Date* p_
 			p_date->setYear(year);
 			res = true;
 		}
-		catch (const string msg)
+		catch (char const* msg)
 		{
-			cout << msg.c_str() << endl;
+			cout << msg << endl;
 		}
 
 	} while (res != true);
@@ -499,9 +501,9 @@ void Interface::getVisitInfo(Patient** newPatient, Date* visitDate, string* visP
 			*newPatient = hospital.getPatientByID(patientID);
 			isValidID = true;
 		}
-		catch (const string msg)
+		catch (char const* msg)
 		{
-			cout << msg.c_str() << endl;
+			cout << msg << endl;
 		}
 	}
 
@@ -533,9 +535,9 @@ void Interface::getVisitInfo(Patient** newPatient, Date* visitDate, string* visP
 			(*newPatient)->setCurrDepartment(*depToAdd);
 			isValidDep = true;
 		}
-		catch (const string msg)
+		catch (char const* msg)
 		{
-			cout << msg.c_str() << endl;
+			cout << msg << endl;
 		}
 	}
 	
@@ -554,9 +556,9 @@ void Interface::getVisitInfo(Patient** newPatient, Date* visitDate, string* visP
 				validSel = true;
 
 			}
-			catch (const string msg)
+			catch (char const* msg)
 			{
-				cout << msg.c_str() << endl;
+				cout << msg << endl;
 			}
 		}
 
@@ -620,9 +622,9 @@ void Interface::getVisitInfo(Patient** newPatient, Date* visitDate, string* visP
 			visitDate->setYear(year);
 			res = true;
 		}
-		catch (const string msg)
+		catch (char const* msg)
 		{
-			cout << msg.c_str() << endl;
+			cout << msg << endl;
 		}
 
 	} while (res != true);
@@ -639,9 +641,9 @@ void Interface::getVisitInfo(Patient** newPatient, Date* visitDate, string* visP
 			validSel = true;
 
 		}
-		catch (const string msg)
+		catch (char const* msg)
 		{
-			cout << msg.c_str() << endl;
+			cout << msg << endl;
 		}
 	}
 
@@ -670,9 +672,9 @@ void Interface::getVisitInfo(Patient** newPatient, Date* visitDate, string* visP
 			*treatDoc = hospital.getStaffMemberByID(idToCheck);
 			validID = true;
 		}
-		catch (const string msg)
+		catch (char const* msg)
 		{
-			cout << msg.c_str() << endl;
+			cout << msg << endl;
 		}
 	}
 	cout << "Staff member set as treating staff." << endl;
@@ -700,9 +702,9 @@ void Interface::compareResearchers(Research_Institute& RI)
 			index = RI.searchResearcherByName(search_name);
 			validSel = true;
 		}
-		catch (const string msg)
+		catch (char const* msg)
 		{
-			cout << msg.c_str() << endl;
+			cout << msg << endl;
 		}
 	}
 
@@ -719,9 +721,9 @@ void Interface::compareResearchers(Research_Institute& RI)
 			index = RI.searchResearcherByName(search_name);
 			validSel = true;
 		}
-		catch (const string msg)
+		catch (char const* msg)
 		{
-			cout << msg.c_str() << endl;
+			cout << msg << endl;
 		}
 	}
 
@@ -768,7 +770,7 @@ void Interface::compareResearchers(Research_Institute& RI)
 	return input;
 }
 
-void Interface::isValid(int check, int lower, int upper) throw (const string)
+void Interface::isValid(int check, int lower, int upper) throw (const char*)
 {
 	if (((lower <= check) && (check <= upper)) == true)
 		return;
@@ -796,7 +798,7 @@ void Interface::saveHospitalToFiles(Hospital& hospital)
 		outFile << hospital.departments[i]->getName().c_str() << " ";
 		cur_num_of_stf_mem = hospital.departments[i]->getNumOfStaffMembers();
 		outFile << cur_num_of_stf_mem << " ";
-		hospital.departments[i]->printNamesOfStaff(outFile);
+		hospital.departments[i]->printNamesOfStaffToFile(outFile);
 	}
 	outFile << endl;
 
@@ -807,7 +809,7 @@ void Interface::saveHospitalToFiles(Hospital& hospital)
 
 	for (int i = 0; i < num_of_staff_mem; i++)
 	{
-		outFile << typeid(*(hospital.staff_members[i])).name() + 6 << " ";  //print type
+		outFile << typeid(*(hospital.staff_members[i])).name() + 6 << " ";  //print type of object
 
 		outFile << hospital.staff_members[i]->getId() << " "
 			<< hospital.staff_members[i]->getName().c_str() << " "

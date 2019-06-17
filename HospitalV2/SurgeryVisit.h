@@ -17,17 +17,16 @@ private:
 	bool isFast;
 
 public:
-	//c'tor and d'tor
+	//c'tor
 	SurgeryVisit(Patient* patient, Date date, string purpose, StaffMember* doc,int roomNum,bool isFast);
-	~SurgeryVisit();
-
-	//copy c'tor
-	SurgeryVisit(const SurgeryVisit& other);
-
 
 	//setters and getters
 	int getRoomNum();
 	bool getIsFast();
+
+private:
+	//copy c'tor
+	SurgeryVisit(const SurgeryVisit& other);
 };
 
 #endif

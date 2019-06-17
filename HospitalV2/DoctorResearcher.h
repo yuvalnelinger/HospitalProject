@@ -8,8 +8,8 @@
 #include <iostream>
 #include "doctor.h"
 #include "Researcher.h"
-
 using namespace std;
+
 class Department;
 
 class DoctorResearcher : public Doctor, public Researcher

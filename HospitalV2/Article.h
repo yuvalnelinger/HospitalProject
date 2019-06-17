@@ -14,9 +14,8 @@ private:
 	string name_of_magazine;
 
 public:
-	//c'tor and d'tor
+	//c'tor
 	Article(Date p_date, const string title, const string name_of_magazine);
-	~Article();
 
 	//copy c'tor
 	Article(const Article& other);

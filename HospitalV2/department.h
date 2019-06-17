@@ -2,7 +2,6 @@
 #define __DEPARTMENT_H
 
 #define _CRT_SECURE_NO_WARNINGS
-#define INIT_SIZE 50
 #include "doctor.h"
 #include "Nurse.h"
 #include "patient.h"
@@ -20,11 +19,9 @@ private:
 	Array<StaffMember*> staff_members;
 	vector<Patient*> patients;
 
-
 public:
-	//c'tor and d'tor
+	//c'tor
 	Department(string name);
-	~Department();
 
 	//getters and setters
 	int getNumOfStaffMembers();
@@ -35,11 +32,10 @@ public:
 	const Department& operator+=(const StaffMember* mem);
 
 	//methods
-	void addStaffMember(const StaffMember* mem);
 	void addPatient(const Patient* patient);
 	void showPatients() const;
 	void showStaff();
-	void printNamesOfStaff(ofstream &out);
+	void printNamesOfStaffToFile(ofstream &out);
 
 private:
 	//copy c'tor

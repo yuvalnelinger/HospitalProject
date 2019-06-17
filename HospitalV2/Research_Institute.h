@@ -1,7 +1,6 @@
 #ifndef __Research_Institute_H
 #define __Research_Institute_H
 
-#define INIT_SIZE 50
 #include "Researcher.h"
 #include "Article.h"
 #include "StaffMember.h"
@@ -32,7 +31,7 @@ public:
 	//methods
 	void addResearcher(string name); //adds researcher ptr to the array
 	void addArticle(Date date, string title, string name_of_magazine, int r_index);
-	int searchResearcherByName(string name) const throw (const string);
+	int searchResearcherByName(string name) const throw (const char*);
 	void showResearchers() const;
 
 private:

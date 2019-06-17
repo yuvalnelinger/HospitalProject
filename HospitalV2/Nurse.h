@@ -17,7 +17,6 @@ private:
 public:
 	//c'tor and d'tor
 	Nurse(const string name, int y_exp, Department* depart);
-	~Nurse();
 
 	//getters and setters
 	int getYearsOfExperience() const;

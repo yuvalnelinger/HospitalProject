@@ -6,13 +6,10 @@ Patient::Patient(string name, int id, int year, int gender) : curr_department(nu
 	setName(name);
 	this->yearOfBirth = year;
 	this->gender = gender;
-	//arr_of_visitations = new Visit*[size_of_visitations];
-	//num_of_visitations = 0;
 }
 
 Patient::~Patient()
 {
-
 	for (int i = 0; i < visitations.size(); i++)
 		delete visitations[i];
 }
@@ -60,15 +57,6 @@ void Patient::show() const
 
 void Patient::addVisit(Patient* patient, Date visitDate, StaffMember* treatDoc,string purpose, bool* isFast, int roomNum,bool* isSurgery)
 {
-	//if (num_of_visitations == size_of_visitations) //array increment if needed
-	//{
-	//	size_of_visitations *= 2;
-	//	Visit** temp = new Visit*[size_of_visitations];
-	//	for (int i = 0; i < num_of_visitations; i++) //copy from old array to new array
-	//		temp[i] = visitations[i];
-	//	delete[] visitations;
-	//	visitations = temp;
-	//}
 	Visit* newVis;
 	
 	if (*isSurgery)
@@ -79,7 +67,6 @@ void Patient::addVisit(Patient* patient, Date visitDate, StaffMember* treatDoc,s
 	{
 		newVis = new Visit(patient,visitDate,purpose,false,treatDoc);
 	}
-	//this->visitations[num_of_visitations++] = newVis; 
 	visitations.push_back(newVis); //add new visit to this patient
 }
 

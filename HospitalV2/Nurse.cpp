@@ -6,8 +6,6 @@ Nurse::Nurse(const string name, int y_exp, Department* depart) : StaffMember(nam
 	years_of_experience = y_exp;
 }
 
-Nurse::~Nurse() {}
-
 //getters and setters
 int Nurse::getYearsOfExperience() const { return years_of_experience; }
 

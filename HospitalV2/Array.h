@@ -89,14 +89,10 @@ const T& Array<T>::operator[] (int index)
 	return arr[index]; // return array element  
 }
 
-
 template<class T>
 const int Array<T>::arrSize()
 {
 	return logicalSize;
 }
-
-
-
 
 #endif

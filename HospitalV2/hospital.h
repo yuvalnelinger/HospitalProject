@@ -1,13 +1,11 @@
 #ifndef __HOSPITAL_H
 #define __HOSPITAL_H
 
-#define MAX_TITLE 150
-#define MAX_NAME 30
-#define INIT_SIZE 50
-#define NOT_FOUND -1
 #define _CRT_SECURE_NO_WARNINGS
 
 #include <iostream>
+#include <vector>
+#include <string>
 #include "department.h"
 #include "StaffMember.h"
 #include "Nurse.h"   
@@ -17,9 +15,7 @@
 #include "Surgeon.h"
 #include "SurgeonResearcher.h"
 #include "DoctorResearcher.h"
-#include <vector>
 using namespace std;
-
 
 class Hospital
 {
@@ -32,15 +28,16 @@ private:
 
 public:
 	friend class Interface;
+
 	//c'tor and d'tor
 	Hospital(const string name);
 	~Hospital();
 
 	//getters and setters
 	string getName() const;
-	Department* getDepartmentByIndex(int num) const throw (const string);  
-	Patient* getPatientByID(int id) const throw (const string); 
-	StaffMember* getStaffMemberByID(int id) const throw (const string); 
+	Department* getDepartmentByIndex(int num) const throw (const char*);  
+	Patient* getPatientByID(int id) const throw (const char*);
+	StaffMember* getStaffMemberByID(int id) const throw (const char*);
 	int getNumOfDepartments();
 	Research_Institute& getResearchInstitute();
 	void setName(const string name);

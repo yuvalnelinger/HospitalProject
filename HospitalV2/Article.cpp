@@ -1,16 +1,11 @@
 #include "Article.h"
 
-//c'tor and d'tor
+//c'tor
 Article::Article(Date p_date, const string title, const string name_of_magazine) 
 {
 	publish_date = p_date;
 	setTitle(title);
 	setNameOfMagazine(name_of_magazine);
-}
-
-Article::~Article()
-{
-	
 }
 
 //copy c'tor

@@ -24,9 +24,7 @@ StaffMember::StaffMember()
 	this->department = 0;
 }
 
-StaffMember::~StaffMember()
-{
-}
+StaffMember::~StaffMember() {}
 
 //getters and setters
 int StaffMember::getIDCounter() { return counter; }

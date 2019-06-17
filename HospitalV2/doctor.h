@@ -12,9 +12,8 @@ protected:
 	string specialty;
 
 public:
-	//c'tor and d'tor
+	//c'tor
 	Doctor(const string name, const string specialty, Department* depart);
-	~Doctor();
 
 	string getSpecialty() const;
 	void setSpecialty(const string specialty);

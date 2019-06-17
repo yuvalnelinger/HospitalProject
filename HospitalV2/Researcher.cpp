@@ -1,38 +1,18 @@
 #include "Researcher.h"
 #include "Article.h"
 
-//c'tor and d'tor
-Researcher::Researcher(string name) : StaffMember(name, nullptr)
-{
-	//articles = new Article*[size_of_articles];
-	//num_of_articles = 0;
-}
+//c'tor
+Researcher::Researcher(string name) : StaffMember(name, nullptr) {}
 
 Researcher::Researcher(const Researcher& other) : StaffMember(other)
-{
-	//for (int i = 0; i <articles.size(); i++)
-	//	delete articles[i];
-
-	//articles.clear();
-	
+{	
 	int logSize = other.articles.size();
 	articles.reserve(logSize);
-	
-	//size_of_articles = other.size_of_articles;
-	//num_of_articles = other.num_of_articles;
 
-	//articles = new Article*[size_of_articles];
 	for (int i = 0; i < logSize; i++)
 	{
-		//articles[i] = other.articles[i];
 		articles.push_back(other.articles[i]);
 	}
-}
-
-Researcher::~Researcher()
-{
-	//delete[]articles;
-	articles.clear();
 }
 
 //operators
@@ -43,22 +23,13 @@ const Researcher& Researcher::operator=(const Researcher& other)
 	for (int i = 0; i < articles.size(); i++)
 		delete articles[i];
 	
-	//delete[]articles;
 	articles.clear();
-
-	//size_of_articles = other.size_of_articles;
-	//num_of_articles = other.num_of_articles;
 
 	int logSize = other.articles.size();
 	articles.reserve(logSize);
 
-	//articles = new Article*[size_of_articles];
-	//for (int i = 0; i < num_of_articles; i++)
-	//	articles[i] = other.articles[i];
-
 	for (int i = 0; i < logSize; i++)
 	{
-		//articles[i] = other.articles[i];
 		articles.push_back(other.articles[i]);
 	}
 
@@ -79,17 +50,6 @@ void Researcher::toOs(ostream& os) const
 //methods
 void Researcher::addArticle(Article* article)
 {
-	//if (num_of_articles == size_of_articles) //array increment if needed
-	//{
-	//	size_of_articles *= 2;
-	//	Article** temp = new Article*[size_of_articles];
-	//	for (int i = 0; i < num_of_articles; i++) //copy from old array to new array
-	//		temp[i] = articles[i];
-	//	delete[] articles;
-	//	articles = temp;
-	//}
-
-	//articles[num_of_articles++] = article;
 	articles.push_back(article);
 }
 
